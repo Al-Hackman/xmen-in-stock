@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import editItem from "../../assets/icons/edit-24px.svg";
 import "./WarehouseItem.scss";
+import arrow from '../../assets/icons/chevron_right-24px.svg';
 
 const ListItem = (props) => {
     return (
@@ -10,8 +11,9 @@ const ListItem = (props) => {
             <div className="item__top">
                 <div className="item__left">
                     <h2 className="item__label">{props.itemType}</h2>
-                    <Link to={props.name} className="item__text">
+                    <Link to={props.name} className="item__link item__link--main">
                         {props.name}
+                        <img src={arrow} alt="right arrow"/>
                     </Link>
                     <h2 className="item__label">Address</h2>
                     <p className="item__text">{props.address}</p>

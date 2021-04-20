@@ -6,6 +6,21 @@
     display: flex;
     flex-direction: column;
     padding-bottom: func.rem-size(27px);
+    padding-right: func.size-to-vw(var.$mobile, 21px);
+    padding-left: func.size-to-vw(var.$mobile, 21px);
+    @include mix.paragraph-medium;
+
+    &__label {
+        margin-top: func.rem-size(16px);
+        margin-bottom: func.rem-size(4px);
+        text-transform: uppercase;
+        @include mix.table-header;
+    }
+
+    &__text {
+        @include mix.paragraph-medium;
+        margin: 0;
+    }
 
     &__top {
         display: flex;
@@ -24,8 +39,24 @@
     &__bottom {
         display: flex;
         justify-content: space-between;
+        margin-top: func.rem-size(16px);
     }
-    &__label {
-        @include mix.table-header;
+
+    &__link {
+        color: var.$primary;
+        text-decoration: none;
+
+        &--main {
+            @include mix.important;
+
+            color: var.$instock;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__button {
+        background-color: transparent;
+        border-width: 0;
     }
 }

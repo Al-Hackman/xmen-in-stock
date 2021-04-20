@@ -6,7 +6,7 @@
     border-radius: func.rem-size(3px);
 
     &__top {
-        padding: func.rem-size(32px) func.rem-size(24px);
+        padding: func.rem-size(32px) func.size-to-vw(var.$mobile, 21px);
     }
 
     &__label {
@@ -38,8 +38,8 @@
         padding-right: func.rem-size(24px);
     }
 
-    &__list{
+    &__list {
         list-style-type: none;
-        padding: func.rem-size(8px) func.rem-size(24px);
+        padding: func.rem-size(8px) 0;
     }
 }
