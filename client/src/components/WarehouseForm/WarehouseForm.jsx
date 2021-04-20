@@ -2,14 +2,14 @@ import React from 'react';
 import backArrowIcon from '../../assets/icons/arrow_back-24px.svg'
 import './WarehouseForm.scss';
 
-function WarehouseForm(props) {
+function WarehouseForm() {
     
   
     return (
         <section className="warehouse-form">
             <header className="warehouse-form__header">
-            <img src={backArrowIcon} alt="back arrow icon"/>
-            <h1 className="warehouse-form__title">{props.title}Edit Warehouse</h1>
+            <img className="warehouse-form__icon" src={backArrowIcon} alt="back arrow icon"/>
+            <h1 className="warehouse-form__title">Edit Warehouse</h1>
             </header>
             <div className="warehouse-form__container">
                 <form className="warehouse-form__form">
@@ -29,7 +29,7 @@ function WarehouseForm(props) {
                     </label>    
                 </div>
                 <div className="warehouse-form__wrap">
-                    <h4>Contact Details</h4>    
+                    <h2 className="warehouse-form__heading">Contact Details</h2>    
                     <label className="warehouse-form__label" htmlFor="contactNameInput">Contact Name
                         <input className="warehouse-form__input" id="contactNameInput" name="contactNameInput" placeholder="Contact Name" type="text" required="" />
                     </label>
@@ -44,8 +44,8 @@ function WarehouseForm(props) {
                     </label>
                 </div>
                     <div className="warehouse-form__button-wrap">
-                        <button className="warehouse-form__button warehouse-form__button--delete" type="submit">Cancel</button>
-                        <button className="warehouse-form__button" type="submit">{props.button}Save</button>
+                        <button className="button warehouse-form__button-cancel" type="submit">Cancel</button>
+                        <button className="button warehouse-form__button" type="submit">Save</button>
                     </div>
              </form>              
             </div> 

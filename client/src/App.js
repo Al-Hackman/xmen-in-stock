@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/global.scss';
 import {Switch, Route} from "react-router-dom";
 import './App.css';
 import WarehouseForm from './components/WarehouseForm/WarehouseForm';
