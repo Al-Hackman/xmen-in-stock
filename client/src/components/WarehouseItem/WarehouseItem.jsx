@@ -6,21 +6,33 @@ import "./WarehouseItem.scss";
 
 const ListItem = (props) => {
     return (
-        <li className="item">
-            <div className="item__left">
-                <h2 className="item__label">{props.itemType}</h2>
-                <Link to={props.name} className="item__text">
-                    {props.name}
-                </Link>
-                <h2 className="item__label">Address</h2>
-                <p className="item__text">{props.address}</p>
-            </div>
-            <div className="item__right">
-                <h2 className="item__label">Contact Name</h2>
-                <p className="item__text">{props.contact.name}</p>
-                <h2 className="item__label">Contact Information</h2>
-                <p className="item__text">{props.contact.phone}</p>
-                <p className="item__text">{props.contact.email}</p>
+        <li className="item divider--top">
+            <div className="item__top">
+                <div className="item__left">
+                    <h2 className="item__label">{props.itemType}</h2>
+                    <Link to={props.name} className="item__text">
+                        {props.name}
+                    </Link>
+                    <h2 className="item__label">Address</h2>
+                    <p className="item__text">{props.address}</p>
+                </div>
+                <div className="item__right">
+                    <h2 className="item__label">Contact Name</h2>
+                    <p className="item__text">{props.contact.name}</p>
+                    <h2 className="item__label">Contact Information</h2>
+                    <Link
+                        to={`tel:${props.contact.phone}`}
+                        className="item__link"
+                    >
+                        {props.contact.phone}
+                    </Link>
+                    <Link
+                        to={`mailto:${props.contact.email}`}
+                        className="item__link"
+                    >
+                        {props.contact.email}
+                    </Link>
+                </div>
             </div>
             <div className="item__bottom">
                 <button className="item__button">

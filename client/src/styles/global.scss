@@ -1,7 +1,22 @@
-
 @use './partials/typography' as *;
+@use './partials/functions' as func;
+@use './partials/variables' as var;
+@use './partials/mixins' as mix;
 
+* {
+    box-sizing: border-box;
+}
+
+.divider{
+    &--top {
+        border-top: func.rem-size(1px) solid var.$dividers-borders;
+    }
+}
 
 .App{
     font-family: 'Titillium Web';
+}
+
+p {
+    @include mix.paragraph-large;
 }

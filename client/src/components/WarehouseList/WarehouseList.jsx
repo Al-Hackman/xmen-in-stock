@@ -4,13 +4,17 @@ import ListItem from "../WarehouseItem/WarehouseItem";
 import axios from "axios";
 import api from "../../utils/api";
 import Spinner from "../Spinner/Spinner";
+import "./WarehouseList.scss";
+import searchIcon from "../../assets/icons/search-24px.svg";
 
 class WarehouseList extends React.Component {
+    // state to store current list of items
     state = {
         items: [],
     };
 
     componentDidMount = () => {
+        // axios call to get list of warehouses from api
         axios
             .get(api.apiUrl + api.warehouseEndpoint)
             .then((response) => {
@@ -30,27 +34,38 @@ class WarehouseList extends React.Component {
     };
 
     render() {
+        // Spinner component to display in case
+        // axios call takes long
         let items = <Spinner />;
 
         if (this.state.items) {
             items = this.state.items.map((item) => {
-                return <ListItem key={item.id} {...item} />;
+                return <ListItem key={item.id} {...item} itemType="Warehouse"/>;
             });
         }
-        console.log(items);
 
         return (
             <div className="warehouse-list">
                 <div className="warehouse-list__top">
                     <h1 className="warehouse-list__title">Warehouses</h1>
-                    <form>
-                        <input type="text" placeholder="Search..." />
+                    <form className="warehouse-list__search">
+                        <input
+                            className="warehouse-list__input"
+                            name="search"
+                            type="text"
+                            placeholder="Search..."
+                        />
+                        <button className="button warehouse-list__search-button">
+                            <img src={searchIcon} alt="search" />
+                        </button>
                     </form>
                     <Link to="/new-warehouse" className="warehouse-list__add">
-                        <button className="warehouse-list__add-button">Add new warehouse</button>
+                        <button className="warehouse-list__add-button">
+                            Add new warehouse
+                        </button>
                     </Link>
                 </div>
-                <div className="warehouse-list__list">
+                <div className="warehouse-list__content">
                     <div className="warehouse-list__label">
                         <p className="warehouse-list__item-item-name warehouse-list__item">
                             Warehouse
@@ -65,7 +80,7 @@ class WarehouseList extends React.Component {
                             Contact information
                         </p>
                     </div>
-                    <ul>{items}</ul>
+                    <ul className="warehouse-list__list">{items}</ul>
                 </div>
             </div>
         );

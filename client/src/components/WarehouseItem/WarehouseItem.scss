@@ -1,3 +1,31 @@
+@use '../../styles/partials/variables' as var;
+@use '../../styles/partials/mixins' as mix;
+@use '../../styles/partials/functions' as func;
+
 .item {
-    
+    display: flex;
+    flex-direction: column;
+    padding-bottom: func.rem-size(27px);
+
+    &__top {
+        display: flex;
+    }
+
+    &__left {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__right {
+        @extend .item__left;
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__label {
+        @include mix.table-header;
+    }
 }

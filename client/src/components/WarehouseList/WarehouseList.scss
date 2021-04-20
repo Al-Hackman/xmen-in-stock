@@ -1,0 +1,45 @@
+@use '../../styles/partials/variables' as var;
+@use '../../styles/partials/functions' as func;
+@use '../../styles/partials/mixins' as mix;
+
+.warehouse-list {
+    border-radius: func.rem-size(3px);
+
+    &__top {
+        padding: func.rem-size(32px) func.rem-size(24px);
+    }
+
+    &__label {
+        display: none;
+
+        @include mix.tablet-up {
+            display: flex;
+        }
+    }
+
+    &__search {
+        position: relative;
+
+        &-button {
+            position: absolute;
+            padding-top: func.rem-size(6px);
+            padding-bottom: func.rem-size(6px);
+            background-color: transparent;
+            outline: none;
+            border-width: 0;
+            right: 0;
+        }
+    }
+
+    &__input {
+        width: 100%;
+        padding-top: func.rem-size(8px);
+        padding-bottom: func.rem-size(8px);
+        padding-right: func.rem-size(24px);
+    }
+
+    &__list{
+        list-style-type: none;
+        padding: func.rem-size(8px) func.rem-size(24px);
+    }
+}
