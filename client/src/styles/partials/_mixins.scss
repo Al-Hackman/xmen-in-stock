@@ -1,0 +1,65 @@
+
+
+// mixins for tablet(768px) breakpoints.
+@mixin tablet {
+    @media (min-width:768px) {
+        @content;
+    }
+}
+
+//mixins for desktop(1280px) breakpoints.
+@mixin desktop {
+    @media (min-width:1280px) {
+        @content;
+    }
+}
+
+// Did this because so we can implement the strict width on the mockup for desktop.
+@mixin desktop-1440 {
+    @media (min-width:1440px) {
+        @content;
+    }
+}
+
+// Mixins for various font sizes.
+@mixin header {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+}
+@mixin lower-header {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+}
+@mixin sub-header {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+    font-weight: 600;
+}
+@mixin paragraph-1 {
+    font-size: 1rem;
+    line-height: 1.75rem;
+    font-weight: 400;
+}
+@mixin paragraph-2 {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+}
+@mixin paragraph-3 {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+    font-weight: 400;
+}
+@mixin m-h1 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    font-weight: 600;
+}
+@mixin m-h2{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+}
+
