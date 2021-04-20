@@ -1,15 +1,15 @@
 import React from 'react';
 import {Switch, Route} from "react-router-dom";
 import './App.css';
+import WarehouseList from './components/WarehouseList/WarehouseList';
 
 class App extends React.Component {
 
   render() {
     return (
       <>
-        <MainNav />
           <Switch>
-            <Route />
+            <Route path="/" exact render={(props)=><WarehouseList {...props}/>}/>
           </Switch>
       </>
     );
