@@ -1,0 +1,72 @@
+.warehouse-form {
+  box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+  border-radius: 3px;
+}
+.warehouse-form__header {
+  display: flex;
+  padding: 0.75em 1.5em;
+  font-size: 1.5em;
+}
+.warehouse-form__title {
+  color: #13182C;
+  padding-left: 0.75em;
+  font-size: 1.25em;
+}
+.warehouse-form__wrap {
+  padding: 0 1.5em 0.75em 1.5em;
+  border-top: 1px solid #BDC5D5;
+}
+.warehouse-form__heading {
+  font-size: 1.25em;
+}
+.warehouse-form__label {
+  font-weight: bold;
+  font-size: 0.8125em;
+  color: #13182C;
+}
+.warehouse-form__input {
+  display: block;
+  margin: 0.5em 0 1em 0;
+  border-radius: 20px;
+  width: 100%;
+  height: 32px;
+  border: 1px solid #BDC5D5;
+}
+.warehouse-form__input::-moz-placeholder {
+  padding-left: 1em;
+}
+.warehouse-form__input:-ms-input-placeholder {
+  padding-left: 1em;
+}
+.warehouse-form__input::placeholder {
+  padding-left: 1em;
+}
+.warehouse-form__input:focus {
+  outline: none;
+}
+.warehouse-form__button-wrap {
+  background-color: #F7F8F9;
+  height: 68px;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75em 1.5em 0 1.5em;
+}
+.warehouse-form__button {
+  border-radius: 20px;
+  background-color: #2E66E5;
+  color: #fff;
+  height: 36px;
+  width: 130px;
+  border: none;
+  margin: 0.5em;
+  display: inline-block;
+}
+.warehouse-form__button:focus {
+  outline: none;
+}
+.warehouse-form__button--delete {
+  background-color: #fff;
+  color: #5C667E;
+  border: 1px solid #BDC5D5;
+}/*# sourceMappingURL=WarehouseForm.css.map */
