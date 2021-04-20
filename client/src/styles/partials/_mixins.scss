@@ -1,23 +1,24 @@
-@use './variables' as var;
 @use './functions' as func;
+@use './typography' as *;
+@use './variables' as *;
 
 // mixins for tablet(768px) breakpoints.
 @mixin tablet-up {
-    @media (min-width: var.$tablet) {
+    @media (min-width: $tablet) {
         @content;
     }
 }
 
 //mixins for desktop(1280px) breakpoints.
 @mixin desktop-up {
-    @media (min-width: var.$laptop) {
+    @media (min-width: $laptop) {
         @content;
     }
 }
 
 // Did this because so we can implement the strict width on the mockup for desktop.
 @mixin desktop-up {
-    @media (min-width: var.$desktop) {
+    @media (min-width: $desktop) {
         @content;
     }
 }
@@ -92,4 +93,12 @@
         font-size: func.rem-size(12px);
         line-height: func.rem-size(18px);
     }
+}
+
+//flex container positions
+@mixin flex-container($align: null, $spacing: null, $wrap: null) {
+    display: flex;
+    align-items: $align;
+    justify-content: $spacing;
+    flex-wrap: $wrap;
 }

@@ -1,7 +1,7 @@
 @use './partials/typography' as *;
 @use './partials/functions' as func;
-@use './partials/variables' as var;
-@use './partials/mixins' as mix;
+@use './partials/variables' as *; 
+@use './partials/mixins' as *;
 
 * {
     box-sizing: border-box;
@@ -13,11 +13,25 @@
     }
 }
 
-.App{
-    font-family: 'Titillium Web', 'Courier New', Courier, monospace;
-    color: var.$primary;
-}
-
 p {
     @include mix.paragraph-large;
+body {
+    color: $primary;
+    font-family: 'Titillium Web', sans-serif;
+}
+// .App{
+//     font-family: 'Titillium Web';
+// }
+h1, h2, h3, h4 {
+    font-weight: 600;
+}
+.button {
+    border-radius: 20px;
+    height: 36px;
+    border: none;
+    display: inline-block;
+    &:focus {
+        outline: none;
+    }
+        
 }
