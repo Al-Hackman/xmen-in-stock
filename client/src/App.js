@@ -16,7 +16,7 @@ class App extends React.Component {
                         render={(props) => <WarehouseList {...props} />}
                     />
                     <Route
-                        path="/"
+                        path="/add-warehouse"
                         render={(props) => <WarehouseForm {...props} />}
                     />
                 </Switch>
