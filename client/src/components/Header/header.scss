@@ -1,0 +1,66 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as mix;
+
+
+
+.navbar{
+    width: 100%;
+    height: 200px;
+    background-color: $cta-button;
+    padding: 0px 1rem;
+    // position: absolute;
+
+    &__logo-wrap{
+        display: flex;
+        justify-content: center;
+        padding: 1.875rem 0px;
+    }
+
+    &__button-wrap{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__btn{
+        box-sizing: border-box;
+        width:100%;
+        height: 36px;
+        border: none;
+        color: $dividers-borders;
+        background-color: $cta-button;  
+    }
+
+    &__btn-link{
+        width: 47%;
+    }
+
+    &--active button.navbar__btn{
+        box-sizing: border-box;
+        border-radius: 20px;
+        background-color: $primary;
+        color: $secondary;
+    }
+
+    @include mix.tablet-up{
+        height: 186px;
+        padding: 0px 2rem;
+        display: flex;
+        justify-content: space-between;
+
+        &__button-wrap{
+            padding-top: 1.875rem;
+            justify-content: flex-end;
+            width: 30%;
+        }
+        &__btn{
+            font-size: 14px;
+        }   
+    }
+
+    @include mix.desktop-up{
+        padding: 0px 8.125rem;
+
+
+    }
+
+}

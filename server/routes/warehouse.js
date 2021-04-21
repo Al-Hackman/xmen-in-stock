@@ -4,10 +4,19 @@ const fs = require("fs");
 const router = express.Router();
 
 let warehouseData;
-
+// get warehouse data
 try {
     const data = fs.readFileSync("data/warehouses.json", "utf8");
     warehouseData = JSON.parse(data);
+} catch (error) {
+    console.error("Error reading file", error);
+}
+
+let inventoryData;
+// Get Inventory data
+try {
+    const data = fs.readFileSync("data/inventories.json", "utf8");
+    inventoryData = JSON.parse(data);
 } catch (error) {
     console.error("Error reading file", error);
 }
@@ -30,9 +39,28 @@ router.get("/", (_req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-    let everyWarehouse = req.params.id;
-    let result = warehouseData.find((result) => result.id === everyWarehouse);
-    res.status(201).send(result);
+    // find warehouse
+    let targetWarehouse = warehouseData.find(
+        (result) => result.id === req.params.id
+    );
+    
+    let resultWarehouse = {
+        id: targetWarehouse.id,
+        name: targetWarehouse.name,
+        address: `${targetWarehouse.address}, ${targetWarehouse.city}, ${targetWarehouse.country}`,
+        contact: {
+            name: targetWarehouse.contact.name,
+            position: targetWarehouse.contact.position,
+            phone: targetWarehouse.contact.phone,
+            email: targetWarehouse.contact.email,
+        },
+    }
+
+    // add corresponding inventory to warehouse data to send
+    resultWarehouse.inventories = inventoryData.filter(
+        (item) => item.warehouseID === targetWarehouse.id
+    );
+    res.status(201).send(resultWarehouse);
 });
 
 // router.post('/', (req, res)=> {
