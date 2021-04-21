@@ -1,21 +1,26 @@
-import React from 'react';
-import './styles/global.scss';
-import {Switch, Route} from "react-router-dom";
-import './App.css';
-import WarehouseForm from './components/WarehouseForm/WarehouseForm';
+import React from "react";
+import "./styles/global.scss";
+import { Switch, Route } from "react-router-dom";
+import WarehouseList from "./components/WarehouseList/WarehouseList";
+import WarehouseForm from "./components/WarehouseForm/WarehouseForm";
 
 class App extends React.Component {
-
-  render() {
-    return (
-      <>
-      <WarehouseForm />
-          <Switch>
-            <Route />
-          </Switch>
-      </>
-    );
-  }
+    render() {
+        return (
+            <>
+                <Switch>
+                    <Route
+                        path="/"
+                        exact
+                        render={(props) => <WarehouseList {...props} />}
+                    />
+                    <Route
+                        path="/add-warehouse"
+                        render={(props) => <WarehouseForm {...props} />}
+                    />
+                </Switch>
+            </>
+        );
+    }
 }
 export default App;
-
