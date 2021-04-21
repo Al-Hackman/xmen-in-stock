@@ -68,8 +68,6 @@ class AddWarehouse extends React.Component {
             let phoneError = "";
             const phoneRegex = /^\+?(\d{1,2})?\s?\-?\.?\(?\d{3}[\-\)\.\s]?\s?\d{3}[\-\.\s]?\d{4}$/im;
             let isValidPhone = phoneRegex.test(this.state.inputs.phoneInput); //this will return a true/false value
-            console.log("phoneValid", isValidPhone)
-            console.log("phoneInput", this.state)
 
             if (this.state.inputs.phoneInput === "") {
                 phoneError = "warehouse-form__error";
@@ -97,16 +95,17 @@ class AddWarehouse extends React.Component {
         if (!Object.values(this.state.inputs).includes("") && isValidEmail && isValidPhone) {
             // replace the alert and run the axios here
             axios
-            .get(api.apiUrl + api.warehouseEndpoint, {
-                name: this.state.warehouseInput, 
-                address: this.state.addressInput, 
-                city: this.state.city, 
-                country: this.state.country, 
-                contactName: this.state.contactName, 
-                position: this.state.position, 
-                phone: this.state.phone, 
-                email: this.state.email
+            .post(api.apiUrl + api.warehouseEndpoint, {
+                name: this.state.inputs.warehouseInput, 
+                address: this.state.inputs.addressInput, 
+                city: this.state.inputs.cityInput, 
+                country: this.state.inputs.countryInput, 
+                contactName: this.state.inputs.nameInput, 
+                position: this.state.inputs.positionInput, 
+                phone: this.state.inputs.phoneInput, 
+                email: this.state.inputs.emailInput
             })
+            .then(()=> {this.props.history.push("/")}) 
             .catch(err=>{
                 console.error(err);
               }) 
