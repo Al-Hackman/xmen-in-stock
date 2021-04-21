@@ -7,37 +7,37 @@
     border-radius: 3px;
     &__icon {
         padding-left: 0.75em;
-        @include tablet {
+        @include tablet-up {
             padding-left: 1.25em;
         }
-        @include desktop {
+        @include laptop-up {
             padding-left: 1.75em;
         }
     }
     &__header {
         display: flex;
         padding: 0;
-        @include lower-header;
+        @include header;
     }
     &__title {
         padding-left: 0.25em;
         font-size: 1.25em;
     }
     &__container {
-        @include tablet {
+        @include tablet-up {
         border-top: 1px solid $dividers-borders;
         padding-top: 24px;
         }
     }
     &__form {
-        @include tablet {
+        @include tablet-up {
             @include flex-container($spacing: space-evenly, $wrap: wrap);
             }
     }
     &__wrap {
         padding: 0 1.25em 0.75em 1.3em;
         border-top: 1px solid $dividers-borders;
-        @include tablet {
+        @include tablet-up {
             width: 42%;
             border-top: none;
             padding: 0 1.65em;
@@ -49,7 +49,7 @@
     }
     &__heading {
         font-size: 1.25em;
-        @include tablet {
+        @include tablet-up {
             margin-top: 0;
         }
     }
@@ -64,7 +64,7 @@
         width: 100%;
         height: 36px;
         border: 1px solid $dividers-borders;
-        @include tablet {
+        @include tablet-up {
             height: 38px;
         }
         &::placeholder {
@@ -72,7 +72,7 @@
         }
         &:focus {
             outline: none;
-            border: 1px solid $elements;
+            border: 1px solid $instock;
         }
         &:invalid {
             border: 1px solid $out-of-stock;
@@ -82,24 +82,24 @@
         background-color: $cta-background;
         padding: 0.75em 1.25em ;
         @include flex-container($spacing: center);
-        @include tablet {
+        @include tablet-up {
             width: 100%;
             justify-content:flex-end;
             margin-top: 1.5em;
         }
-        @include desktop {
+        @include laptop-up {
             padding:  0.75em 2.25em;
         }
     }
     &__button {
-        background-color: $elements;
+        background-color: $instock;
         color: #fff;
         min-width: 134px;
         margin: 0.5em;
         &:hover {
         background-color: $cta-button;
         }
-        @include tablet {
+        @include tablet-up {
             min-width: 61px;
         }
     }
@@ -109,11 +109,11 @@
         color: $table-headers;
         border: 1px solid $dividers-borders;
         &:hover {
-            color: $elements;
-            border: 1px solid $elements;
+            color: $instock;
+            border: 1px solid $instock;
             background-color: $secondary;
             }
-        @include tablet {
+        @include tablet-up {
             width: 72px;
         }
     }

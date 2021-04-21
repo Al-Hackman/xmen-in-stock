@@ -1,0 +1,151 @@
+@use '../../styles/partials/variables' as var;
+@use '../../styles/partials/functions' as func;
+@use '../../styles/partials/mixins' as mix;
+
+.warehouse-list {
+    border-radius: func.rem-size(3px);
+
+    &__top {
+        padding: func.rem-size(32px) func.size-to-vw(var.$mobile, 21px);
+
+        @include mix.tablet-up {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: func.rem-size(32px) func.size-to-vw(var.$tablet, 32px) func.rem-size(22px);
+        }
+    }
+
+    &__title {
+        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    &__label {
+        display: none;
+
+        @include mix.tablet-up {
+            display: flex;
+            background-color: var.$cta-background;
+            padding: 0 func.size-to-vw(var.$tablet, 32px);
+        }
+    }
+
+    &__column-heading {
+        display: flex;
+        width: func.size-to-vw(var.$tablet, 140px);
+        text-transform: uppercase;
+
+        @include mix.laptop-up {
+            width: func.size-to-vw(var.$laptop, 174px);
+        }
+
+        &--main {
+            width: func.size-to-vw(var.$tablet, 150px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 221px);
+            }
+        }
+
+        &--address {
+            width: func.size-to-vw(var.$tablet, 150px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 261px);
+            }
+        }
+
+        &--contact {
+            width: func.size-to-vw(var.$tablet, 160px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 221px);
+            }
+        }
+
+        &--action {
+            width: fit-content;
+            margin-left: auto;
+        }
+    }
+
+    &__item {
+        @include mix.tablet-up {
+            @include mix.paragraph-small;
+        }
+    }
+
+    &__sort-icon {
+        width: func.rem-size(24px);
+    }
+
+    &__add {
+        @include mix.tablet-up {
+            margin-left: func.rem-size(16px);
+        }
+
+        &-button {
+            width: 100%;
+            margin-top: func.rem-size(16px);
+            background-color: var.$instock;
+            color: var.$secondary;
+            text-transform: capitalize;
+    
+            @include mix.tablet-up {
+                margin-top: 0;
+                padding:0 func.rem-size(16px);
+                width:func.rem-size(168px);
+            }
+        }
+    }
+
+
+    &__search {
+        position: relative;
+
+        &-button {
+            position: absolute;
+            padding: func.rem-size(6px) func.rem-size(16px);
+            border-radius: 0 func.rem-size(20px) func.rem-size(20px) 0;
+            background-color: transparent;
+            outline: none;
+            border-width: 0;
+            right: 0;
+            display: inline-flex;
+            align-items: center;
+            transition: all ease 0.1s;
+
+            &:hover {
+                background-color: var.$cta-button;
+            }
+
+            
+        }
+    }
+
+    &__input {
+        width: 100%;
+        border: func.rem-size(1px) solid var.$dividers-borders;
+        padding-top: func.rem-size(8px);
+        padding-bottom: func.rem-size(8px);
+        padding-right: func.rem-size(24px);
+        padding-left: func.rem-size(16px);
+
+        @include mix.tablet-up {
+            width: func.rem-size(185px);
+        }
+
+        @include mix.laptop-up {
+            width: func.rem-size(274px);
+        }
+    }
+
+    &__list {
+        list-style-type: none;
+        padding: func.rem-size(8px) 0;
+
+        @include mix.tablet-up {
+            margin-top: 0;
+            padding-top: 0;
+        }
+    }
+}
