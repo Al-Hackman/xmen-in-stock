@@ -48,6 +48,13 @@ h3,
 h4 {
     font-weight: 600;
 }
+
+button {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 .button {
     font-family: "Titillium Web", sans-serif;
     border-radius: 20px;
@@ -57,4 +64,6 @@ h4 {
     &:focus {
         outline: none;
     }
+
+    
 }
