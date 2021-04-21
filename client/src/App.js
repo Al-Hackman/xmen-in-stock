@@ -3,7 +3,10 @@ import "./styles/global.scss";
 import { Switch, Route } from "react-router-dom";
 import WarehouseList from "./components/WarehouseList/WarehouseList";
 import AddWarehouse from "./components/AddWarehouse/AddWarehouse";
+import Modal from "./components/DeleteCards/Modal";
+import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
+
 
 class App extends React.Component {
    
@@ -25,6 +28,11 @@ class App extends React.Component {
             <Route  
               path="/add-warehouse" 
               render={(routerProps) =><AddWarehouse {...routerProps}/>}
+            />
+
+            <Route  
+              path="/invt-delete" 
+              render={(routerProps) =><Modal><DeleteTeleInvt {...routerProps}/></Modal>}
             />
           </Switch>
       </>
