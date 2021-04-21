@@ -20,12 +20,9 @@ router.get('/', (_req, res)=> {
         let singleWarehouse = {
             id: warehouse.id,
             name: warehouse.name,
-            address: warehouse.address,
-            city: warehouse.city,
-            country: warehouse.country,
+            address: `${warehouse.address}, ${warehouse.city}, ${warehouse.country}`,
             contact: {
-            name: warehouse.name,
-            position: warehouse.position,  
+            name: warehouse.name,  
             phone: warehouse.phone,
             email: warehouse.email
         } 
