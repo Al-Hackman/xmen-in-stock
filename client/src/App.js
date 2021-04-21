@@ -8,37 +8,43 @@ import Modal from "./components/DeleteCards/Modal";
 import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
 
-
 class App extends React.Component {
-   
-  render() {
-    return (
-      <>
+    render() {
+        return (
+            <>
                 <Header />
-      
-          <Switch>
-            <Route
-              path="/"
-              exact
-              render={(props) => <WarehouseList {...props} />}
-            />
-            <Route 
-              path="/edit-warehouse" 
-              render={(routerProps) =><EditWarehouse {...routerProps}/>}
-            />
-            <Route  
-              path="/add-warehouse" 
-              render={(routerProps) =><AddWarehouse {...routerProps}/>}
-            />
+                <main>
+                    <Switch>
+                        <Route
+                            path="/"
+                            exact
+                            render={(props) => <WarehouseList {...props} />}
+                        />
+                        <Route
+                            path="/edit-warehouse"
+                            render={(routerProps) => (
+                                <EditWarehouse {...routerProps} />
+                            )}
+                        />
+                        <Route
+                            path="/add-warehouse"
+                            render={(routerProps) => (
+                                <AddWarehouse {...routerProps} />
+                            )}
+                        />
 
-            <Route  
-              path="/invt-delete" 
-              render={(routerProps) =><Modal><DeleteTeleInvt {...routerProps}/></Modal>}
-            />
-          </Switch>
-      </>
-    );
-  }
-
+                        <Route
+                            path="/invt-delete"
+                            render={(routerProps) => (
+                                <Modal>
+                                    <DeleteTeleInvt {...routerProps} />
+                                </Modal>
+                            )}
+                        />
+                    </Switch>
+                </main>
+            </>
+        );
+    }
 }
 export default App;
