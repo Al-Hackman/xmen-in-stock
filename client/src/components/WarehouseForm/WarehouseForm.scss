@@ -60,15 +60,13 @@
     &__input {
         display: block;
         margin: 0.5em 0 1em 0;
+        padding-left: 1em;
         border-radius: 20px;
         width: 100%;
         height: 36px;
         border: 1px solid $dividers-borders;
         @include tablet-up {
             height: 38px;
-        }
-        &::placeholder {
-            padding-left: 1em;
         }
         &:focus {
             outline: none;
