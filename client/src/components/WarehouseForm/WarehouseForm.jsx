@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import backArrowIcon from '../../assets/icons/arrow_back-24px.svg'
 import './WarehouseForm.scss';
 

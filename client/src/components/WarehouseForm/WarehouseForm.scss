@@ -38,9 +38,9 @@
         padding: 0 1.25em 0.75em 1.3em;
         border-top: 1px solid $dividers-borders;
         @include tablet-up {
-            width: 42%;
+            width: 48%;
             border-top: none;
-            padding: 0 1.65em;
+            padding: 0 1.3em;
             &:first-child {
                 border-right: 1px solid $dividers-borders;
                 padding-right: 4.2vw;

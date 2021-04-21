@@ -12,13 +12,19 @@ class App extends React.Component {
       <>
       <WarehouseForm />
           <Switch>
-          <Route
-                        path="/"
-                        exact
-                        render={(props) => <WarehouseList {...props} />}
-                    />
-            <Route path="/edit-warehouse" render={(routerProps) =><WarehouseForm {...routerProps}/>}/>
-            <Route  path="/add-new-warehouse" render={(routerProps) =><WarehouseForm {...routerProps}/>}/>
+            <Route
+              path="/"
+              exact
+              render={(props) => <WarehouseList {...props} />}
+            />
+            <Route 
+              path="/edit-warehouse" 
+              render={(routerProps) =><WarehouseForm {...routerProps}/>}
+            />
+            <Route  
+              path="/add-warehouse" 
+              render={(routerProps) =><WarehouseForm {...routerProps}/>}
+            />
           </Switch>
       </>
     );
