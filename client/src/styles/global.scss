@@ -31,6 +31,7 @@ main {
     border-radius: func.rem-size(3px);
 
     @include tablet-up {
+        margin-top: func.rem-size(-94px);
         margin-left: func.size-to-vw($tablet, 32px);
         margin-right: func.size-to-vw($tablet, 32px);
     }
