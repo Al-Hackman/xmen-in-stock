@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import api from "../../utils/api";
 import backArrowIcon from "../../assets/icons/arrow_back-24px.svg";
 import "./AddWarehouse.scss";
 
@@ -29,7 +31,6 @@ class AddWarehouse extends React.Component {
 
     handleOnChange = (event) => {
         event.preventDefault();
-        console.log(event.target.value);
         this.setState({
             inputs: {
                 ...this.state.inputs,
@@ -40,63 +41,75 @@ class AddWarehouse extends React.Component {
 
     handleOnSubmit = (event) => {
         event.preventDefault();
-        let warehouseError = "";
-        if (this.state.inputs.warehouseInput === "") {
-            warehouseError = "warehouse-form__error";
-        }
-        let addressError = "";
-        if (this.state.inputs.addressInput === "") {
-            addressError = "warehouse-form__error";
-        }
-        let cityError = "";
-        if (this.state.inputs.cityInput === "") {
-            cityError = "warehouse-form__error";
-        }
-        let countryError = "";
-        if (this.state.inputs.countryInput === "") {
-            countryError = "warehouse-form__error";
-        }
-        let nameError = "";
-        if (this.state.inputs.nameInput === "") {
-            nameError = "warehouse-form__error";
-        }
-        let positionError = "";
-        if (this.state.inputs.positionInput === "") {
-            positionError = "warehouse-form__error";
-        }
-        let phoneError = "";
-        const phoneRegex = /^\+?(\d{1,2})?\s?\-?\.?\(?\d{3}[\-\)\.\s]?\s?\d{3}[\-\.\s]?\d{4}$/im;
-        let isValidPhone = phoneRegex.test(this.state.inputs.phoneInput); //this will return a true/false value
-        console.log("phoneValid", isValidPhone)
-        console.log("phoneInput", this.state)
+            let warehouseError = "";
+            if (this.state.inputs.warehouseInput === "") {
+                warehouseError = "warehouse-form__error";
+            }
+            let addressError = "";
+            if (this.state.inputs.addressInput === "") {
+                addressError = "warehouse-form__error";
+            }
+            let cityError = "";
+            if (this.state.inputs.cityInput === "") {
+                cityError = "warehouse-form__error";
+            }
+            let countryError = "";
+            if (this.state.inputs.countryInput === "") {
+                countryError = "warehouse-form__error";
+            }
+            let nameError = "";
+            if (this.state.inputs.nameInput === "") {
+                nameError = "warehouse-form__error";
+            }
+            let positionError = "";
+            if (this.state.inputs.positionInput === "") {
+                positionError = "warehouse-form__error";
+            }
+            let phoneError = "";
+            const phoneRegex = /^\+?(\d{1,2})?\s?\-?\.?\(?\d{3}[\-\)\.\s]?\s?\d{3}[\-\.\s]?\d{4}$/im;
+            let isValidPhone = phoneRegex.test(this.state.inputs.phoneInput); //this will return a true/false value
 
-        if (this.state.inputs.phoneInput === "") {
-            phoneError = "warehouse-form__error";
-        }
-        
-        let emailError = "";
-        const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        let isValidEmail = emailRegex.test(this.state.inputs.emailInput);
-        if (this.state.inputs.emailInput === "") {
-            emailError = "warehouse-form__error";
-        }
-
-        this.setState({
-            errors:{
-                warehouseInputError: warehouseError,
-                addressInputError: addressError,
-                cityInputError: cityError,
-                countryInputError: countryError,
-                nameInputError: nameError,
-                positionInputError: positionError,
-                phoneInputError: phoneError,
-                emailInputError: emailError,
-                }
-        });
+            if (this.state.inputs.phoneInput === "") {
+                phoneError = "warehouse-form__error";
+            }
+            
+            let emailError = "";
+            const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            let isValidEmail = emailRegex.test(this.state.inputs.emailInput);
+            if (this.state.inputs.emailInput === "") {
+                emailError = "warehouse-form__error";
+            }
+            this.setState({
+                errors:{
+                    warehouseInputError: warehouseError,
+                    addressInputError: addressError,
+                    cityInputError: cityError,
+                    countryInputError: countryError,
+                    nameInputError: nameError,
+                    positionInputError: positionError,
+                    phoneInputError: phoneError,
+                    emailInputError: emailError,
+                    }
+            });
 
         if (!Object.values(this.state.inputs).includes("") && isValidEmail && isValidPhone) {
             // replace the alert and run the axios here
-            alert("Posted!");
+            axios
+            .post(api.apiUrl + api.warehouseEndpoint, {
+                name: this.state.inputs.warehouseInput, 
+                address: this.state.inputs.addressInput, 
+                city: this.state.inputs.cityInput, 
+                country: this.state.inputs.countryInput, 
+                contactName: this.state.inputs.nameInput, 
+                position: this.state.inputs.positionInput, 
+                phone: this.state.inputs.phoneInput, 
+                email: this.state.inputs.emailInput
+            })
+            .then(()=> {this.props.history.push("/")}) 
+            .catch(err=>{
+                console.error(err);
+              }) 
+              event.target.reset()
         }
     };
 

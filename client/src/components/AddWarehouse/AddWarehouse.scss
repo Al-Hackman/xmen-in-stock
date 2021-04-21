@@ -73,9 +73,6 @@
             outline: none;
             border: 1px solid $instock;
         }
-        &:invalid {
-            border: 1px solid $out-of-stock;
-        }
     }
     &__button-wrap {
         background-color: $cta-background;
@@ -118,6 +115,6 @@
     }
 
     &__error {
-        border-color: red;
+        border-color: 1px solid $out-of-stock;
     }
 }
