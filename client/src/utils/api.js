@@ -4,7 +4,7 @@
 const api = {
     apiUrl: "http://localhost:8080",
     warehouseEndpoint: "/warehouse",
-    inventoryEndpoint: "/inventory"
+    inventoryEndpoint: "/inventory",
 };
 
 export default api;
