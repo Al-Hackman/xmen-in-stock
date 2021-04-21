@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import backArrowIcon from "../../assets/icons/arrow_back-24px.svg";
-import "./AddWarehouse.scss";
+import "./EditWarehouse.scss";
 
-class AddWarehouse extends React.Component {
+class EditWarehouse extends React.Component {
     state = {
         inputs: {
             warehouseInput: "",
@@ -106,14 +106,14 @@ class AddWarehouse extends React.Component {
         return (
             <section className="warehouse-form">
                 <header className="warehouse-form__header">
-                    <Link to="/" className="warehouse-list__icon-link">  
+                    <Link to="" className="warehouse-list__icon-link">  
                         <img
                             className="warehouse-form__icon"
                             src={backArrowIcon}
                             alt="back arrow icon"
                         />
                     </Link>
-                    <h1 className="warehouse-form__title">Add New Warehouse</h1>
+                    <h1 className="warehouse-form__title">Edit Warehouse</h1>
                 </header>
                 <div className="warehouse-form__container">
                     <form
@@ -288,7 +288,7 @@ class AddWarehouse extends React.Component {
                                 className="button warehouse-form__button"
                                 type="submit"
                             >
-                                + Add Warehouse
+                                Save
                             </button>
                         </div>
                     </form>
@@ -298,4 +298,4 @@ class AddWarehouse extends React.Component {
     }
 }
 
-export default AddWarehouse;
+export default EditWarehouse;
