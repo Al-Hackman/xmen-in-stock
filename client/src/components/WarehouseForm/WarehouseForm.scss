@@ -115,4 +115,8 @@
             width: 72px;
         }
     }
+
+    &__error {
+        border-color: red;
+    }
 }
