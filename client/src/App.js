@@ -6,24 +6,30 @@ import WarehouseForm from "./components/WarehouseForm/WarehouseForm";
 import Header from "./components/Header/Header";
 
 class App extends React.Component {
-    render() {
-        return (
-            <>
-                    <Header />
+   
+  render() {
+    return (
+      <>
+                <Header />
+      
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={(props) => <WarehouseList {...props} />}
+            />
+            <Route 
+              path="/edit-warehouse" 
+              render={(routerProps) =><WarehouseForm {...routerProps}/>}
+            />
+            <Route  
+              path="/add-warehouse" 
+              render={(routerProps) =><WarehouseForm {...routerProps}/>}
+            />
+          </Switch>
+      </>
+    );
+  }
 
-                <Switch>
-                    <Route
-                        path="/"
-                        exact
-                        render={(props) => <WarehouseList {...props} />}
-                    />
-                    <Route
-                        path="/add-warehouse"
-                        render={(props) => <WarehouseForm {...props} />}
-                    />
-                </Switch>
-            </>
-        );
-    }
 }
 export default App;
