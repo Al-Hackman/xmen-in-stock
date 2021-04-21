@@ -1,67 +1,98 @@
+@use './functions' as func;
 @use './typography' as *;
 @use './variables' as *;
 
 // mixins for tablet(768px) breakpoints.
-@mixin tablet {
-    @media (min-width:768px) {
+@mixin tablet-up {
+    @media (min-width: $tablet) {
         @content;
     }
 }
 
 //mixins for desktop(1280px) breakpoints.
-@mixin desktop {
-    @media (min-width:1280px) {
+@mixin laptop-up {
+    @media (min-width: $laptop) {
         @content;
     }
 }
 
 // Did this because so we can implement the strict width on the mockup for desktop.
-@mixin desktop-1440 {
-    @media (min-width:1440px) {
+@mixin desktop-up {
+    @media (min-width: $desktop) {
         @content;
     }
 }
 
 // Mixins for various font sizes.
 @mixin header {
-    font-size: 2rem;
-    line-height: 2.5rem;
+    font-size: func.rem-size(28px);
+    line-height: func.rem-size(36px);
     font-weight: 600;
-}
-@mixin lower-header {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 600;
+
+    @include tablet-up {
+        font-size: func.rem-size(32px);
+        line-height: func.rem-size(40px);
+    }
 }
 @mixin sub-header {
-    font-size: 0.75rem;
-    line-height: 1.125rem;
+    font-size: func.rem-size(20px);
+    line-height: func.rem-size(28px);
+    font-weight: 600;
+
+    @include tablet-up {
+        font-size: func.rem-size(24px);
+        line-height: func.rem-size(32px);
+    }
+}
+
+@mixin paragraph-large {
+    font-size: func.rem-size(15px);
+    line-height: func.rem-size(26px);
+    font-weight: 400;
+
+    @include tablet-up {
+        font-size: func.rem-size(16px);
+        line-height: func.rem-size(28px);
+    }
+}
+
+@mixin paragraph-medium {
+    font-size: func.rem-size(13px);
+    line-height: func.rem-size(20px);
+    font-weight: 400;
+
+    @include tablet-up {
+        font-size: func.rem-size(14px);
+        line-height: func.rem-size(22px);
+    }
+}
+
+@mixin paragraph-small {
+    font-size: func.rem-size(11px);
+    line-height: func.rem-size(16px);
+    font-weight: 400;
+
+    @include tablet-up {
+        font-size: func.rem-size(12px);
+        line-height: func.rem-size(18px);
+    }
+}
+
+@mixin important {
+    @extend paragraph-medium !optional;
     font-weight: 600;
 }
-@mixin paragraph-1 {
-    font-size: 1rem;
-    line-height: 1.75rem;
-    font-weight: 400;
-}
-@mixin paragraph-2 {
-    font-size: 0.875rem;
-    line-height: 1.375rem;
-    font-weight: 400;
-}
-@mixin paragraph-3 {
-    font-size: 0.75rem;
-    line-height: 1.125rem;
-    font-weight: 400;
-}
-@mixin m-h1 {
-    font-size: 1.75rem;
-    line-height: 2.25rem;
+
+@mixin table-header {
+    font-size: func.rem-size(11px);
+    line-height: func.rem-size(16px);
     font-weight: 600;
-}
-@mixin m-h2{
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 600;
+    color: $table-headers;
+
+    @include tablet-up {
+        font-size: func.rem-size(12px);
+        line-height: func.rem-size(18px);
+    }
 }
 
 //flex container positions

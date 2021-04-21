@@ -1,0 +1,122 @@
+@use '../../styles/partials/variables' as var;
+@use '../../styles/partials/mixins' as mix;
+@use '../../styles/partials/functions' as func;
+
+.item {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: func.rem-size(27px);
+    padding-right: func.size-to-vw(var.$mobile, 21px);
+    padding-left: func.size-to-vw(var.$mobile, 21px);
+    @include mix.paragraph-medium;
+
+    @include mix.tablet-up {
+        flex-direction: row;
+        padding: func.rem-size(16px) func.size-to-vw(var.$tablet, 32px);
+    }
+
+    &__label {
+        margin-top: func.rem-size(16px);
+        margin-bottom: func.rem-size(4px);
+        text-transform: uppercase;
+        @include mix.table-header;
+
+        @include mix.tablet-up {
+            display: none;
+        }
+    }
+
+    &__text {
+        @include mix.paragraph-medium;
+        margin: 0;
+
+        @include mix.tablet-up {
+            width: func.size-to-vw(var.$tablet, 140px);
+        }
+
+        @include mix.laptop-up {
+            width: func.size-to-vw(var.$laptop, 174px);
+        }
+    }
+
+    &__top {
+        display: flex;
+    }
+
+    &__left {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+
+        @include mix.tablet-up {
+            flex-direction: row;
+            width: initial;
+        }
+    }
+
+    &__right {
+        @extend .item__left;
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+        margin-top: func.rem-size(16px);
+
+        @include mix.tablet-up {
+            margin-left: auto;
+            margin-top: 0;
+            align-items: center;
+        }
+    }
+
+    &__address {
+        @include mix.tablet-up {
+            padding-right: func.size-to-vw(var.$tablet, 30px);
+            width: func.size-to-vw(var.$tablet, 150px);
+        }
+
+        @include mix.laptop-up {
+            width: func.size-to-vw(var.$laptop, 261px);
+        }
+    }
+
+    &__link {
+        color: var.$primary;
+        text-decoration: none;
+
+        &:hover{
+            text-decoration: underline;
+        }
+
+        &-container {
+            display: flex;
+            flex-direction: column;           
+        }
+
+        &--main {
+            @include mix.important;
+
+            color: var.$instock;
+            display: flex;
+            align-items: center;
+
+            @include mix.tablet-up {
+                width: func.size-to-vw(var.$tablet, 150px);
+            }
+
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 221px);
+            }
+        }
+    }
+
+    &__button {
+        background-color: transparent;
+        border-width: 0;
+
+        @include mix.tablet-up{
+            margin-left: func.rem-size(6px);
+        }
+    }
+}

@@ -1,0 +1,37 @@
+@use './variables' as var;
+
+@function rem-size($pixel-size) {
+    $result: $pixel-size/16px * 1rem;
+    @return $result;
+}
+
+// This function returns a multiple value based on
+// the base 8px spacing and its ratio to a 320px width viewport
+@function spacing-ratio($layer, $device: "mobile") {
+    $result: 0;
+    @if $device == "mobile" {
+        $result: $layer * (8px / var.$mobile);
+    } @else if $device == "tablet" {
+        $result: $layer * (24px / var.$tablet);
+    } @else if $device == "laptop" {
+        $result: $layer * (24px / var.$desktop);
+    }
+
+    @return $result;
+}
+
+// spacing in multiples of 8px
+@function spacing-layers($layers) {
+    $result: rem-size(8px * $layers);
+    @return $result;
+}
+
+@function size-ratio($width, $height) {
+    $result: $height/$width;
+    @return $result;
+}
+
+@function size-to-vw($width, $height) {
+    $result: size-ratio($width, $height) * 100vw;
+    @return $result;
+}
