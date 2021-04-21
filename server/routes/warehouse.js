@@ -1,6 +1,6 @@
 const express = require("express");
 const fs = require("fs");
-// const uuid = require('uuid');
+const uuid = require('uuid');
 const router = express.Router();
 const formatter = require('../utils/formatter');
 
@@ -52,9 +52,22 @@ router.get("/:id", (req, res) => {
     res.status(201).send(targetWarehouse);
 });
 
-// router.post('/', (req, res)=> {
-
-// });
+router.post('/', (req, res)=> {
+    const {name, address, city, country, contcatName, position, phone, email} = req.body;
+    warehouseData.push({
+    id: uuid.v4(),
+    name: name,
+    address: address,
+    city: city,
+    country: country,
+    contactName: contactName,
+    position: position,
+    phone: phone,
+    email: email
+    });
+    fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
+    res.json(warehouseData)
+});
 
 router.put("/:id", (req, res) => {
     // find warehouse
