@@ -1,5 +1,6 @@
 import React from "react";
-// import axios from 'axios';
+import axios from 'axios';
+import api from "../../utils/api";
 import backArrowIcon from "../../assets/icons/arrow_back-24px.svg";
 import "./WarehouseForm.scss";
 
@@ -31,7 +32,7 @@ class WarehouseForm extends React.Component {
         event.preventDefault();
         this.setState({
             inputs: {
-                [event.target.name]: event.target.value,
+                [event.target.name]: event.target.value, 
             },
         });
     };
@@ -42,11 +43,46 @@ class WarehouseForm extends React.Component {
         if (this.state.inputs.warehouseInput === "") {
             warehouseError = "warehouse-form__error";
         }
+        let addressError = "";
+        if (this.state.inputs.addressInput === "") {
+            addressError = "warehouse-form__error";
+        }
+        let cityError = "";
+        if (this.state.inputs.cityInput === "") {
+            cityError = "warehouse-form__error";
+        }
+        let countryError = "";
+        if (this.state.inputs.countryInput === "") {
+            countryError = "warehouse-form__error";
+        }
+        let nameError = "";
+        if (this.state.inputs.nameInput === "") {
+            nameError = "warehouse-form__error";
+        }
+        let positionError = "";
+        if (this.state.inputs.positionInput === "") {
+            positionError = "warehouse-form__error";
+        }
+        let phoneError = "";
+        if (this.state.inputs.phoneInput === "") {
+            phoneError = "warehouse-form__error";
+        }
+        let emailError = "";
+        if (this.state.inputs.emailInput === "") {
+            emailError = "warehouse-form__error";
+        }
 
         this.setState({
             errors:{
                 warehouseInputError: warehouseError,
-            }
+                addressInputError: addressError,
+                cityInputError: cityError,
+                countryInputError: countryError,
+                nameInputError: nameError,
+                positionInputError: positionError,
+                phoneInputError: phoneError,
+                emailInputError: emailError,
+                }
         });
 
         if (!Object.values(this.state.inputs).includes("")) {
