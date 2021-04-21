@@ -5,22 +5,30 @@ import WarehouseList from "./components/WarehouseList/WarehouseList";
 import WarehouseForm from "./components/WarehouseForm/WarehouseForm";
 
 class App extends React.Component {
-    render() {
-        return (
-            <>
-                <Switch>
-                    <Route
-                        path="/"
-                        exact
-                        render={(props) => <WarehouseList {...props} />}
-                    />
-                    <Route
-                        path="/add-warehouse"
-                        render={(props) => <WarehouseForm {...props} />}
-                    />
-                </Switch>
-            </>
-        );
-    }
+
+
+  render() {
+    return (
+      <>
+      <WarehouseForm />
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={(props) => <WarehouseList {...props} />}
+            />
+            <Route 
+              path="/edit-warehouse" 
+              render={(routerProps) =><WarehouseForm {...routerProps}/>}
+            />
+            <Route  
+              path="/add-warehouse" 
+              render={(routerProps) =><WarehouseForm {...routerProps}/>}
+            />
+          </Switch>
+      </>
+    );
+  }
+
 }
 export default App;
