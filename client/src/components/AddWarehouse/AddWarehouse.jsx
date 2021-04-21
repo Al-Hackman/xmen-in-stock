@@ -1,10 +1,10 @@
 import React from "react";
-import axios from 'axios';
-import api from "../../utils/api";
+// import axios from 'axios';
+// import api from "../../utils/api";
 import backArrowIcon from "../../assets/icons/arrow_back-24px.svg";
-import "./WarehouseForm.scss";
+import "./AddWarehouse.scss";
 
-class WarehouseForm extends React.Component {
+class AddWarehouse extends React.Component {
     state = {
         inputs: {
             warehouseInput: "",
@@ -30,8 +30,10 @@ class WarehouseForm extends React.Component {
 
     handleOnChange = (event) => {
         event.preventDefault();
+        console.log(event.target.value);
         this.setState({
             inputs: {
+                ...this.state.inputs,
                 [event.target.name]: event.target.value, 
             },
         });
@@ -64,10 +66,18 @@ class WarehouseForm extends React.Component {
             positionError = "warehouse-form__error";
         }
         let phoneError = "";
+        const phoneRegex = /^\+?(\d{1,2})?\s?\-?\.?\(?\d{3}[\-\)\.\s]?\s?\d{3}[\-\.\s]?\d{4}$/im;
+        let isValidPhone = phoneRegex.test(this.state.inputs.phoneInput); //this will return a true/false value
+        console.log("phoneValid", isValidPhone)
+        console.log("phoneInput", this.state)
+
         if (this.state.inputs.phoneInput === "") {
             phoneError = "warehouse-form__error";
         }
+        
         let emailError = "";
+        const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let isValidEmail = emailRegex.test(this.state.inputs.emailInput);
         if (this.state.inputs.emailInput === "") {
             emailError = "warehouse-form__error";
         }
@@ -85,14 +95,14 @@ class WarehouseForm extends React.Component {
                 }
         });
 
-        if (!Object.values(this.state.inputs).includes("")) {
+        if (!Object.values(this.state.inputs).includes("") && isValidEmail && isValidPhone) {
             // replace the alert and run the axios here
             alert("Posted!");
         }
     };
 
     render() {
-        let errorMessage = <p>This is the error message</p>;
+        let errorMessage = <p>This field is required</p>;
 
         return (
             <section className="warehouse-form">
@@ -102,7 +112,7 @@ class WarehouseForm extends React.Component {
                         src={backArrowIcon}
                         alt="back arrow icon"
                     />
-                    <h1 className="warehouse-form__title">{this.title}</h1>
+                    <h1 className="warehouse-form__title">Add New Warehouse</h1>
                 </header>
                 <div className="warehouse-form__container">
                     <form
@@ -129,9 +139,7 @@ class WarehouseForm extends React.Component {
                                     name="warehouseInput"
                                     placeholder="Warehouse Name"
                                     type="text"
-                                    required=""
                                 />
-                                {/* Display error message if there's error in input */}
                                 {this.state.errors.warehouseInputError ? (
                                     errorMessage
                                 ) : (
@@ -144,13 +152,17 @@ class WarehouseForm extends React.Component {
                             >
                                 Street Address
                                 <input
-                                    className="warehouse-form__input"
+                                    className={`warehouse-form__input ${this.state.errors.addressInputError}`}
                                     id="addressInput"
                                     name="addressInput"
                                     placeholder="Street Address"
                                     type="text"
-                                    required=""
                                 />
+                                {this.state.errors.addressInputError ? (
+                                    errorMessage
+                                ) : (
+                                    <></>
+                                )}
                             </label>
                             <label
                                 className="warehouse-form__label"
@@ -158,13 +170,17 @@ class WarehouseForm extends React.Component {
                             >
                                 City
                                 <input
-                                    className="warehouse-form__input"
+                                    className={`warehouse-form__input ${this.state.errors.cityInputError}`}
                                     id="cityInput"
                                     name="cityInput"
                                     placeholder="City"
                                     type="text"
-                                    required=""
                                 />
+                                {this.state.errors.cityInputError ? (
+                                    errorMessage
+                                ) : (
+                                    <></>
+                                )}
                             </label>
                             <label
                                 className="warehouse-form__label"
@@ -172,13 +188,17 @@ class WarehouseForm extends React.Component {
                             >
                                 Country
                                 <input
-                                    className="warehouse-form__input"
+                                    className={`warehouse-form__input ${this.state.errors.countryInputError}`}
                                     id="countryInput"
                                     name="countryInput"
                                     placeholder="Country"
                                     type="text"
-                                    required=""
                                 />
+                                {this.state.errors.countryInputError ? (
+                                    errorMessage
+                                ) : (
+                                    <></>
+                                )}
                             </label>
                         </div>
                         <div className="warehouse-form__wrap">
@@ -191,13 +211,17 @@ class WarehouseForm extends React.Component {
                             >
                                 Contact Name
                                 <input
-                                    className="warehouse-form__input"
+                                    className={`warehouse-form__input ${this.state.errors.nameInputError}`}
                                     id="nameInput"
                                     name="nameInput"
                                     placeholder="Contact Name"
                                     type="text"
-                                    required=""
                                 />
+                                {this.state.errors.nameInputError ? (
+                                    errorMessage
+                                ) : (
+                                    <></>
+                                )}
                             </label>
                             <label
                                 className="warehouse-form__label"
@@ -205,13 +229,17 @@ class WarehouseForm extends React.Component {
                             >
                                 Position
                                 <input
-                                    className="warehouse-form__input"
+                                    className={`warehouse-form__input ${this.state.errors.positionInputError}`}
                                     id="positionInput"
                                     name="positionInput"
                                     placeholder="Position"
                                     type="text"
-                                    required=""
                                 />
+                                {this.state.errors.positionInputError ? (
+                                    errorMessage
+                                ) : (
+                                    <></>
+                                )}
                             </label>
                             <label
                                 className="warehouse-form__label"
@@ -219,14 +247,16 @@ class WarehouseForm extends React.Component {
                             >
                                 Phone Number
                                 <input
-                                    className="warehouse-form__input"
+                                    className={`warehouse-form__input ${this.state.errors.phoneInputError}`}
                                     id="phoneInput"
                                     name="phoneInput"
                                     placeholder="Phone Number"
-                                    type="tel"
-                                    pattern="[0-9]{10}"
-                                    required=""
                                 />
+                                {this.state.errors.phoneInputError ? (
+                                    errorMessage
+                                ) : (
+                                    <></>
+                                )}
                             </label>
                             <label
                                 className="warehouse-form__label"
@@ -234,13 +264,16 @@ class WarehouseForm extends React.Component {
                             >
                                 Email
                                 <input
-                                    className="warehouse-form__input"
+                                    className={`warehouse-form__input ${this.state.errors.emailInputError}`}
                                     id="emailInput"
                                     name="emailInput"
                                     placeholder="Email"
-                                    type="email"
-                                    required=""
                                 />
+                                {this.state.errors.addressInputError ? (
+                                    errorMessage
+                                ) : (
+                                    <></>
+                                )}
                             </label>
                         </div>
                         <div className="warehouse-form__button-wrap">
@@ -254,7 +287,7 @@ class WarehouseForm extends React.Component {
                                 className="button warehouse-form__button"
                                 type="submit"
                             >
-                                {this.action}
+                                + Add Warehouse
                             </button>
                         </div>
                     </form>
@@ -264,4 +297,4 @@ class WarehouseForm extends React.Component {
     }
 }
 
-export default WarehouseForm;
+export default AddWarehouse;
