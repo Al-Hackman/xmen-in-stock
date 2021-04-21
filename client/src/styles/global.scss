@@ -20,7 +20,28 @@ p {
 body {
     color: $primary;
     font-family: "Titillium Web", sans-serif;
+    background-color: $body-background;
 }
+
+main {
+    margin-top: func.rem-size(-64px);
+    margin-left: func.size-to-vw($mobile, 320/375 * 16px);
+    margin-right: func.size-to-vw($mobile, 320/375 * 16px);
+    background-color: $secondary;
+    border-radius: func.rem-size(3px);
+
+    @include tablet-up {
+        margin-top: func.rem-size(-94px);
+        margin-left: func.size-to-vw($tablet, 32px);
+        margin-right: func.size-to-vw($tablet, 32px);
+    }
+
+    @include laptop-up {
+        margin-left: func.size-to-vw($laptop, 130px);
+        margin-right: func.size-to-vw($laptop, 130px);
+    }
+}
+
 h1,
 h2,
 h3,
