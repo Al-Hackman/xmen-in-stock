@@ -3,9 +3,31 @@ import React from 'react';
 import backArrowIcon from '../../assets/icons/arrow_back-24px.svg'
 import './WarehouseForm.scss';
 
+
+  
 class WarehouseForm extends React.Component {
 
-    
+    state = {
+        warehouseInput: null,
+        addressInput: null,
+        cityInput: null,
+        countryInput: null,
+        nameInput: null,
+        positionInput: null,
+        phoneInput: null,
+        emailInput: null,
+        errors: {
+            warehouseInputError: '',
+            addressInputError: '',
+            cityInputError: '',
+            countryInputError: '',
+            nameInputError: '',
+            positionInputError: '',
+            phoneInputError: '',
+            emailInputError: '',
+        }
+    };
+
     
       render() {
 
