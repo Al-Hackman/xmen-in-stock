@@ -11,7 +11,8 @@ class App extends React.Component {
       <>
       <WarehouseForm />
           <Switch>
-            <Route />
+            <Route path="/edit-warehouse" render={(routerProps) =><WarehouseForm {...routerProps}/>}/>
+            <Route  path="/add-new-warehouse" render={(routerProps) =><WarehouseForm {...routerProps}/>}/>
           </Switch>
       </>
     );
