@@ -7,6 +7,7 @@ import Modal from "./components/DeleteCards/Modal";
 import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import EditInventory from "./components/EditInventory/EditInventory";
 
 class App extends React.Component {
     render() {
@@ -23,18 +24,13 @@ class App extends React.Component {
                         <Route
                             path="/edit-warehouse/:id"
                             render={(routerProps) => (
-                                <EditWarehouse
-                                    {...routerProps}
-                                />
+                                <EditWarehouse {...routerProps} />
                             )}
                         />
                         <Route
                             path="/add-warehouse"
                             render={(routerProps) => (
-                                <EditWarehouse
-                                    {...routerProps}
-                                    isNew
-                                />
+                                <EditWarehouse {...routerProps} isNew />
                             )}
                         />
 
@@ -45,6 +41,15 @@ class App extends React.Component {
                                     <DeleteTeleInvt {...routerProps} />
                                 </Modal>
                             )}
+                        />
+
+                        <Route
+                            path="/edit-inventory/:id"
+                            render={(props) => <EditInventory {...props} />}
+                        />
+                        <Route
+                            path="/add-inventory"
+                            render={(props) => <EditInventory {...props} isNew />}
                         />
                     </Switch>
                 </main>

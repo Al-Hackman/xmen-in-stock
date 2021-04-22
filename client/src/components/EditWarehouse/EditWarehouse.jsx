@@ -1,5 +1,5 @@
 import React from "react";
-import backArrowIcon from "../../assets/icons/arrow_back-24px.svg";
+import EditAction from '../EditAction/EditAction';
 import "./EditWarehouse.scss";
 import axios from "axios";
 import api from "../../utils/api";
@@ -360,20 +360,7 @@ class EditWarehouse extends React.Component {
                                 )}
                             </label>
                         </div>
-                        <div className="warehouse-form__button-wrap">
-                            <button
-                                className="button warehouse-form__button-cancel"
-                                onClick={(event) => this.handleOnCancel(event)}
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                className="button warehouse-form__button"
-                                type="submit"
-                            >
-                                {buttonText}
-                            </button>
-                        </div>
+                        <EditAction {...this.props} buttonText={buttonText}/>
                     </form>
                 </div>
             </section>

@@ -6,7 +6,15 @@
 .page-title {
     display: flex;
     align-items: center;
-    padding: 0;
+    padding: 0 func.size-to-vw($mobile, 320/375 * 28px);
+
+    @include tablet-up {
+        padding: 0 func.size-to-vw($tablet, 320/375 * 22px);
+    }
+
+    @include laptop-up {
+        padding: 0 func.size-to-vw($laptop, 320/375 * 22px);
+    }
 
     &__return {
         background-color: transparent;
@@ -15,16 +23,8 @@
         display: flex;
         align-items: center;
         height: fit-content;
-        margin-left: func.size-to-vw($mobile, 320/375 * 28px);
         padding-left: 0;
         padding-right: 0;
-
-        @include tablet-up {
-            margin-left: func.size-to-vw($tablet, 320/375 * 22px);
-        }
-        @include laptop-up {
-            margin-left: func.size-to-vw($laptop, 320/375 * 22px);
-        }
     }
     &__title {
         padding-left: 0.25em;
