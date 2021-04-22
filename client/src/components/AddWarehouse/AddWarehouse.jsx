@@ -66,6 +66,7 @@ class AddWarehouse extends React.Component {
                 positionError = "warehouse-form__error";
             }
             let phoneError = "";
+            //eslint-disable-next-line
             const phoneRegex = /^\+?(\d{1,2})?\s?\-?\.?\(?\d{3}[\-\)\.\s]?\s?\d{3}[\-\.\s]?\d{4}$/im;
             let isValidPhone = phoneRegex.test(this.state.inputs.phoneInput); //this will return a true/false value
 
@@ -74,6 +75,7 @@ class AddWarehouse extends React.Component {
             }
             
             let emailError = "";
+            //eslint-disable-next-line
             const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             let isValidEmail = emailRegex.test(this.state.inputs.emailInput);
             if (this.state.inputs.emailInput === "") {

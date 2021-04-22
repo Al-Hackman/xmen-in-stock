@@ -52,21 +52,31 @@ router.get("/:id", (req, res) => {
     res.status(201).send(targetWarehouse);
 });
 
-router.post('/', (req, res)=> {
-    const {name, address, city, country, contcatName, position, phone, email} = req.body;
+// Add a warehouse
+router.post('/', (req, res) => {
+    const { name, address, city, country, contactName, position, phone, email } = req.body;
     warehouseData.push({
-    id: uuid.v4(),
-    name: name,
-    address: address,
-    city: city,
-    country: country,
-    contactName: contactName,
-    position: position,
-    phone: phone,
-    email: email
+        id: uuid.v4(),
+        name: name,
+        address: address,
+        city: city,
+        country: country,
+        contact: {
+            name: contactName,
+            position: position,
+            phone: phone,
+            email: email
+        }
     });
-    fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
-    res.json(warehouseData)
+    
+    // write to file
+
+    try {
+        fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
+        res.json(warehouseData)
+    } catch (error) {
+        console.error("Error writing to warehouses.json", error);
+    }
 });
 
 router.put("/:id", (req, res) => {

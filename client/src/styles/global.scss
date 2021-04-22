@@ -63,7 +63,9 @@ button {
     display: inline-block;
     &:focus {
         outline: none;
-    }
-
-    
+    }  
+}
+::placeholder {
+    color: $primary;
+    font-family: "Titillium Web", sans-serif;
 }
