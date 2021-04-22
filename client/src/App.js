@@ -2,19 +2,11 @@ import React from "react";
 import "./styles/global.scss";
 import { Switch, Route } from "react-router-dom";
 import WarehouseList from "./components/WarehouseList/WarehouseList";
-<<<<<<< HEAD
-import WarehouseForm from "./components/WarehouseForm/WarehouseForm";
-import Modal from "./components/DeleteCards/Modal";
-import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
-import Header from "./components/Header/Header";
-=======
 import EditWarehouse from "./components/EditWarehouse/EditWarehouse";
-import EditInventory from "./components/EditInventory/EditInventory";
 import Modal from "./components/DeleteCards/Modal";
 import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
->>>>>>> f02d99a9ac0ef992104d28d65fd9f82a978319c1
 
 class App extends React.Component {
     render() {
@@ -45,18 +37,13 @@ class App extends React.Component {
                                 />
                             )}
                         />
+
                         <Route
                             path="/invt-delete"
                             render={(routerProps) => (
                                 <Modal>
                                     <DeleteTeleInvt {...routerProps} />
                                 </Modal>
-                            )}
-                        />
-                        <Route
-                            path="/edit-inventory"
-                            render={(routerProps) => (
-                                <EditInventory {...routerProps} />
                             )}
                         />
                     </Switch>
