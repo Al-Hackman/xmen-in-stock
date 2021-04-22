@@ -127,4 +127,24 @@ router.put("/:id", (req, res) => {
     }
 });
 
+
+//This Deletes a warehouse using the warehouse ID
+router.delete("/:id", (req, res) => {
+    // find warehouse and delete from the warehouse json
+    const deleteWarehouse = warehouseData.findIndex(
+        (warehouse) => warehouse.id === req.params.id);
+        warehouseData.splice(deleteWarehouse, 1);
+
+        fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
+        res.json(warehouseData);
+
+    // find all inventories corresponding to the spicific warehouse and delete them
+    const updatedInventory = inventoryData.filter((inventory) => inventory.warehouseID != req.params.id);
+        
+        fs.writeFileSync("data/inventories.json", JSON.stringify(updatedInventory));
+        // res.json(updatedInventory);
+
+});
+
+
 module.exports = router;
