@@ -44,11 +44,6 @@ router.get("/:id", (req, res) => {
     let targetWarehouse = warehouseData.find(
         (result) => result.id === req.params.id
     );
-
-    // add corresponding inventory to warehouse data to send
-    targetWarehouse.inventories = inventoryData.filter(
-        (item) => item.warehouseID === targetWarehouse.id
-    );
     res.status(201).send(targetWarehouse);
 });
 
