@@ -1,8 +1,8 @@
 const express = require("express");
 const fs = require("fs");
-const uuid = require('uuid');
+const uuid = require("uuid");
 const router = express.Router();
-const formatter = require('../utils/formatter');
+const formatter = require("../utils/formatter");
 
 let warehouseData;
 // get warehouse data
@@ -52,21 +52,33 @@ router.get("/:id", (req, res) => {
     res.status(201).send(targetWarehouse);
 });
 
-router.post('/', (req, res)=> {
-    const {name, address, city, country, contcatName, position, phone, email} = req.body;
+router.post("/", (req, res) => {
+    const {
+        name,
+        address,
+        city,
+        country,
+        contactName,
+        position,
+        phone,
+        email,
+    } = req.body;
+
     warehouseData.push({
-    id: uuid.v4(),
-    name: name,
-    address: address,
-    city: city,
-    country: country,
-    contactName: contactName,
-    position: position,
-    phone: phone,
-    email: email
+        id: uuid.v4(),
+        name: name,
+        address: address,
+        city: city,
+        country: country,
+        contact: {
+            name: contactName,
+            position: position,
+            phone: phone,
+            email: email,
+        },
     });
     fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
-    res.json(warehouseData)
+    res.json(warehouseData);
 });
 
 router.put("/:id", (req, res) => {
@@ -92,21 +104,22 @@ router.put("/:id", (req, res) => {
 
     // Create new warehouse object to add if only data is valid
     if (!hasEmptyField && isValidPhone && isValidEmail) {
-        let updatedWarehouse = { ...targetWarehouse };
         let formattedPhoneNumber = formatter.formatPhone(req.body.phone);
-        updatedWarehouse.name = req.body.name;
-        updatedWarehouse.address = req.body.address;
-        updatedWarehouse.city = req.body.city;
-        updatedWarehouse.country = req.body.country;
-        updatedWarehouse.contact.name = req.body.contactName;
-        updatedWarehouse.contact.position = req.body.position;
-        updatedWarehouse.contact.phone = formattedPhoneNumber;
-        updatedWarehouse.contact.email = req.body.email;
-
+        targetWarehouse.name = req.body.name;
+        targetWarehouse.address = req.body.address;
+        targetWarehouse.city = req.body.city;
+        targetWarehouse.country = req.body.country;
+        targetWarehouse.contact.name = req.body.contactName;
+        targetWarehouse.contact.position = req.body.position;
+        targetWarehouse.contact.phone = formattedPhoneNumber;
+        targetWarehouse.contact.email = req.body.email;
 
         // write to file
         try {
-            fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
+            fs.writeFileSync(
+                "data/warehouses.json",
+                JSON.stringify(warehouseData)
+            );
         } catch (error) {
             console.error("Error writing to warehouses.json", error);
         }

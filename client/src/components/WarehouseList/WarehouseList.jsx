@@ -19,7 +19,6 @@ class WarehouseList extends React.Component {
         axios
             .get(api.apiUrl + api.warehouseEndpoint)
             .then((response) => {
-                console.log(response.data);
                 this.setState({
                     items: response.data,
                 });

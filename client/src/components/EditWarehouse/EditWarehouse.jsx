@@ -1,10 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import backArrowIcon from "../../assets/icons/arrow_back-24px.svg";
 import "./EditWarehouse.scss";
+import axios from "axios";
+import api from "../../utils/api";
 
 class EditWarehouse extends React.Component {
     state = {
+        warehouseId: "",
         inputs: {
             warehouseInput: "",
             addressInput: "",
@@ -29,11 +31,10 @@ class EditWarehouse extends React.Component {
 
     handleOnChange = (event) => {
         event.preventDefault();
-        console.log(event.target.value);
         this.setState({
             inputs: {
                 ...this.state.inputs,
-                [event.target.name]: event.target.value, 
+                [event.target.name]: event.target.value,
             },
         });
     };
@@ -67,13 +68,11 @@ class EditWarehouse extends React.Component {
         let phoneError = "";
         const phoneRegex = /^\+?(\d{1,2})?\s?\-?\.?\(?\d{3}[\-\)\.\s]?\s?\d{3}[\-\.\s]?\d{4}$/im;
         let isValidPhone = phoneRegex.test(this.state.inputs.phoneInput); //this will return a true/false value
-        console.log("phoneValid", isValidPhone)
-        console.log("phoneInput", this.state)
 
         if (this.state.inputs.phoneInput === "") {
             phoneError = "warehouse-form__error";
         }
-        
+
         let emailError = "";
         const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let isValidEmail = emailRegex.test(this.state.inputs.emailInput);
@@ -82,7 +81,7 @@ class EditWarehouse extends React.Component {
         }
 
         this.setState({
-            errors:{
+            errors: {
                 warehouseInputError: warehouseError,
                 addressInputError: addressError,
                 cityInputError: cityError,
@@ -91,29 +90,106 @@ class EditWarehouse extends React.Component {
                 positionInputError: positionError,
                 phoneInputError: phoneError,
                 emailInputError: emailError,
-                }
+            },
         });
 
-        if (!Object.values(this.state.inputs).includes("") && isValidEmail && isValidPhone) {
-            // replace the alert and run the axios here
-            alert("Posted!");
+        if (
+            !Object.values(this.state.inputs).includes("") &&
+            isValidEmail &&
+            isValidPhone
+        ) {
+            let newDetails = {
+                name: this.state.inputs.warehouseInput,
+                address: this.state.inputs.addressInput,
+                city: this.state.inputs.cityInput,
+                country: this.state.inputs.countryInput,
+                contactName: this.state.inputs.nameInput,
+                position: this.state.inputs.positionInput,
+                phone: this.state.inputs.phoneInput,
+                email: this.state.inputs.emailInput,
+            };
+            if (this.props.isNew) {
+                axios
+                    .post(api.apiUrl + api.warehouseEndpoint, newDetails)
+                    .then(() => {
+                        this.props.history.push("/");
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    });
+                event.target.reset();
+            } else {
+                axios
+                    .put(
+                        `${api.apiUrl}${api.warehouseEndpoint}/${this.state.warehouseId}`,
+                        newDetails
+                    )
+                    .then(() => {
+                        this.props.history.push("/");
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    });
+                event.target.reset();
+            }
+        }
+    };
+
+    handleOnCancel = (event) => {
+        event.preventDefault();
+
+        this.props.history.goBack();
+    }
+
+    componentDidMount = () => {
+        if (!this.props.isNew) {
+            axios
+                .get(
+                    `${api.apiUrl}${api.warehouseEndpoint}/${this.props.match.params.id}`
+                )
+                .then((response) => {
+                    this.setState(
+                        {
+                            warehouseId:response.data.id,
+                            inputs: {
+                                warehouseInput: response.data.name,
+                                addressInput: response.data.address,
+                                cityInput: response.data.city,
+                                countryInput: response.data.country,
+                                nameInput: response.data.contact.name,
+                                positionInput: response.data.contact.position,
+                                phoneInput: response.data.contact.phone,
+                                emailInput: response.data.contact.email,
+                            },
+                        }
+                    );
+                })
+                .catch((err) => {
+                    console.error(
+                        "Error on GET method during ComponentDidMount",
+                        err
+                    );
+                });
         }
     };
 
     render() {
         let errorMessage = <p>This field is required</p>;
 
+        let buttonText = this.props.isNew ? "+ Add Warehouse" : "Save";
+        let titleText = this.props.isNew ? "Add New Warehouse" : "Edit Warehouse";
         return (
             <section className="warehouse-form">
                 <header className="warehouse-form__header">
-                    <Link to="" className="warehouse-list__icon-link">  
+                    <button className="warehouse-form__return">
                         <img
-                            className="warehouse-form__icon"
+                            className="warehouse-form__return-icon"
                             src={backArrowIcon}
                             alt="back arrow icon"
+                            onClick={(event) => this.handleOnCancel(event)}
                         />
-                    </Link>
-                    <h1 className="warehouse-form__title">Edit Warehouse</h1>
+                    </button>
+                    <h1 className="warehouse-form__title">{titleText}</h1>
                 </header>
                 <div className="warehouse-form__container">
                     <form
@@ -135,6 +211,7 @@ class EditWarehouse extends React.Component {
                             >
                                 Warehouse Name
                                 <input
+                                    defaultValue={this.state.inputs.warehouseInput}
                                     className={`warehouse-form__input ${this.state.errors.warehouseInputError}`}
                                     id="warehouseInput"
                                     name="warehouseInput"
@@ -153,6 +230,7 @@ class EditWarehouse extends React.Component {
                             >
                                 Street Address
                                 <input
+                                    defaultValue={this.state.inputs.addressInput}
                                     className={`warehouse-form__input ${this.state.errors.addressInputError}`}
                                     id="addressInput"
                                     name="addressInput"
@@ -171,6 +249,7 @@ class EditWarehouse extends React.Component {
                             >
                                 City
                                 <input
+                                    defaultValue={this.state.inputs.cityInput}
                                     className={`warehouse-form__input ${this.state.errors.cityInputError}`}
                                     id="cityInput"
                                     name="cityInput"
@@ -189,6 +268,7 @@ class EditWarehouse extends React.Component {
                             >
                                 Country
                                 <input
+                                    defaultValue={this.state.inputs.countryInput}
                                     className={`warehouse-form__input ${this.state.errors.countryInputError}`}
                                     id="countryInput"
                                     name="countryInput"
@@ -212,6 +292,7 @@ class EditWarehouse extends React.Component {
                             >
                                 Contact Name
                                 <input
+                                    defaultValue={this.state.inputs.nameInput}
                                     className={`warehouse-form__input ${this.state.errors.nameInputError}`}
                                     id="nameInput"
                                     name="nameInput"
@@ -230,6 +311,7 @@ class EditWarehouse extends React.Component {
                             >
                                 Position
                                 <input
+                                    defaultValue={this.state.inputs.positionInput}
                                     className={`warehouse-form__input ${this.state.errors.positionInputError}`}
                                     id="positionInput"
                                     name="positionInput"
@@ -248,6 +330,7 @@ class EditWarehouse extends React.Component {
                             >
                                 Phone Number
                                 <input
+                                    defaultValue={this.state.inputs.phoneInput}
                                     className={`warehouse-form__input ${this.state.errors.phoneInputError}`}
                                     id="phoneInput"
                                     name="phoneInput"
@@ -265,6 +348,7 @@ class EditWarehouse extends React.Component {
                             >
                                 Email
                                 <input
+                                    defaultValue={this.state.inputs.emailInput}
                                     className={`warehouse-form__input ${this.state.errors.emailInputError}`}
                                     id="emailInput"
                                     name="emailInput"
@@ -280,7 +364,7 @@ class EditWarehouse extends React.Component {
                         <div className="warehouse-form__button-wrap">
                             <button
                                 className="button warehouse-form__button-cancel"
-                                onClick={() => this.handleOnCancel}
+                                onClick={(event) => this.handleOnCancel(event)}
                             >
                                 Cancel
                             </button>
@@ -288,7 +372,7 @@ class EditWarehouse extends React.Component {
                                 className="button warehouse-form__button"
                                 type="submit"
                             >
-                                Save
+                                {buttonText}
                             </button>
                         </div>
                     </form>
