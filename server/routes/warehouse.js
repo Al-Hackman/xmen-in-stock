@@ -47,6 +47,7 @@ router.get("/:id", (req, res) => {
     res.status(201).send(targetWarehouse);
 });
 
+
 router.post("/", (req, res) => {
     const {
         name,
@@ -58,6 +59,7 @@ router.post("/", (req, res) => {
         phone,
         email,
     } = req.body;
+
 
     warehouseData.push({
         id: uuid.v4(),

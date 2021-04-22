@@ -9,6 +9,7 @@ import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
 =======
 import EditWarehouse from "./components/EditWarehouse/EditWarehouse";
+import EditInventory from "./components/EditInventory/EditInventory";
 import Modal from "./components/DeleteCards/Modal";
 import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
@@ -44,13 +45,18 @@ class App extends React.Component {
                                 />
                             )}
                         />
-
                         <Route
                             path="/invt-delete"
                             render={(routerProps) => (
                                 <Modal>
                                     <DeleteTeleInvt {...routerProps} />
                                 </Modal>
+                            )}
+                        />
+                        <Route
+                            path="/edit-inventory"
+                            render={(routerProps) => (
+                                <EditInventory {...routerProps} />
                             )}
                         />
                     </Switch>
