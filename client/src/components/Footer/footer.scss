@@ -1,0 +1,20 @@
+@use '../../styles/partials/mixins' as mix;
+@use '../../styles/partials/variables' as *;
+
+
+
+
+.footer-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+
+    &__content{
+        @include mix.paragraph-small;
+        color: $table-headers;
+        padding: 2.5rem 0px;
+    }
+}
+
+
