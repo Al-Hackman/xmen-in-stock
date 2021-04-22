@@ -3,6 +3,7 @@ import "./styles/global.scss";
 import { Switch, Route } from "react-router-dom";
 import WarehouseList from "./components/WarehouseList/WarehouseList";
 import EditWarehouse from "./components/EditWarehouse/EditWarehouse";
+import EditInventory from "./components/EditInventory/EditInventory";
 import Modal from "./components/DeleteCards/Modal";
 import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
@@ -33,7 +34,6 @@ class App extends React.Component {
                                 <EditWarehouse {...routerProps} isNew />
                             )}
                         />
-
                         <Route
                             path="/invt-delete"
                             render={(routerProps) => (
