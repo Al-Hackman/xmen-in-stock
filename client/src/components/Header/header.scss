@@ -1,70 +1,84 @@
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as mix;
+@use '../../styles/partials/functions' as func;
 
-
-
-.navbar{
+.navbar {
     width: 100%;
-    height: 200px;
+    height: func.rem-size(200px);
     background-color: $cta-button;
-    padding: 0px 1rem;
-    // position: absolute;
+    padding: func.rem-size(24px) 1rem;
 
-    &__logo-wrap{
-        display: flex;
-        justify-content: center;
-        padding: 1.875rem 0px;
-    }
-
-    &__button-wrap{
+    @include mix.tablet-up {
+        height: func.rem-size(186px);
+        padding: 0px func.size-to-vw($tablet, 32px);
         display: flex;
         justify-content: space-between;
     }
 
-    &__btn{
-        box-sizing: border-box;
-        width:100%;
-        height: 36px;
-        border: none;
-        color: $dividers-borders;
-        background-color: $cta-button;  
+    @include mix.laptop-up {
+        padding: 0px func.size-to-vw($laptop, 130px);
     }
 
     &__btn:hover{
         text-decoration: underline;
     }
 
-    &__btn-link{
-        width: 47%;
+    
+    &__logo-wrap {
+        display: flex;
+        justify-content: center;
+        margin-bottom: func.rem-size(24px);
+        height: fit-content;
+
+        @include mix.tablet-up {
+            margin-top: func.rem-size(32px);
+        }
     }
 
-    &--active button.navbar__btn{
-        box-sizing: border-box;
-        border-radius: 20px;
-        background-color: $primary;
-        color: $secondary;
+    &__logo-link {
+        display: flex;
+        align-items: center;
     }
 
-    @include mix.tablet-up{
-        height: 186px;
-        padding: 0px 2rem;
+    &__button-wrap {
         display: flex;
         justify-content: space-between;
 
-        &__button-wrap{
-            padding-top: 1.875rem;
+        @include mix.tablet-up {
+            margin-top: func.rem-size(27px);
             justify-content: flex-end;
-            width: 30%;
         }
-        &__btn{
-            font-size: 14px;
-        }   
     }
 
-    @include mix.desktop-up{
-        padding: 0px 8.125rem;
+    &__btn {
+        box-sizing: border-box;
+        width: 100%;
+        height: func.rem-size(36px);
+        border: none;
+        color: $dividers-borders;
+        background-color: $cta-button;
+        @include mix.paragraph-medium;
 
-
+        @include mix.tablet-up {
+            height: func.rem-size(38px);
+        }
     }
 
+    &__btn-link {
+        width: func.size-to-vw($mobile, 320/375 * 164px);
+        height: fit-content;
+
+        @include mix.tablet-up {
+            width: func.size-to-vw($tablet, 107px);
+        }
+    }
+
+    &--active{
+        .navbar__btn {
+            box-sizing: border-box;
+            border-radius: func.rem-size(20px);
+            background-color: $primary;
+            color: $secondary;
+        }
+    }
 }

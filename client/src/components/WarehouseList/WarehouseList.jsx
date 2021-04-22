@@ -19,7 +19,6 @@ class WarehouseList extends React.Component {
         axios
             .get(api.apiUrl + api.warehouseEndpoint)
             .then((response) => {
-                console.log(response.data);
                 this.setState({
                     items: response.data,
                 });
@@ -62,7 +61,7 @@ class WarehouseList extends React.Component {
                             <img src={searchIcon} alt="search" />
                         </button>
                     </form>
-                    <Link to="/new-warehouse" className="warehouse-list__add">
+                    <Link to="/add-warehouse" className="warehouse-list__add">
                         <button className="button warehouse-list__add-button">
                             + Add new warehouse
                         </button>

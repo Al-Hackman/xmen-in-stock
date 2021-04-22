@@ -34,7 +34,7 @@
 
     &__column-heading {
         display: flex;
-        width: func.size-to-vw(var.$tablet, 140px);
+        width: func.size-to-vw(var.$tablet, 120px);
         text-transform: uppercase;
 
         @include mix.laptop-up {
@@ -49,7 +49,7 @@
         }
 
         &--address {
-            width: func.size-to-vw(var.$tablet, 150px);
+            width: func.size-to-vw(var.$tablet, 120px);
             @include mix.laptop-up {
                 width: func.size-to-vw(var.$laptop, 261px);
             }

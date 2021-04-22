@@ -31,7 +31,7 @@
         margin: 0;
 
         @include mix.tablet-up {
-            width: func.size-to-vw(var.$tablet, 140px);
+            width: func.size-to-vw(var.$tablet, 120px);
         }
 
         @include mix.laptop-up {
@@ -50,6 +50,7 @@
 
         @include mix.tablet-up {
             flex-direction: row;
+            align-items: center;
             width: initial;
         }
     }
@@ -73,7 +74,7 @@
     &__address {
         @include mix.tablet-up {
             padding-right: func.size-to-vw(var.$tablet, 30px);
-            width: func.size-to-vw(var.$tablet, 150px);
+            width: func.size-to-vw(var.$tablet, 120px);
         }
 
         @include mix.laptop-up {
