@@ -2,12 +2,12 @@ import React from "react";
 import "./styles/global.scss";
 import { Switch, Route } from "react-router-dom";
 import WarehouseList from "./components/WarehouseList/WarehouseList";
-import AddWarehouse from "./components/AddWarehouse/AddWarehouse";
 import EditWarehouse from "./components/EditWarehouse/EditWarehouse";
 import EditInventory from "./components/EditInventory/EditInventory";
 import Modal from "./components/DeleteCards/Modal";
 import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 class App extends React.Component {
     render() {
@@ -22,15 +22,20 @@ class App extends React.Component {
                             render={(props) => <WarehouseList {...props} />}
                         />
                         <Route
-                            path="/edit-warehouse"
+                            path="/edit-warehouse/:id"
                             render={(routerProps) => (
-                                <EditWarehouse {...routerProps} />
+                                <EditWarehouse
+                                    {...routerProps}
+                                />
                             )}
                         />
                         <Route
                             path="/add-warehouse"
                             render={(routerProps) => (
-                                <AddWarehouse {...routerProps} />
+                                <EditWarehouse
+                                    {...routerProps}
+                                    isNew
+                                />
                             )}
                         />
                         <Route
@@ -49,6 +54,7 @@ class App extends React.Component {
                         />
                     </Switch>
                 </main>
+                <Footer />
             </>
         );
     }

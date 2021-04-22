@@ -19,6 +19,11 @@
         padding: 0px func.size-to-vw($laptop, 130px);
     }
 
+    &__btn:hover{
+        text-decoration: underline;
+    }
+
+    
     &__logo-wrap {
         display: flex;
         justify-content: center;
