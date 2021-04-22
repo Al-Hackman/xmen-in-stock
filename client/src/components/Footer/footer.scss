@@ -2,23 +2,13 @@
 @use '../../styles/partials/variables' as *;
 
 
-// html, body{
-//   height: 100%;
-//   position: relative;
-// }
 
-// #root {
-//  display: flex;
-//  flex-direction: column;
-// }
 
 .footer-wrap{
     width: 100%;
     display: flex;
     justify-content: center;
-    // position: absolute;  
-    // bottom: 0;
-    // margin-top: auto;  
+    
 
     &__content{
         @include mix.paragraph-small;
