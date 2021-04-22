@@ -16,7 +16,11 @@ const ListItem = (props) => {
                         className="item__link item__link--main"
                     >
                         {props.name}
-                        <img src={arrow} alt="right arrow" className="item__link-icon"/>
+                        <img
+                            src={arrow}
+                            alt="right arrow"
+                            className="item__link-icon"
+                        />
                     </Link>
                     <h2 className="item__label">Address</h2>
                     <p className="item__text item__address">{props.address}</p>
@@ -52,16 +56,15 @@ const ListItem = (props) => {
                         }}
                     />
                 </button>
-                <button className="item__button">
-                    <img
-                        src={editItem}
-                        alt="edit item"
-                        className="item__icon"
-                        onClick={(event) => {
-                            props.handleOnEdit(event);
-                        }}
-                    />
-                </button>
+                <Link to={`/edit-warehouse/${props.id}`}>
+                    <button className="item__button">
+                        <img
+                            src={editItem}
+                            alt="edit item"
+                            className="item__icon"
+                        />
+                    </button>
+                </Link>
             </div>
         </li>
     );
