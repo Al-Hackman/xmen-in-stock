@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import WarehouseList from "./components/WarehouseList/WarehouseList";
 import WarehouseForm from "./components/WarehouseForm/WarehouseForm";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 class App extends React.Component {
    
@@ -27,6 +28,8 @@ class App extends React.Component {
               render={(routerProps) =><WarehouseForm {...routerProps}/>}
             />
           </Switch>
+
+          <Footer />
       </>
     );
   }

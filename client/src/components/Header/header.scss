@@ -30,6 +30,10 @@
         background-color: $cta-button;  
     }
 
+    &__btn:hover{
+        text-decoration: underline;
+    }
+
     &__btn-link{
         width: 47%;
     }
