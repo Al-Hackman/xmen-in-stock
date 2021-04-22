@@ -1,7 +1,8 @@
 const express = require("express");
 const fs = require("fs");
-// const uuid = require('uuid');
+const uuid = require("uuid");
 const router = express.Router();
+const formatter = require("../utils/formatter");
 
 let warehouseData;
 // get warehouse data
@@ -43,28 +44,107 @@ router.get("/:id", (req, res) => {
     let targetWarehouse = warehouseData.find(
         (result) => result.id === req.params.id
     );
-    
-    let resultWarehouse = {
-        id: targetWarehouse.id,
-        name: targetWarehouse.name,
-        address: `${targetWarehouse.address}, ${targetWarehouse.city}, ${targetWarehouse.country}`,
-        contact: {
-            name: targetWarehouse.contact.name,
-            position: targetWarehouse.contact.position,
-            phone: targetWarehouse.contact.phone,
-            email: targetWarehouse.contact.email,
-        },
-    }
-
-    // add corresponding inventory to warehouse data to send
-    resultWarehouse.inventories = inventoryData.filter(
-        (item) => item.warehouseID === targetWarehouse.id
-    );
-    res.status(201).send(resultWarehouse);
+    res.status(201).send(targetWarehouse);
 });
 
-// router.post('/', (req, res)=> {
+router.post("/", (req, res) => {
+    const {
+        name,
+        address,
+        city,
+        country,
+        contactName,
+        position,
+        phone,
+        email,
+    } = req.body;
 
-// });
+    warehouseData.push({
+        id: uuid.v4(),
+        name: name,
+        address: address,
+        city: city,
+        country: country,
+        contact: {
+            name: contactName,
+            position: position,
+            phone: phone,
+            email: email,
+        },
+    });
+    fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
+    res.json(warehouseData);
+});
+
+router.put("/:id", (req, res) => {
+    // find warehouse
+    let targetWarehouse = warehouseData.find(
+        (result) => result.id === req.params.id
+    );
+
+    // check for empty values inside object from request
+    let hasEmptyField = false;
+    Object.values(req.body).forEach((value) => {
+        if (value.length < 1) {
+            hasEmptyField = true;
+        }
+    });
+
+    // Regex to check phone number
+    const phoneRegex = /^\+?(\d{1,2})?\s?\-?\.?\(?\d{3}[\-\)\.\s]?\s?\d{3}[\-\.\s]?\d{4}$/im;
+    let isValidPhone = phoneRegex.test(req.body.phone);
+
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let isValidEmail = emailRegex.test(req.body.email);
+
+    // Create new warehouse object to add if only data is valid
+    if (!hasEmptyField && isValidPhone && isValidEmail) {
+        let formattedPhoneNumber = formatter.formatPhone(req.body.phone);
+        targetWarehouse.name = req.body.name;
+        targetWarehouse.address = req.body.address;
+        targetWarehouse.city = req.body.city;
+        targetWarehouse.country = req.body.country;
+        targetWarehouse.contact.name = req.body.contactName;
+        targetWarehouse.contact.position = req.body.position;
+        targetWarehouse.contact.phone = formattedPhoneNumber;
+        targetWarehouse.contact.email = req.body.email;
+
+        // write to file
+        try {
+            fs.writeFileSync(
+                "data/warehouses.json",
+                JSON.stringify(warehouseData)
+            );
+        } catch (error) {
+            console.error("Error writing to warehouses.json", error);
+        }
+
+        res.status(200).json(req.body);
+    } else {
+        res.status(500).send(
+            "New data is invalid. All fields must be filled in. Phone number and email address must be in the correct format"
+        );
+    }
+});
+
+
+//This Deletes a warehouse using the warehouse ID
+router.delete("/:id", (req, res) => {
+    // find warehouse and delete from the warehouse json
+    const deleteWarehouse = warehouseData.findIndex(
+        (warehouse) => warehouse.id === req.params.id);
+        warehouseData.splice(deleteWarehouse, 1);
+
+        fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
+        res.json(warehouseData);
+
+    // find all inventories corresponding to the spicific warehouse and delete them
+    const updatedInventory = inventoryData.filter((inventory) => inventory.warehouseID != req.params.id);
+        
+        fs.writeFileSync("data/inventories.json", JSON.stringify(updatedInventory));
+        // res.json(updatedInventory);
+
+});
+
 
 module.exports = router;

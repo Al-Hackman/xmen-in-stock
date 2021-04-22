@@ -1,16 +1,16 @@
-$primary: #13182C;                  // Global text color
-$secondary: #FFFFFF;                // Global White color
-$cta-button: #232940;               // Top navigation header background,CTA button hover state background 
-$dividers-borders: #bdc5d5;         // Outlines, dividers, borders, table sorting icon
-$table-headers: #5C667E;            // Table column headers & placeholder text
-$instock: #2E66E5;                 // Interactive elements 
-$out-of-stock: #C94515;             // “Out of stock” label, error states & delete icon
-$cta-background: #F7F8F9;           // Page background,table column header background, CTA background
-$instock-label: #158463;                  // Instock label
+$primary: #13182c; // Global text color
+$secondary: #ffffff; // Global White color
+$body-background: #d1d1d1;
+$cta-button: #232940; // Top navigation header background,CTA button hover state background
+$dividers-borders: #bdc5d5; // Outlines, dividers, borders, table sorting icon
+$table-headers: #5c667e; // Table column headers & placeholder text
+$instock: #2e66e5; // Interactive elements
+$out-of-stock: #c94515; // “Out of stock” label, error states & delete icon
+$cta-background: #f7f8f9; // Page background,table column header background, CTA background
+$instock-label: #158463; // Instock label
 
 // Device breakpoints
 $mobile: 320px;
 $tablet: 768px;
 $laptop: 1280px;
 $desktop: 1440px;
-
