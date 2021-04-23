@@ -25,4 +25,13 @@ router.get("/warehouse/:id", (req, res) => {
     res.status(200).json(warehouseInventories);
 });
 
+//find single inventory item
+router.get("/:id", (req, res) => {
+    let inventoryItem = inventoryData.find(
+        (result) => result.id === req.params.id
+    );
+    res.status(201).send(inventoryItem);
+});
+
+
 module.exports = router;

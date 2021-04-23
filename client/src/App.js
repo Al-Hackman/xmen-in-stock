@@ -3,11 +3,12 @@ import "./styles/global.scss";
 import { Switch, Route } from "react-router-dom";
 import WarehouseList from "./components/WarehouseList/WarehouseList";
 import EditWarehouse from "./components/EditWarehouse/EditWarehouse";
-import EditInventory from "./components/EditInventory/EditInventory";
 import Modal from "./components/DeleteCards/Modal";
 import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import EditInventory from "./components/EditInventory/EditInventory";
+import InventoryItem from "./components/InventoryItem/InventoryItem";
 
 class App extends React.Component {
     render() {
@@ -24,18 +25,13 @@ class App extends React.Component {
                         <Route
                             path="/edit-warehouse/:id"
                             render={(routerProps) => (
-                                <EditWarehouse
-                                    {...routerProps}
-                                />
+                                <EditWarehouse {...routerProps} />
                             )}
                         />
                         <Route
                             path="/add-warehouse"
                             render={(routerProps) => (
-                                <EditWarehouse
-                                    {...routerProps}
-                                    isNew
-                                />
+                                <EditWarehouse {...routerProps} isNew />
                             )}
                         />
                         <Route
@@ -46,11 +42,18 @@ class App extends React.Component {
                                 </Modal>
                             )}
                         />
+
                         <Route
-                            path="/edit-inventory"
-                            render={(routerProps) => (
-                                <EditInventory {...routerProps} />
-                            )}
+                            path="/edit-inventory/:id"
+                            render={(props) => <EditInventory {...props} />}
+                        />
+                        <Route
+                            path="/add-inventory"
+                            render={(props) => <EditInventory {...props} isNew />}
+                        />
+                        <Route
+                            path="/inventory-item"
+                            render={(props) => <InventoryItem {...props} />}
                         />
                     </Switch>
                 </main>

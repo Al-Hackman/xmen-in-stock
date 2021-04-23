@@ -1,0 +1,46 @@
+@use '../../styles/partials/typography' as *;
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/functions' as func;
+
+.edit-action {
+    background-color: $cta-background;
+    padding: 0.75em 1.25em;
+    @include flex-container($spacing: center);
+    @include tablet-up {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 1.5em;
+    }
+    @include laptop-up {
+        padding: 0.75em 2.25em;
+    }
+
+    &__button {
+        background-color: $instock;
+        color: #fff;
+        min-width: 134px;
+        margin: 0.5em;
+        &:hover {
+            background-color: $cta-button;
+        }
+        @include tablet-up {
+            min-width: 61px;
+        }
+    }
+
+    &__button-cancel {
+        @extend .edit-action__button;
+        background-color: $secondary;
+        color: $table-headers;
+        border: 1px solid $dividers-borders;
+        &:hover {
+            color: $instock;
+            border: 1px solid $instock;
+            background-color: $secondary;
+        }
+        @include tablet-up {
+            width: 72px;
+        }
+    }
+}
