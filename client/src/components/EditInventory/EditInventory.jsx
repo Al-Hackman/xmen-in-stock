@@ -9,10 +9,12 @@ class EditInventory extends React.Component {
     state = {
         itemId: "",
         itemName: "",
+        warehouseId: "",
         description: "",
         category: "",
-        inStock: false,
+        inStock: "Out of Stock",
         warehouse: "",
+        quantity: 0,
         warehouseList: [],
         categoryList: [],
     };
@@ -21,6 +23,32 @@ class EditInventory extends React.Component {
         this.setState({
             [event.target.name]: event.target.value,
         });
+    };
+
+    componentDidUpdate = () => {
+        console.log(this.state);
+
+        if (this.state.warehouseList.length < 1) {
+            axios
+                .get(`${api.apiUrl}${api.warehouseEndpoint}`)
+                .then((response) => {
+                    let warehouses = [];
+                    response.data.forEach((warehouse) => {
+                        if (!warehouses.includes(warehouse.name)) {
+                            warehouses.push(warehouse.name);
+                        }
+                    });
+                    this.setState({
+                        warehouseList: warehouses,
+                    });
+                })
+                .catch((error) =>
+                    console.error(
+                        "Error with GET warehouse request in ComonentDidMount in Edit Invetory",
+                        error
+                    )
+                );
+        }
     };
 
     componentDidMount = () => {
@@ -33,33 +61,9 @@ class EditInventory extends React.Component {
                         categories.push(item.category);
                     }
                 });
-                return categories;
                 this.setState({
                     categoryList: categories,
                 });
-            })
-            .then((categories) => {
-                axios
-                    .get(`${api.apiUrl}${api.inventoryEndpoint}`)
-                    .then((response) => {
-                        let warehouses = [];
-                        response.data.forEach((warehouse) => {
-                            if (!warehouses.includes(warehouse.warehouseName)) {
-                                warehouses.push(warehouse.warehouseName);
-                            }
-                        });
-
-                        this.setState({
-                            categoryList: categories,
-                            warehouseList: warehouses,
-                        });
-                    })
-                    .catch((error) =>
-                        console.error(
-                            "Error with GET warehouse request in ComonentDidMount in Edit Invetory",
-                            error
-                        )
-                    );
             })
             .catch((error) =>
                 console.error(
@@ -69,7 +73,28 @@ class EditInventory extends React.Component {
             );
 
         if (!this.props.isNew) {
-            console.log("need to load existing item details");
+            axios
+                .get(
+                    `${api.apiUrl}${api.inventoryEndpoint}/${this.props.match.params.id}`
+                )
+                .then((response) => {
+                    this.setState({
+                        itemId: response.data.id,
+                        warehouseId: response.data.warehouseID,
+                        itemName: response.data.itemName,
+                        description: response.data.description,
+                        category: response.data.category,
+                        inStock: response.data.status,
+                        warehouse: response.data.warehouseName,
+                        quantity: 0,
+                    });
+                })
+                .catch((error) =>
+                    console.error(
+                        "Error with GET inventory request in ComonentDidMount in Edit Invetory",
+                        error
+                    )
+                );
         }
     };
 
@@ -77,6 +102,48 @@ class EditInventory extends React.Component {
         event.preventDefault();
 
         this.props.history.goBack();
+    };
+
+    handleOnSubmit = (event) => {
+        event.preventDefault();
+
+        console.log(event.target);
+
+        let newDetails = {
+            id: this.state.itemId,
+            warehouseID: this.state.warehouseId,
+            warehouseName: this.state.warehouse,
+            itemName: this.state.itemName,
+            description: this.state.description,
+            category: this.state.category,
+            status: this.state.inStock,
+            quantity: this.state.quantity,
+        };
+
+        if (this.props.isNew) {
+            axios
+                .post(api.apiUrl + api.inventoryEndpoint, newDetails)
+                .then(() => {
+                    this.props.history.push("/");
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+            event.target.reset();
+        } else {
+            axios
+                .put(
+                    `${api.apiUrl}${api.warehouseEndpoint}/${this.state.warehouseId}`,
+                    newDetails
+                )
+                .then(() => {
+                    this.props.history.push("/");
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+            event.target.reset();
+        }
     };
 
     render = () => {
@@ -106,6 +173,29 @@ class EditInventory extends React.Component {
             : "Edit Inventory Item";
 
         let buttonText = this.props.isNew ? "+ Add Item" : "Save";
+
+        let quantityInput = <></>;
+
+        if (this.state.inStock.toLowerCase() === "in stock") {
+            quantityInput = (
+                <>
+                    <label
+                        className="inventory-form__label"
+                        htmlFor="description"
+                    >
+                        Quantity
+                    </label>
+                    <input
+                        defaultValue={0}
+                        className={
+                            "inventory-form__input inventory-form__desciption"
+                        }
+                        name="description"
+                        type="number"
+                    />
+                </>
+            );
+        }
 
         return (
             <div className="inventory-form">
@@ -175,22 +265,23 @@ class EditInventory extends React.Component {
                         <label className="inventory-form__label">Status</label>
                         <div className="inventory-for__status">
                             <input
-                                value={true}
+                                value="In Stock"
                                 className={"inventory-form__radio"}
-                                name="instock"
+                                name="inStock"
                                 id="InStock"
                                 type="radio"
                             />
                             <label htmlFor="InStock">In stock</label>
                             <input
-                                value={false}
+                                value="Out of Stock"
                                 className={"inventory-form__radio"}
-                                name="instock"
+                                name="inStock"
                                 id="OutOfStock"
                                 type="radio"
                             />
                             <label htmlFor="OutOfStock">Out of stock</label>
                         </div>
+                        {quantityInput}
                         <label
                             className="inventory-form__label"
                             htmlFor="category"

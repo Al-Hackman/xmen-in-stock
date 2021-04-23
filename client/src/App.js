@@ -8,7 +8,6 @@ import Modal from "./components/DeleteCards/Modal";
 import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import EditInventory from "./components/EditInventory/EditInventory";
 
 class App extends React.Component {
     render() {
