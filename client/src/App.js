@@ -9,6 +9,10 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import EditInventory from "./components/EditInventory/EditInventory";
 import InventoryItem from "./components/InventoryItem/InventoryItem";
+import DeleteWarehouseModal from "./components/DeleteWarehouseModal/DeleteWarehouseModal";
+import ModalDelete from "./components/DeleteWarehouseModal/ModalDelete";
+
+
 
 class App extends React.Component {
     render() {
@@ -43,6 +47,14 @@ class App extends React.Component {
                             )}
                         />
 
+                        <Route
+                            path="/warehouse-delete"
+                            render={(routerProps) => ( <ModalDelete><DeleteWarehouseModal {...routerProps} /></ModalDelete>
+                            )}
+                        />
+
+                                               
+                                     
                         <Route
                             path="/edit-inventory/:id"
                             render={(props) => <EditInventory {...props} />}
