@@ -69,7 +69,7 @@
             cursor: not-allowed;
           }
 
-        &:not(:focus):invalid:invalid{
+        &:invalid{
             color:$dividers-borders;
         }
     }
