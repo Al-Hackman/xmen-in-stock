@@ -2,11 +2,13 @@
 @use '../../styles/partials/functions' as func;
 @use '../../styles/partials/mixins' as mix;
 
-.warehouse-list {
+.warehouse-details {
     border-radius: func.rem-size(3px);
 
     &__top {
         padding: func.rem-size(32px) func.size-to-vw(var.$mobile, 21px);
+        display: flex;
+        align-items: center;
 
         @include mix.tablet-up {
             display: flex;
@@ -15,13 +17,70 @@
             padding: func.rem-size(32px) func.size-to-vw(var.$tablet, 32px) func.rem-size(22px);
         }
     }
+    &__arrow-icon {
+        width: 25px;
+        height: 25px;
+        margin-right: 7px;
+    }
+
 
     &__title {
         margin-right: auto;
         margin-top: 0;
         margin-bottom: 0;
     }
+    &__edit-icon-button{
+        width: 36px;
+        height: 36px;
+        border: 0;
+        border-radius: 50px;
+        background-color: var.$instock;
+       
+    }
+    &__edit-icon {
+        width: 20px;
+        height: 20px;
+    }
+    &__item-details-container {
+        padding: func.rem-size(32px) func.size-to-vw(var.$mobile, 21px);
+        display: flex;
+        flex-direction: column;
+    }
+    &___address-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+    &__item-warehouse-address-title {
+        @include mix.paragraph-small;
 
+    }
+    &__warehouse-address-info {
+        @include mix.paragraph-medium;
+    }
+    &__name-info-container {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__name-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+    &__warehouse-contact-name-title {
+        @include mix.paragraph-small;
+    }
+    &__contact-name {
+        @include mix.paragraph-medium;
+    }
+    &__info-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+    &__warehouse-contact-info-title {
+        @include mix.paragraph-small;
+    }
+    &__ontact-info {
+        @include mix.paragraph-medium;
+    }
     &__label {
         display: none;
 

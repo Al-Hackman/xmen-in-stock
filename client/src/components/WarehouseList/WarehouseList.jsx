@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ListItem from "../WarehouseItem/WarehouseItem";
+import WarehouseItem from "../WarehouseItem/WarehouseItem";
 import axios from "axios";
 import api from "../../utils/api";
 import Spinner from "../Spinner/Spinner";
@@ -41,7 +41,7 @@ class WarehouseList extends React.Component {
         if (this.state.items) {
             items = this.state.items.map((item) => {
                 return (
-                    <ListItem key={item.id} {...item} itemType="Warehouse" />
+                    <WarehouseItem key={item.id} {...item} itemType="Warehouse" />
                 );
             });
         }

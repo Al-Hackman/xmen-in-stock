@@ -12,31 +12,25 @@ const WarehouseDetailsItem = (props) => {
                 <div className="detail-item__left">
                     <h2 className="detail-item__label">{props.itemType}</h2>
                     <Link
-                        to={props.name}
+                        to={props.itemName}
                         className="detail-item__link detail-item__link--main"
                     >
-                        {props.name}
+                        {props.itemName}
                         <img src={arrow} alt="right arrow" className="detail-item__link-icon"/>
                     </Link>
                     <h2 className="detail-item__label">Address</h2>
-                    <p className="detail-item__text detail-item__address">{props.address}</p>
+                    <p className="detail-item__text detail-item__address">{props.category}</p>
                 </div>
                 <div className="detail-item__right">
                     <h2 className="detail-item__label">Contact Name</h2>
-                    <p className="detail-item__text">{props.contact.name}</p>
+                    <p className="detail-item__text">{props.status}</p>
                     <h2 className="detail-item__label">Contact Information</h2>
                     <div className="detail-item__link-container">
                         <Link
-                            to={`tel:${props.contact.phone}`}
+                            to={`tel:${props.quantity}`}
                             className="detail-item__link"
                         >
-                            {props.contact.phone}
-                        </Link>
-                        <Link
-                            to={`mailto:${props.contact.email}`}
-                            className="detail-item__link"
-                        >
-                            {props.contact.email}
+                            {props.quantity}
                         </Link>
                     </div>
                 </div>

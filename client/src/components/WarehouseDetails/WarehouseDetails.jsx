@@ -1,27 +1,38 @@
 import React from "react";
 // import { Link } from "react-router-dom";
-import ListItem from "../WarehouseDetails/WarehouseDetails";
+// import WarehouseDetailsItem from "../WarehouseItem/WarehouseItem";
+import WarehouseDetailsItem from "../WarehouseDetailsItem/WarehouseDetailsItem";
 import axios from "axios";
 import api from "../../utils/api";
 import Spinner from "../Spinner/Spinner";
 import "./warehouseDetails.scss";
-// import searchIcon from "../../assets/icons/search-24px.svg";
-// import sortIcon from "../../assets/icons/sort-24px.svg";
+import editIcon from "../../assets/icons/edit-24px-white.svg";
+import sortIcon from "../../assets/icons/sort-24px.svg";
+import arrowIcon from "../../assets/icons/arrow_back-24px.svg";
 
 class WarehouseDetails extends React.Component {
     // state to store current list of items
     state = {
-        items: [],
+        warehouse: {},
+        inventories: [],
     };
 
+
+    // component did update
+    // axios inside to get inventories
+    // set it to state
+
     componentDidMount = () => {
+        // Change axios call here to get specific warehouse
+
         // axios call to get list of warehouses from api
+        console.log('component mounted');
         axios
-            .get(api.apiUrl + api.warehouseEndpoint)
+            .get(api.apiUrl + api.warehouseEndpoint + '/' + this.props.match.params.id)
             .then((response) => {
                 console.log(response.data);
                 this.setState({
-                    items: response.data,
+                    warehouse: response.data,
                 });
             })
             .catch((error) =>
@@ -34,40 +45,85 @@ class WarehouseDetails extends React.Component {
             );
     };
 
+    
+
+    componentDidUpdate (){
+        if (this.state.inventories < 1){
+        axios
+            .get(api.apiUrl + api.inventoryEndpoint + '/warehouse/' + this.state.warehouse.id)
+            .then((response) => {
+                console.log(response.data);
+                this.setState({
+                    inventories: response.data,
+                });
+            })
+            .catch((error) =>
+                console.error(
+                    `Error on axios GET to ${
+                        api.apiUrl + api.inventoryEndpoint
+                    }`,
+                    error
+                )
+            );
+    };
+}
+         
+        
+
     render() {
         // Spinner component to display in case
         // axios call takes long
-        let items = <Spinner />;
+        let inventories = <Spinner />;
 
-        if (this.state.items) {
-            items = this.state.items.map((item) => {
+        if (this.state.inventories) {
+            inventories = this.state.inventories.map((item) => {
                 return (
-                    <ListItem key={item.id} {...item} itemType="Warehouse" />
+                    <WarehouseDetailsItem key={item.id} {...item} itemType="Inventory Item" />
                 );
             });
         }
+        let warehouseInfo = <Spinner/>;
+        console.log(this.state.warehouse);
+        if (this.state.warehouse.contact) {
+            warehouseInfo = (<div className="warehouse-details__item-details-container">
+            <div className="warehouse-details__address-wrap">
+            <h3 className="warehouse-details__item-warehouse-address-title">WAREHOUSE ADDRESS:</h3>
+            <address className="warehouse-details__warehouse-address-info">{this.state.warehouse.address}</address>
+            </div>
+            <div className="warehouse-details__name-info-container">
+            <div className="warehouse-details__name-wrap">
+            <h3 className="warehouse-details__warehouse-contact-name-title">CONTACT NAME:</h3>
+
+            <p className="warehouse-details__contact-name">{this.state.warehouse.contact.name}</p>
+            <p className="warehouse-details__contact-name">{this.state.warehouse.contact.position}</p>
+            </div>
+            <div className="warehouse-details__info-wrap">
+            <h3 className="warehouse-details__warehouse-contact-info-title">CONTACT INFORMATION:</h3>
+            <p className="warehouse-details__contact-info">{this.state.warehouse.contact.phone}</p>
+            <p className="warehouse-details__contact-info">{this.state.warehouse.contact.email}</p>
+            </div>
+            </div>
+        </div>)
+        }
 
         return (
-            <div className="warehouse-list">
-                <div className="warehouse-list__top">
-                    <h1 className="warehouse-list__title">Warehouses</h1>
-                    {/* <form className="warehouse-list__search">
-                        <input
-                            className="warehouse-list__input button"
-                            name="search"
-                            type="text"
-                            placeholder="Search..."
-                        />
-                        <button className="warehouse-list__search-button">
-                            <img src={searchIcon} alt="search" />
-                        </button>
-                    </form> */}
-                    {/* <Link to="/new-warehouse" className="warehouse-list__add">
-                        <button className="button warehouse-list__add-button">
-                            + Add new warehouse
-                        </button>
-                    </Link> */}
+            <div className="warehouse-details">
+                <div className="warehouse-details__top">
+                <img
+                                src={arrowIcon}
+                                alt="Back Arrow Icon"
+                                className="warehouse-details__arrow-icon"
+                            />
+                    <h1 className="warehouse-details__title">{this.state.warehouse.name}</h1>
+                    <button className="warehouse-details__edit-icon-button" type="button" name="edit-button" value=""><img
+                                src={editIcon}
+                                alt="Edit Icon"
+                                className="warehouse-details__edit-icon"
+                            /></button>
                 </div>
+                {/* Show warehouse details here */}
+                {/* ie. address, contact name, contact information */}
+                {warehouseInfo}
                 <div className="warehouse-details__content">
                     <div className="warehouse-details__label">
                         <div className="warehouse-details__column-heading warehouse-details__column-heading--main">
@@ -80,8 +136,8 @@ class WarehouseDetails extends React.Component {
                                 className="warehouse-details__sort-icon"
                             />
                         </div>
-                        <div className="warehouse-details__column-heading warehouse-list__column-heading--category">
-                            <p className="warehouse-details__item-address warehouse-list__item">
+                        <div className="warehouse-details__column-heading warehouse-details__column-heading--category">
+                            <p className="warehouse-details__item-address warehouse-details__item">
                                 CATEGORY
                             </p>
                             <img
@@ -91,7 +147,7 @@ class WarehouseDetails extends React.Component {
                             />
                         </div>
                         <div className="warehouse-details__column-heading">
-                            <p className="warehouse-details__item-contact-name warehouse-list__item">
+                            <p className="warehouse-details__item-contact-name warehouse-details__item">
                                 STATUS
                             </p>
                             <img
@@ -100,8 +156,8 @@ class WarehouseDetails extends React.Component {
                                 className="warehouse-details__sort-icon"
                             />
                         </div>
-                        <div className="warehouse-details__column-heading warehouse-list__column-heading--quantity ">
-                            <p className="warehouse-details__item-contact-info warehouse-list__item">
+                        <div className="warehouse-details__column-heading warehouse-details__column-heading--quantity ">
+                            <p className="warehouse-details__item-contact-info warehouse-details__item">
                                 QUANTITY
                             </p>
                             <img
@@ -114,7 +170,7 @@ class WarehouseDetails extends React.Component {
                             ACTIONS
                         </p>
                     </div>
-                    <ul className="warehouse-details__list">{items}</ul>
+                    <ul className="warehouse-details__list">{inventories}</ul>
                 </div>
             </div>
         );

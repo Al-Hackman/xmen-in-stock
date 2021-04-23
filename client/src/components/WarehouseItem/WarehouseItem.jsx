@@ -5,7 +5,7 @@ import editItem from "../../assets/icons/edit-24px.svg";
 import "./WarehouseItem.scss";
 import arrow from "../../assets/icons/chevron_right-24px.svg";
 
-const ListItem = (props) => {
+const WarehouseItem = (props) => {
     return (
         <li className="item divider--top">
             <div className="item__top">
@@ -70,4 +70,4 @@ const ListItem = (props) => {
     );
 };
 
-export default ListItem;
+export default WarehouseItem;

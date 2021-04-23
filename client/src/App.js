@@ -7,6 +7,7 @@ import Modal from "./components/DeleteCards/Modal";
 import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 
 class App extends React.Component {
     render() {
@@ -19,6 +20,10 @@ class App extends React.Component {
                             path="/"
                             exact
                             render={(props) => <WarehouseList {...props} />}
+                        />
+                        <Route
+                            path="/warehouse/:id"
+                            render={(props) => <WarehouseDetails {...props} />}
                         />
                         <Route
                             path="/edit-warehouse/:id"
