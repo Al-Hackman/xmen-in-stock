@@ -41,6 +41,25 @@
         font-weight: 600;
         font-size: 0.8125em;
     }
+    &__status {
+        padding-bottom: func.rem-size(10px);
+        
+    }
+    &__radio-label {
+        &:first-of-type {
+            padding-right: func.rem-size(36px);
+        } 
+        @include instock-mobile-up {
+            &:first-of-type {
+                padding-right: func.rem-size(76px);
+            }
+        } 
+        @include laptop-up {
+            &:first-of-type {
+                padding-right: func.rem-size(40px);
+            }
+        }     
+    }
     &__input {
         display: block;
         margin: 0.5em 0 1em 0;
@@ -60,9 +79,20 @@
             border: 1px solid $out-of-stock;
         }
     }
+    &__description {
+        @extend .inventory-form__input;
+        resize: none;
+        height: 120px;
+        padding-top: 0.75em;;
+    }
 
     &__select{
         padding-right: func.rem-size(16px);
+        appearance: none;
+        background-image: url(../../assets/icons/arrow_drop_down-24px.svg);
+        background-repeat: no-repeat, repeat;
+        background-position: right .7em top 50%, 0 0;
+        background-size: 1.65em auto, 100%;
 
         &[disabled], &:disabled{
             opacity: 0.4;

@@ -232,15 +232,16 @@ class EditInventory extends React.Component {
                         >
                             Description
                         </label>
-                        <input
+                        <textarea
                             defaultValue={this.state.itemName}
                             className={
-                                "inventory-form__input inventory-form__desciption"
+                                "inventory-form__input inventory-form__description"
                             }
                             name="description"
                             placeholder="Please enter a brief item description"
                             type="text"
-                        />
+                        >     
+                        </textarea>
                         <label
                             className="inventory-form__label"
                             htmlFor="itemName"
@@ -252,7 +253,7 @@ class EditInventory extends React.Component {
                             name="category"
                             className="inventory-form__input inventory-form__select"
                         >
-                            <option value="" disabled hidden>
+                            <option className="option" value="" disabled hidden>
                                 Please select
                             </option>
                             {categoryOptions}
@@ -263,7 +264,7 @@ class EditInventory extends React.Component {
                             Item Availability
                         </h2>
                         <label className="inventory-form__label">Status</label>
-                        <div className="inventory-for__status">
+                        <div className="inventory-form__status">
                             <input
                                 value="In Stock"
                                 className={"inventory-form__radio"}
@@ -271,7 +272,7 @@ class EditInventory extends React.Component {
                                 id="InStock"
                                 type="radio"
                             />
-                            <label htmlFor="InStock">In stock</label>
+                            <label className="inventory-form__radio-label" htmlFor="InStock">In stock</label>
                             <input
                                 value="Out of Stock"
                                 className={"inventory-form__radio"}
@@ -279,7 +280,7 @@ class EditInventory extends React.Component {
                                 id="OutOfStock"
                                 type="radio"
                             />
-                            <label htmlFor="OutOfStock">Out of stock</label>
+                            <label className="inventory-form__radio-label" htmlFor="OutOfStock">Out of stock</label>
                         </div>
                         {quantityInput}
                         <label
