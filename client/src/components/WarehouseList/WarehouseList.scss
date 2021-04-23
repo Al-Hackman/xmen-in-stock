@@ -6,7 +6,7 @@
     border-radius: func.rem-size(3px);
 
     &__top {
-        padding: func.rem-size(32px) func.size-to-vw(var.$mobile, 21px);
+        padding: func.rem-size(32px) func.size-to-vw(var.$mobile, 21px) func.rem-size(0px);
 
         @include mix.tablet-up {
             display: flex;
