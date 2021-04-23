@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ListItem from "../InventoryDetails/InventoryDetails";
+import InventoryDetails from "../InventoryDetails/InventoryDetails";
 import axios from "axios";
 import api from "../../utils/api";
 import Spinner from "../Spinner/Spinner";
@@ -47,7 +47,7 @@ class InventoryList extends React.Component {
                 if (this.state.items) {
                     items = this.state.items.map((item) => {
                         return (
-                            <ListItem key={item.id} {...item} itemType="Inventory" />
+                            <InventoryDetails key={item.id} {...item} />
                         );
                     });
                 }
@@ -70,7 +70,7 @@ class InventoryList extends React.Component {
                     </form>
                     <Link to="/add-inventory" className="inventory-list__add">
                         <button className="button inventory-list__add-button">
-                            + Add new warehouse
+                            + Add new Item
                         </button>
                     </Link>
                 </div>

@@ -41,17 +41,15 @@ function InventoryDetails(props) {
                 </div>
             </div>
             <div className="item__bottom">
+                <Link to={`/inventory/delete/${props.id}`}>
                 <button className="item__button">
                     <img
                         src={deleteIcon}
                         alt="delete item"
                         className="item__icon"
-                        onClick={(event) => {
-                            props.handleOnDelete(event);
-                        }}
                     />
                 </button>
-                
+                </Link>
 
                 <Link to={`/edit-warehouse/${props.id}`}>
                     <button className="item__button">
