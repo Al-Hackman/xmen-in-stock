@@ -9,6 +9,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import EditInventory from "./components/EditInventory/EditInventory";
 import InventoryItem from "./components/InventoryItem/InventoryItem";
+import InventoryList from "./components/InventoryList/InventoryList";
 
 
 
@@ -51,7 +52,10 @@ class App extends React.Component {
 
                         
 
-                                               
+                        <Route
+                            path="/inventory"
+                            render={(props) => <InventoryList {...props} />}
+                        />                    
                                      
                         <Route
                             path="/edit-inventory/:id"
