@@ -1,0 +1,18 @@
+@use '../../styles/partials/variables' as var;
+@use '../../styles/partials/functions' as func;
+@use '../../styles/partials/mixins' as mix;
+
+
+.delete-warehouse-parent {
+    @include mix.tablet-up {
+        box-sizing: border-box;
+        padding-top: 185px;
+        width: 100%;
+        height: 1024px;
+        background-color: var.$primary;
+        opacity: 0.7;
+    }
+    @include mix.desktop-up {
+        width: 672px;
+    }
+}
