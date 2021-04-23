@@ -11,6 +11,7 @@ import EditInventory from "./components/EditInventory/EditInventory";
 import InventoryItem from "./components/InventoryItem/InventoryItem";
 import DeleteWarehouseModal from "./components/DeleteWarehouseModal/DeleteWarehouseModal";
 import ModalDelete from "./components/DeleteWarehouseModal/ModalDelete";
+import InventoryList from "./components/InventoryList/InventoryList";
 
 
 
@@ -53,7 +54,10 @@ class App extends React.Component {
                             )}
                         />
 
-                                               
+                        <Route
+                            path="/inventory"
+                            render={(props) => <InventoryList {...props} />}
+                        />                    
                                      
                         <Route
                             path="/edit-inventory/:id"
