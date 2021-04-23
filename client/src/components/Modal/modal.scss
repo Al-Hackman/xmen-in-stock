@@ -4,11 +4,18 @@
 
 
 .modal {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var.$secondary;
     @include mix.tablet-up {
-        padding-top: 185px;
-        width: 100%;
-        height: 1024px;
-        background-color: var.$primary;
-        opacity: 0.7;
+        display: flex;
+        justify-content: center;
+        padding: func.rem-size(185px) func.size-to-vw(var.$tablet, 48px) 0;
+        background-color: rgba(var.$primary, $alpha: 0.7);
     }
 }
+

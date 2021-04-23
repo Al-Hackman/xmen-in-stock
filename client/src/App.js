@@ -3,14 +3,12 @@ import "./styles/global.scss";
 import { Switch, Route } from "react-router-dom";
 import WarehouseList from "./components/WarehouseList/WarehouseList";
 import EditWarehouse from "./components/EditWarehouse/EditWarehouse";
-import Modal from "./components/DeleteCards/Modal";
+import Modal from "./components/Modal/Modal";
 import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import EditInventory from "./components/EditInventory/EditInventory";
 import InventoryItem from "./components/InventoryItem/InventoryItem";
-import DeleteWarehouseModal from "./components/DeleteWarehouseModal/DeleteWarehouseModal";
-import ModalDelete from "./components/DeleteWarehouseModal/ModalDelete";
 
 
 
@@ -24,6 +22,10 @@ class App extends React.Component {
                         <Route
                             path="/"
                             exact
+                            render={(props) => <WarehouseList {...props} />}
+                        />
+                        <Route
+                            path="/warehouse"
                             render={(props) => <WarehouseList {...props} />}
                         />
                         <Route
@@ -47,11 +49,7 @@ class App extends React.Component {
                             )}
                         />
 
-                        <Route
-                            path="/warehouse-delete"
-                            render={(routerProps) => ( <ModalDelete><DeleteWarehouseModal {...routerProps} /></ModalDelete>
-                            )}
-                        />
+                        
 
                                                
                                      

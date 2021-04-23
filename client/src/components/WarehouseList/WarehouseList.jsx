@@ -7,8 +7,9 @@ import Spinner from "../Spinner/Spinner";
 import "./WarehouseList.scss";
 import searchIcon from "../../assets/icons/search-24px.svg";
 import sortIcon from "../../assets/icons/sort-24px.svg";
-
-
+import {Route} from 'react-router-dom';
+import Modal from '../Modal/Modal';
+import DeleteWarehouseModal from '../DeleteWarehouseModal/DeleteWarehouseModal'
 
 class WarehouseList extends React.Component {
     // state to store current list of items
@@ -47,7 +48,6 @@ class WarehouseList extends React.Component {
                 );
             });
         }
-        
 
         return (
             <div className="warehouse-list">
@@ -118,6 +118,15 @@ class WarehouseList extends React.Component {
                     </div>
                     <ul className="warehouse-list__list">{items}</ul>
                 </div>
+
+                <Route
+                    path="/warehouse/delete/:name/:id"
+                    render={(routerProps) => (
+                        <Modal {...routerProps}>
+                            <DeleteWarehouseModal {...routerProps}/>
+                        </Modal>
+                    )}
+                />
             </div>
         );
     }

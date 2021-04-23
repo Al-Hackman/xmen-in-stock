@@ -2,103 +2,81 @@
 @use '../../styles/partials/functions' as func;
 @use '../../styles/partials/mixins' as mix;
 
-
 .delete-warehouse {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    z-index: 3;
     width: 100%;
-    height: 667px;
+    height: 100vh;
     background-color: var.$secondary;
-    padding: func.size-to-vw(var.$mobile, 320/375*16px);
+    padding: func.rem-size(21px) func.size-to-vw(var.$mobile, 320/375 * 16px)
+        func.rem-size(24px);
+    display: flex;
+    flex-direction: column;
     @include mix.tablet-up {
-        position: relative;
-        margin: auto;
         border-radius: 3px;
-        width: 672px;
-        height: 262px;
+        height: fit-content;
+        width: func.rem-size(672px);
+        padding: func.rem-size(21px) func.rem-size(64px)
+            func.rem-size(40px);
     }
-    @include mix.laptop-up {
-        padding: 35px;
-    }
-    @include mix.laptop-up;
+
+
     &__icon {
-        position: absolute;
-        right: 3%;
+        align-self: flex-end;
         width: 21px;
         height: 21px;
         color: var.$primary;
+
+        &:hover {
+            cursor: pointer;
+        }
         @include mix.tablet-up {
-            right: 3%;
-            top: 7%;
-        }        
+            margin-right: func.rem-size(-43px)
+        }
     }
+
     &__title {
         @include mix.header;
         color: var.$primary;
-        margin: 60px 0 16px 0;
+        margin-top: func.rem-size(25px);
+        margin-bottom: 0;
         @include mix.tablet-up {
-            @include mix.tablet-up;
-            margin: 10px 0 16px 30px;
+            margin-top: func.rem-size(5px);
         }
-       
     }
     &__paragraph {
         @include mix.paragraph-large;
         color: var.$primary;
-        margin-top: 16px;
+        margin-top: 1rem;
         @include mix.tablet-up {
-            @include mix.tablet-up;
-            width: 513px;
-            margin-left: 30px;
-            
+            margin-bottom: func.rem-size(32px);
+            max-width: func.rem-size(500px);;
         }
     }
     &__button-wrap {
-        position: absolute;
-        bottom: 5%;
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
         @include mix.tablet-up {
-            display: flex;
             justify-content: flex-end;
-            width: 577px;
-            height: 73px;
         }
     }
     &__button-cancel {
-        width: func.size-to-vw(var.$mobile, 320/375*163px);
-        height: 36px;
-        font-size: 13px;
-        line-height: 20px;
-        font-weight: 600;
+        width: func.size-to-vw(var.$mobile, 320/375 * 163px);
+        height: func.rem-size(36px);
+        @include mix.important;
         color: var.$table-headers;
         background-color: var.$secondary;
         border: 1px solid var.$dividers-borders;
         border-radius: 20px;
-        box-sizing: border-box;
-        margin-right: 14px;
         @include mix.tablet-up {
-            width: 72px;
-            height: 38px;
+            margin-left: func.rem-size(16px);
+            width: func.rem-size(72px);
+            height: func.rem-size(38px);
         }
-
     }
     &__button {
-        width: func.size-to-vw(var.$mobile, 320/375*163px);
-        height: 36px;
-        font-size: 13px;
-        line-height: 20px;
-        font-weight: 600;
-        color: var.$secondary;
-        border: 0;
+        @extend .delete-warehouse__button-cancel;
         background-color: var.$out-of-stock;
-        border-radius: 20px;
-        box-sizing: border-box;
-        @include mix.tablet-up {
-            width: 72px;
-            height: 38px;
-        }
+        color: var.$secondary;
     }
 }
-
-
