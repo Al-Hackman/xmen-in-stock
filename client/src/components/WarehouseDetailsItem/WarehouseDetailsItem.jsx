@@ -18,13 +18,13 @@ const WarehouseDetailsItem = (props) => {
                         {props.itemName}
                         <img src={arrow} alt="right arrow" className="detail-item__link-icon"/>
                     </Link>
-                    <h2 className="detail-item__label">Address</h2>
+                    <h2 className="detail-item__label">Category</h2>
                     <p className="detail-item__text detail-item__address">{props.category}</p>
                 </div>
                 <div className="detail-item__right">
-                    <h2 className="detail-item__label">Contact Name</h2>
+                    <h2 className="detail-item__label">Status</h2>
                     <p className="detail-item__text">{props.status}</p>
-                    <h2 className="detail-item__label">Contact Information</h2>
+                    <h2 className="detail-item__label">Qty</h2>
                     <div className="detail-item__link-container">
                         <Link
                             to={`tel:${props.quantity}`}

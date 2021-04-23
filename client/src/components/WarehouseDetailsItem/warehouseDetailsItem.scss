@@ -2,7 +2,7 @@
 @use '../../styles/partials/mixins' as mix;
 @use '../../styles/partials/functions' as func;
 
-.item {
+.detail-item {
     display: flex;
     flex-direction: column;
     padding-bottom: func.rem-size(27px);
@@ -54,9 +54,9 @@
         }
     }
 
-    &__right {
-        @extend .item__left;
-    }
+    // &__right {
+    //     @extend .item__left;
+    // }
 
     &__bottom {
         display: flex;

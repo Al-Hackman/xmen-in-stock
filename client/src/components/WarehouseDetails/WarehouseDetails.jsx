@@ -88,7 +88,7 @@ class WarehouseDetails extends React.Component {
             warehouseInfo = (<div className="warehouse-details__item-details-container">
             <div className="warehouse-details__address-wrap">
             <h3 className="warehouse-details__item-warehouse-address-title">WAREHOUSE ADDRESS:</h3>
-            <address className="warehouse-details__warehouse-address-info">{this.state.warehouse.address}</address>
+            <address className="warehouse-details__warehouse-address-info">{`${this.state.warehouse.address}, ${this.state.warehouse.city}, ${this.state.warehouse.country}`}</address>
             </div>
             <div className="warehouse-details__name-info-container">
             <div className="warehouse-details__name-wrap">

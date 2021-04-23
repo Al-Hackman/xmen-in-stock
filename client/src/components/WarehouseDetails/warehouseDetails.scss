@@ -42,20 +42,27 @@
         height: 20px;
     }
     &__item-details-container {
-        padding: func.rem-size(32px) func.size-to-vw(var.$mobile, 21px);
+        padding: func.rem-size(24px) func.size-to-vw(var.$mobile, 21px);
+        height: 100%;
         display: flex;
         flex-direction: column;
+        border-top: 1px solid var.$dividers-borders;
     }
     &___address-wrap {
         display: flex;
         flex-direction: column;
+        
     }
     &__item-warehouse-address-title {
         @include mix.paragraph-small;
+        margin: 0;
+        margin-bottom: 8px;
 
     }
     &__warehouse-address-info {
         @include mix.paragraph-medium;
+        font-style: normal;
+        margin-bottom: 1rem;
     }
     &__name-info-container {
         display: flex;
@@ -67,9 +74,12 @@
     }
     &__warehouse-contact-name-title {
         @include mix.paragraph-small;
+        margin: 0;
+        margin-bottom: 8px;
     }
     &__contact-name {
         @include mix.paragraph-medium;
+        margin: 0;
     }
     &__info-wrap {
         display: flex;
@@ -77,9 +87,12 @@
     }
     &__warehouse-contact-info-title {
         @include mix.paragraph-small;
+        margin: 0;
+        margin-bottom: 8px;
     }
-    &__ontact-info {
+    &__contact-info {
         @include mix.paragraph-medium;
+        margin: 0;
     }
     &__label {
         display: none;

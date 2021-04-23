@@ -30,6 +30,7 @@ router.get("/", (_req, res) => {
             address: `${warehouse.address}, ${warehouse.city}, ${warehouse.country}`,
             contact: {
                 name: warehouse.contact.name,
+                position: warehouse.contact.position,
                 phone: warehouse.contact.phone,
                 email: warehouse.contact.email,
             },
