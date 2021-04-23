@@ -17,7 +17,6 @@
     }
     &__wrap {
         padding: 0 1.25em 0.75em 1.3em;
-        // border-top: 1px solid var.$dividers-borders;
         @include mix.tablet-up {
             width: 48%;
             border-top: none;
@@ -58,6 +57,9 @@
     }
     &__instock-tag {
         @include mix.in-stock;
+    }
+    &__out-of-stock-tag {
+        @include mix.out-of-stock;
     }
     &__row-spacing {
         padding-right: func.rem-size(80px);
