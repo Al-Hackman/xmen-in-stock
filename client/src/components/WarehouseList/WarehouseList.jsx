@@ -8,6 +8,8 @@ import "./WarehouseList.scss";
 import searchIcon from "../../assets/icons/search-24px.svg";
 import sortIcon from "../../assets/icons/sort-24px.svg";
 
+
+
 class WarehouseList extends React.Component {
     // state to store current list of items
     state = {
@@ -45,6 +47,7 @@ class WarehouseList extends React.Component {
                 );
             });
         }
+        
 
         return (
             <div className="warehouse-list">

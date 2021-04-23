@@ -5,6 +5,7 @@ import editItem from "../../assets/icons/edit-24px.svg";
 import "./WarehouseItem.scss";
 import arrow from "../../assets/icons/chevron_right-24px.svg";
 
+
 const ListItem = (props) => {
     return (
         <li className="item divider--top">
@@ -56,6 +57,8 @@ const ListItem = (props) => {
                         }}
                     />
                 </button>
+                
+
                 <Link to={`/edit-warehouse/${props.id}`}>
                     <button className="item__button">
                         <img
