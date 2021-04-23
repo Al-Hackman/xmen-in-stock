@@ -1,0 +1,74 @@
+@use '../../styles/partials/variables' as var;
+@use '../../styles/partials/functions' as func;
+@use '../../styles/partials/mixins' as mix;
+
+.inventory-item {
+    &__container {
+        padding-bottom: func.rem-size(21px);
+        border-top: 1px solid var.$dividers-borders;
+        @include mix.tablet-up {
+            border-top: 1px solid var.$dividers-borders;
+            padding-top: 24px;
+            @include mix.flex-container($spacing: space-evenly, $wrap: wrap);
+        }
+        @include mix.tablet-up {
+            padding-bottom: 2em;
+        }
+    }
+    &__wrap {
+        padding: 0 1.25em 0.75em 1.3em;
+        @include mix.tablet-up {
+            width: 48%;
+            border-top: none;
+            padding: 0 1.3em;
+            &:first-child {
+                border-right: 1px solid var.$dividers-borders;
+                padding-right: 4.2vw;
+            }
+        }
+        @include mix.desktop-up {
+            width: 60%;
+        }
+    }
+    &__heading {
+        @include mix.table-header;
+        padding-top: 1em;
+        @include mix.tablet-up {
+            padding-top: 0;
+            &:nth-child(2), &:nth-child(3) {
+                padding-top: 2em;
+            }
+        }
+    }
+    &__text {
+        @include mix.paragraph-medium;
+        margin: 0;
+    }
+    &__row {
+       @include mix.flex-container($spacing: flex-start, $wrap: wrap); 
+    }
+    &__left {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+    }
+    &__right {
+        @extend .inventory-item__left;
+    }
+    &__instock-tag {
+        @include mix.in-stock;
+    }
+    &__out-of-stock-tag {
+        @include mix.out-of-stock;
+    }
+    &__row-spacing {
+        padding-right: func.rem-size(80px);
+        @include mix.tablet-up {
+            padding-right: func.rem-size(100px);
+        }
+        @include mix.laptop-up {
+            padding-right: func.rem-size(180px);
+        }
+    }    
+
+}

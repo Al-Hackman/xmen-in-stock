@@ -1,8 +1,9 @@
 import React from "react";
-import backArrowIcon from "../../assets/icons/arrow_back-24px.svg";
+import EditAction from '../EditAction/EditAction';
 import "./EditWarehouse.scss";
 import axios from "axios";
 import api from "../../utils/api";
+import PageTitle from "../PageTitle/PageTitle";
 
 class EditWarehouse extends React.Component {
     state = {
@@ -139,7 +140,7 @@ class EditWarehouse extends React.Component {
         event.preventDefault();
 
         this.props.history.goBack();
-    }
+    };
 
     componentDidMount = () => {
         if (!this.props.isNew) {
@@ -148,21 +149,19 @@ class EditWarehouse extends React.Component {
                     `${api.apiUrl}${api.warehouseEndpoint}/${this.props.match.params.id}`
                 )
                 .then((response) => {
-                    this.setState(
-                        {
-                            warehouseId:response.data.id,
-                            inputs: {
-                                warehouseInput: response.data.name,
-                                addressInput: response.data.address,
-                                cityInput: response.data.city,
-                                countryInput: response.data.country,
-                                nameInput: response.data.contact.name,
-                                positionInput: response.data.contact.position,
-                                phoneInput: response.data.contact.phone,
-                                emailInput: response.data.contact.email,
-                            },
-                        }
-                    );
+                    this.setState({
+                        warehouseId: response.data.id,
+                        inputs: {
+                            warehouseInput: response.data.name,
+                            addressInput: response.data.address,
+                            cityInput: response.data.city,
+                            countryInput: response.data.country,
+                            nameInput: response.data.contact.name,
+                            positionInput: response.data.contact.position,
+                            phoneInput: response.data.contact.phone,
+                            emailInput: response.data.contact.email,
+                        },
+                    });
                 })
                 .catch((err) => {
                     console.error(
@@ -177,20 +176,12 @@ class EditWarehouse extends React.Component {
         let errorMessage = <p>This field is required</p>;
 
         let buttonText = this.props.isNew ? "+ Add Warehouse" : "Save";
-        let titleText = this.props.isNew ? "Add New Warehouse" : "Edit Warehouse";
+        let titleText = this.props.isNew
+            ? "Add New Warehouse"
+            : "Edit Warehouse";
         return (
             <section className="warehouse-form">
-                <header className="warehouse-form__header">
-                    <button className="warehouse-form__return">
-                        <img
-                            className="warehouse-form__return-icon"
-                            src={backArrowIcon}
-                            alt="back arrow icon"
-                            onClick={(event) => this.handleOnCancel(event)}
-                        />
-                    </button>
-                    <h1 className="warehouse-form__title">{titleText}</h1>
-                </header>
+                <PageTitle title={titleText} {...this.props} />
                 <div className="warehouse-form__container">
                     <form
                         className="warehouse-form__form"
@@ -211,7 +202,9 @@ class EditWarehouse extends React.Component {
                             >
                                 Warehouse Name
                                 <input
-                                    defaultValue={this.state.inputs.warehouseInput}
+                                    defaultValue={
+                                        this.state.inputs.warehouseInput
+                                    }
                                     className={`warehouse-form__input ${this.state.errors.warehouseInputError}`}
                                     id="warehouseInput"
                                     name="warehouseInput"
@@ -230,7 +223,9 @@ class EditWarehouse extends React.Component {
                             >
                                 Street Address
                                 <input
-                                    defaultValue={this.state.inputs.addressInput}
+                                    defaultValue={
+                                        this.state.inputs.addressInput
+                                    }
                                     className={`warehouse-form__input ${this.state.errors.addressInputError}`}
                                     id="addressInput"
                                     name="addressInput"
@@ -268,7 +263,9 @@ class EditWarehouse extends React.Component {
                             >
                                 Country
                                 <input
-                                    defaultValue={this.state.inputs.countryInput}
+                                    defaultValue={
+                                        this.state.inputs.countryInput
+                                    }
                                     className={`warehouse-form__input ${this.state.errors.countryInputError}`}
                                     id="countryInput"
                                     name="countryInput"
@@ -311,7 +308,9 @@ class EditWarehouse extends React.Component {
                             >
                                 Position
                                 <input
-                                    defaultValue={this.state.inputs.positionInput}
+                                    defaultValue={
+                                        this.state.inputs.positionInput
+                                    }
                                     className={`warehouse-form__input ${this.state.errors.positionInputError}`}
                                     id="positionInput"
                                     name="positionInput"
@@ -361,20 +360,7 @@ class EditWarehouse extends React.Component {
                                 )}
                             </label>
                         </div>
-                        <div className="warehouse-form__button-wrap">
-                            <button
-                                className="button warehouse-form__button-cancel"
-                                onClick={(event) => this.handleOnCancel(event)}
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                className="button warehouse-form__button"
-                                type="submit"
-                            >
-                                {buttonText}
-                            </button>
-                        </div>
+                        <EditAction {...this.props} buttonText={buttonText}/>
                     </form>
                 </div>
             </section>

@@ -102,3 +102,33 @@
     justify-content: $spacing;
     flex-wrap: $wrap;
 }
+//instock tag
+@mixin in-stock {
+    color: $instock-label;
+    background-color: rgba(21, 132, 99, 0.07);
+    font-size: func.rem-size(11px);
+    font-weight: 600;
+    text-align: center;
+    padding: 4px, 8px, 4px, 8px;
+    border-radius: 20px;
+    width: func.rem-size(61px);
+    @include tablet-up {
+        font-size: func.rem-size(12px);
+        width: func.rem-size(65px);
+    }
+}
+//out of stock tag
+@mixin out-of-stock {
+    color: $out-of-stock;
+    background-color: rgba(201, 69, 21, 0.07);
+    font-size: func.rem-size(11px);
+    font-weight: 600;
+    text-align: center;
+    padding: 4px, 8px, 4px, 8px;
+    border-radius: 20px;
+    width: func.rem-size(86px);
+    @include tablet-up {
+        font-size: func.rem-size(12px);
+        width: func.rem-size(92px);
+    }
+}
