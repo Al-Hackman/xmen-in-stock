@@ -52,7 +52,7 @@ class App extends React.Component {
                             render={(props) => <EditInventory {...props} isNew />}
                         />
                         <Route
-                            path="/inventory-item"
+                            path="/inventory/:id"
                             render={(props) => <InventoryItem {...props} />}
                         />
                     </Switch>
