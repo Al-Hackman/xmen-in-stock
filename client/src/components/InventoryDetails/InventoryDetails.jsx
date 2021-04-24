@@ -33,7 +33,7 @@ function InventoryDetails(props) {
                 </div>
                 <div className="item__right">
                     <h2 className="item__label">STATUS</h2>
-                    <p className={`item__text ${status}`}>{props.status}</p>
+                    <div className ="item__text"><p className={`item__text-status ${status}`}>{props.status}</p></div>
                     <h2 className="item__label">QTY</h2>
                     <p className="item__text item__text--qty">{props.quantity}</p>
                     <h2 className="item__label">WAREHOUSE</h2>
