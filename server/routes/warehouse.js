@@ -36,7 +36,13 @@ router.get("/", (_req, res) => {
         };
         return singleWarehouse;
     });
-    res.status(201).send(warehouses);
+
+    if(warehouses) {
+        res.status(201).send(warehouses);
+    } else {
+        res.status(500).send("Unable to get warehouses, was not able to map through warehouse.json");
+    }
+
 });
 
 router.get("/:id", (req, res) => {
@@ -44,9 +50,13 @@ router.get("/:id", (req, res) => {
     let targetWarehouse = warehouseData.find(
         (result) => result.id === req.params.id
     );
-    res.status(201).send(targetWarehouse);
-});
 
+    if (targetWarehouse) {
+        res.status(201).send(targetWarehouse);
+    } else {
+        res.status(500).send("Warehouse not found");
+    }
+});
 
 router.post("/", (req, res) => {
     const {
@@ -59,7 +69,6 @@ router.post("/", (req, res) => {
         phone,
         email,
     } = req.body;
-
 
     warehouseData.push({
         id: uuid.v4(),
@@ -74,8 +83,12 @@ router.post("/", (req, res) => {
             email: email,
         },
     });
-    fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
-    res.json(warehouseData);
+    try {
+        fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
+    } catch (error) {
+        console.error("Error writing to warehouses.json", error);
+        res.status(201).json(warehouseData);
+    }
 });
 
 router.put("/:id", (req, res) => {
@@ -129,24 +142,29 @@ router.put("/:id", (req, res) => {
     }
 });
 
-
 //This Deletes a warehouse using the warehouse ID
 router.delete("/:id", (req, res) => {
     // find warehouse and delete from the warehouse json
     const deleteWarehouse = warehouseData.findIndex(
-        (warehouse) => warehouse.id === req.params.id);
+        (warehouse) => warehouse.id === req.params.id
+    );
+
+    if (deleteWarehouse) {
         warehouseData.splice(deleteWarehouse, 1);
 
         fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
-        res.json(warehouseData);
-
-    // find all inventories corresponding to the spicific warehouse and delete them
-    const updatedInventory = inventoryData.filter((inventory) => inventory.warehouseID != req.params.id);
-        
-        fs.writeFileSync("data/inventories.json", JSON.stringify(updatedInventory));
-        // res.json(updatedInventory);
-
+        // find all inventories corresponding to the spicific warehouse and delete them
+        const updatedInventory = inventoryData.filter(
+            (inventory) => inventory.warehouseID != req.params.id
+        );
+        fs.writeFileSync(
+            "data/inventories.json",
+            JSON.stringify(updatedInventory)
+        );
+        res.status(200).json(warehouseData);
+    } else {
+        res.status(500).send("Warehouse not found");
+    }
 });
-
 
 module.exports = router;
