@@ -52,28 +52,28 @@
         &--main {
             width: func.size-to-vw(var.$tablet, 150px);
             @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 221px);
+                width: func.size-to-vw(var.$laptop, 220px);
             }
         }
 
         &--category {
             width: func.size-to-vw(var.$tablet, 120px);
             @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 200px);
+                width: func.size-to-vw(var.$laptop, 175px);
             }
         }
 
         &--status {
             width: func.size-to-vw(var.$tablet, 120px);
             @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 180px);
+                width: func.size-to-vw(var.$laptop, 175px);
             }
         }
 
         &--quantity {
             width: func.size-to-vw(var.$tablet, 60px);
             @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 200px);
+                width: func.size-to-vw(var.$laptop, 90px);
             }
         }
 
