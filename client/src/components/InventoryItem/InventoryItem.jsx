@@ -35,6 +35,7 @@ class InventoryItem extends React.Component {
                 title={this.state.item.itemName} 
                 {...this.props} 
                 editBtn 
+                itemType="inventory"
                 itemId={this.state.item.id}/>
                 <div className="inventory-item__container">
                     <div className="inventory-item__wrap">
