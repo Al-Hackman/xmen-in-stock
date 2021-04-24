@@ -182,11 +182,12 @@
   {
     "id": "079c88df-ed32-4d88-a9b7-eaebc85c4ce2",
     "warehouseID": "5bf7bd6c-2b16-4129-bddc-9d37ff8539e9",
-    "itemName": "Sun Glasses",
-    "description": "New and hip shades.",
+    "warehouseName": "King West",
+    "itemName": "Water Bottle",
+    "description": "With a 1-litre capacity and BPA-free, this water-bottle is perfect for long days out.",
     "category": "Accessories",
-    "status": "In Stock",
-    "quantity": "900"
+    "status": "Out of Stock",
+    "quantity": 0
   },
   {
     "id": "56c8e94c-777d-4176-b7fd-02f0806f614a",
