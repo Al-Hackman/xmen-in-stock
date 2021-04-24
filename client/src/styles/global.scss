@@ -48,6 +48,9 @@ main {
         margin-right: func.size-to-vw($laptop, 130px);
     }
 }
+a {
+    text-decoration: none;
+}
 
 h1,
 h2,

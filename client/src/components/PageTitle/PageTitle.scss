@@ -46,4 +46,37 @@
         margin-top: func.rem-size(24px);
         margin-bottom: func.rem-size(24px);
     }
+    &__button {
+        background-color: $instock;
+        color: #fff;
+        border-radius: 20px;
+        margin-top: 26px;
+        right: 34px;
+        position: absolute;
+        &--text {
+            display: none;
+        }
+        &:hover {
+            background-color: $cta-button;
+        }
+        @include instock-mobile-up {
+            right: func.rem-size(44px);   
+        }
+        @include tablet-up {
+            margin: 0.5em;
+            @include flex-container($align: center, $spacing: center);
+            padding-left: 16px;
+            padding-right: 16px;
+            position: absolute;
+            right: func.rem-size(58px);
+            top: func.rem-size(114px);
+            &--text {
+                display: contents;
+            }
+        }
+        @include laptop-up {
+            right: func.rem-size(158px);
+            top: func.rem-size(114px);
+        }
+    }
 }
