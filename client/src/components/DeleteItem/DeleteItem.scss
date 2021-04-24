@@ -1,0 +1,82 @@
+@use '../../styles/partials/variables' as var;
+@use '../../styles/partials/functions' as func;
+@use '../../styles/partials/mixins' as mix;
+
+.delete-item {
+    z-index: 3;
+    width: 100%;
+    height: 100vh;
+    background-color: var.$secondary;
+    padding: func.rem-size(21px) func.size-to-vw(var.$mobile, 320/375 * 16px)
+        func.rem-size(24px);
+    display: flex;
+    flex-direction: column;
+    @include mix.tablet-up {
+        border-radius: 3px;
+        height: fit-content;
+        width: func.rem-size(672px);
+        padding: func.rem-size(21px) func.rem-size(64px)
+            func.rem-size(40px);
+    }
+
+
+    &__icon {
+        align-self: flex-end;
+        width: 21px;
+        height: 21px;
+        color: var.$primary;
+
+        &:hover {
+            cursor: pointer;
+        }
+        @include mix.tablet-up {
+            margin-right: func.rem-size(-43px)
+        }
+    }
+
+    &__title {
+        @include mix.header;
+        color: var.$primary;
+        margin-top: func.rem-size(25px);
+        margin-bottom: 0;
+        @include mix.tablet-up {
+            margin-top: func.rem-size(5px);
+        }
+    }
+    &__paragraph {
+        @include mix.paragraph-large;
+        color: var.$primary;
+        margin-top: 1rem;
+        @include mix.tablet-up {
+            margin-bottom: func.rem-size(32px);
+            max-width: func.rem-size(500px);;
+        }
+    }
+    &__button-wrap {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        @include mix.tablet-up {
+            justify-content: flex-end;
+        }
+    }
+    &__button-cancel {
+        width: func.size-to-vw(var.$mobile, 320/375 * 163px);
+        height: func.rem-size(36px);
+        @include mix.important;
+        color: var.$table-headers;
+        background-color: var.$secondary;
+        border: 1px solid var.$dividers-borders;
+        border-radius: 20px;
+        @include mix.tablet-up {
+            margin-left: func.rem-size(16px);
+            width: func.rem-size(72px);
+            height: func.rem-size(38px);
+        }
+    }
+    &__button {
+        @extend .delete-item__button-cancel;
+        background-color: var.$out-of-stock;
+        color: var.$secondary;
+    }
+}
