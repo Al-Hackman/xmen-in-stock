@@ -31,7 +31,7 @@ class InventoryItem extends React.Component {
         const status = this.state.item.status === "In Stock" ? "inventory-item__instock-tag" : "inventory-item__out-of-stock-tag"
         return (
             <section className="inventory-item">
-                <PageTitle title={this.state.item.itemName} {...this.props} />
+                <PageTitle title={this.state.item.itemName} {...this.props} editBtn itemId={this.state.item.id}/>
                 <div className="inventory-item__container">
                     <div className="inventory-item__wrap">
                         <h2 className="inventory-item__heading">
