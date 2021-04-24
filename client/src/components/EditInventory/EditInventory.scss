@@ -103,4 +103,7 @@
             color:$dividers-borders;
         }
     }
+    &__error {
+        border-color: $out-of-stock;
+    }
 }

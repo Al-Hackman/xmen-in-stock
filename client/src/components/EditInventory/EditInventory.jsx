@@ -7,16 +7,24 @@ import EditAction from "../EditAction/EditAction";
 
 class EditInventory extends React.Component {
     state = {
-        itemId: "",
-        itemName: "",
-        warehouseId: "",
-        description: "",
-        category: "",
-        inStock: "Out of Stock",
-        warehouse: "",
-        quantity: 0,
         warehouseList: [],
         categoryList: [],
+        itemId: "",
+        inputs: {
+            itemName: "",
+            warehouseId: "",
+            description: "",
+            category: "",
+            inStock: "Out of Stock",
+            warehouse: "",
+            quantity: 0,
+        },
+        errors: {
+            itemNameError: "",
+            descriptionError: "",
+            categoryError: "",
+            warehouseError: "",
+        }
     };
 
     handleOnChange = (event) => {
@@ -106,18 +114,40 @@ class EditInventory extends React.Component {
 
     handleOnSubmit = (event) => {
         event.preventDefault();
-
-        console.log(event.target);
+        let itemNameInputError = "";
+        if (this.state.inputs.itemName === "") {
+            itemNameInputError = "inventory-form__error";
+        }
+        let descriptionInputError = "";
+        if (this.state.inputs.description === "") {
+            descriptionInputError = "inventory-form__error";
+        }
+        let categoryInputError = "";
+        if (this.state.inputs.category === "") {
+            categoryInputError = "inventory-form__error";
+        }
+        let warehouseNameInputError = "";
+        if (this.state.inputs.warehouse === "") {
+            warehouseNameInputError = "inventory-form__error";
+        }
+        this.setState({
+            errors: {
+                itemNameError: itemNameInputError,
+                descriptionError: descriptionInputError,
+                categoryError: categoryInputError,
+                warehouseNameError: warehouseNameInputError,
+            },
+        });
 
         let newDetails = {
             id: this.state.itemId,
-            warehouseID: this.state.warehouseId,
-            warehouseName: this.state.warehouse,
-            itemName: this.state.itemName,
-            description: this.state.description,
-            category: this.state.category,
-            status: this.state.inStock,
-            quantity: this.state.quantity,
+            warehouseID: this.state.inputs.warehouseId,
+            warehouseName: this.state.inputs.warehouse,
+            itemName: this.state.inputs.itemName,
+            description: this.state.inputs.description,
+            category: this.state.inputs.category,
+            status: this.state.inputs.inStock,
+            quantity: this.state.inputs.quantity,
         };
 
         if (this.props.isNew) {
@@ -176,7 +206,7 @@ class EditInventory extends React.Component {
 
         let quantityInput = <></>;
 
-        if (this.state.inStock.toLowerCase() === "in stock") {
+        if (this.state.inputs.inStock.toLowerCase() === "in stock") {
             quantityInput = (
                 <>
                     <label
@@ -196,7 +226,7 @@ class EditInventory extends React.Component {
                 </>
             );
         }
-
+        let errorMessage = <p className="validation-error">This field is required</p>;
         return (
             <div className="inventory-form">
                 <PageTitle {...this.props} title={titleText} />
@@ -220,12 +250,19 @@ class EditInventory extends React.Component {
                             Item Name
                         </label>
                         <input
-                            defaultValue={this.state.itemName}
-                            className={"inventory-form__input"}
+                            defaultValue={this.state.inputs.itemName}
+                            className={
+                                `inventory-form__input ${this.state.errors.itemNameError}`
+                            }
                             name="itemName"
                             placeholder="Item Name"
                             type="text"
                         />
+                        {this.state.errors.itemNameError ? (
+                            errorMessage
+                        ) : (
+                            <></>
+                        )}
                         <label
                             className="inventory-form__label"
                             htmlFor="description"
@@ -233,15 +270,20 @@ class EditInventory extends React.Component {
                             Description
                         </label>
                         <textarea
-                            defaultValue={this.state.itemName}
+                            defaultValue={this.state.inputs.description}
                             className={
-                                "inventory-form__input inventory-form__description"
+                                `inventory-form__input inventory-form__description ${this.state.errors.itemNameError}`
                             }
                             name="description"
                             placeholder="Please enter a brief item description"
                             type="text"
-                        >     
+                        >
                         </textarea>
+                        {this.state.errors.descriptionError ? (
+                            errorMessage
+                        ) : (
+                            <></>
+                        )}
                         <label
                             className="inventory-form__label"
                             htmlFor="itemName"
@@ -249,15 +291,20 @@ class EditInventory extends React.Component {
                             Category
                         </label>
                         <select
-                            defaultValue=""
+                            defaultValue={this.state.inputs.category}
                             name="category"
-                            className="inventory-form__input inventory-form__select"
+                            className={`inventory-form__input inventory-form__select ${this.state.errors.categoryError}`}
                         >
                             <option className="option" value="" disabled hidden>
                                 Please select
                             </option>
                             {categoryOptions}
                         </select>
+                        {this.state.errors.categoryError ? (
+                            errorMessage
+                        ) : (
+                            <></>
+                        )}
                     </div>
                     <div className="inventory-form__wrap">
                         <h2 className="inventory-form__heading">
@@ -290,15 +337,20 @@ class EditInventory extends React.Component {
                             Warehouse
                         </label>
                         <select
-                            defaultValue=""
+                            defaultValue={this.state.inputs.warehouseName}
                             name="warehouse"
-                            className="inventory-form__input inventory-form__select"
+                            className={`inventory-form__input inventory-form__select ${this.state.errors.warehouseNameError}`}
                         >
                             <option disabled hidden value="">
                                 Please select
                             </option>
                             {warehouseOptions}
                         </select>
+                        {this.state.errors.warehouseNameError ? (
+                            errorMessage
+                        ) : (
+                            <></>
+                        )}
                     </div>
                     <EditAction {...this.props} buttonText={buttonText} />
                 </form>
