@@ -2,9 +2,7 @@
 @use '../../styles/partials/mixins' as mix;
 @use '../../styles/partials/functions' as func;
 
-
-
-.inventory-item {
+.detail-item {
     display: flex;
     flex-direction: column;
     padding-bottom: func.rem-size(27px);
@@ -21,33 +19,45 @@
         margin-top: func.rem-size(16px);
         margin-bottom: func.rem-size(4px);
         text-transform: uppercase;
+        @include mix.table-header;
 
         @include mix.tablet-up {
             display: none;
         }
     }
+    &__instock-tag {
+        @include mix.in-stock;
+        margin: 0;
+    }
+    &__out-of-stock-tag {
+        @extend .detail-item__instock-tag;
+        @include mix.out-of-stock;
+    }
 
     &__text {
+
         @include mix.paragraph-medium;
         margin: 0;
 
         @include mix.tablet-up {
-            width: func.size-to-vw(var.$tablet, 100px);
-            text-align: left;
+            width: func.size-to-vw(var.$tablet, 170px);
         }
 
         @include mix.laptop-up {
-            width: func.size-to-vw(var.$laptop, 150px);
-        }
-
-        &--qty{
-            width: func.size-to-vw(var.$tablet, 100px);
+            width: func.size-to-vw(var.$laptop, 260px);
         }
     }
 
     &__top {
         display: flex;
+        @include mix.laptop-up {
+        width: 700px;
+        }
+        @include mix.desktop-up {
+            width: 900px;
+        }
     }
+    
 
     &__left {
         width: 50%;
@@ -56,13 +66,14 @@
 
         @include mix.tablet-up {
             flex-direction: row;
-            align-items: center;
             width: initial;
+            align-items: center;
         }
     }
 
     &__right {
-        @extend .inventory-item__left;
+        @extend .detail-item__left;
+        
     }
 
     &__bottom {
@@ -77,7 +88,7 @@
         }
     }
 
-    &__address {
+    &__category {
         @include mix.tablet-up {
             padding-right: func.size-to-vw(var.$tablet, 30px);
             width: func.size-to-vw(var.$tablet, 120px);
@@ -98,7 +109,9 @@
 
         &-container {
             display: flex;
-            flex-direction: column;           
+            flex-direction: column; 
+            @include mix.tablet-up {
+            }          
         }
 
         &--main {
@@ -109,11 +122,11 @@
             align-items: center;
 
             @include mix.tablet-up {
-                width: func.size-to-vw(var.$tablet, 130px);
+                width: func.size-to-vw(var.$tablet, 150px);
             }
 
             @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 180px);
+                width: func.size-to-vw(var.$laptop, 220px);
             }
         }
     }

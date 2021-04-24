@@ -7,6 +7,7 @@ import Modal from "./components/Modal/Modal";
 import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 import EditInventory from "./components/EditInventory/EditInventory";
 import InventoryItem from "./components/InventoryItem/InventoryItem";
 import InventoryList from "./components/InventoryList/InventoryList";
@@ -26,8 +27,8 @@ class App extends React.Component {
                             render={(props) => <WarehouseList {...props} />}
                         />
                         <Route
-                            path="/warehouse"
-                            render={(props) => <WarehouseList {...props} />}
+                            path="/warehouse/:id"
+                            render={(props) => <WarehouseDetails {...props} />}
                         />
                         <Route
                             path="/edit-warehouse/:id"
@@ -42,18 +43,9 @@ class App extends React.Component {
                             )}
                         />
                         <Route
-                            path="/invt-delete"
-                            render={(routerProps) => (
-                                <Modal>
-                                    <DeleteTeleInvt {...routerProps} />
-                                </Modal>
-                            )}
-                        />
-                        <Route
                             path="/inventories"
                             render={(props) => <InventoryList {...props} />}
                         />                    
-                                     
                         <Route
                             path="/edit-inventory/:id"
                             render={(props) => <EditInventory {...props} />}

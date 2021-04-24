@@ -1,0 +1,211 @@
+@use '../../styles/partials/variables' as var;
+@use '../../styles/partials/functions' as func;
+@use '../../styles/partials/mixins' as mix;
+
+.warehouse-details {
+    border-radius: func.rem-size(3px);
+
+    &__top {
+        padding: func.rem-size(32px) func.size-to-vw(var.$mobile, 21px);
+        display: flex;
+        align-items: center;
+
+        @include mix.tablet-up {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: func.rem-size(32px) func.size-to-vw(var.$tablet, 32px)
+                func.rem-size(22px);
+        }
+    }
+    &__arrow-icon {
+        width: 25px;
+        height: 25px;
+        margin-right: 7px;
+    }
+
+    &__title {
+        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    &__edit-icon-button {
+        width: 36px;
+        height: 36px;
+        border: 0;
+        border-radius: 50px;
+        background-color: var.$instock;
+    }
+    &__edit-icon {
+        width: 20px;
+        height: 20px;
+    }
+    &__info-container {
+        padding: func.rem-size(16px) func.size-to-vw(var.$mobile, 24px);
+        display: flex;
+        flex-direction: column;
+        @include mix.tablet-up {
+            padding: func.rem-size(24px) func.size-to-vw(var.$tablet, 32px);
+            flex-direction: row;
+        }
+    }
+    &__address-wrap {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+
+        @include mix.tablet-up {
+            width: func.size-to-vw(var.$tablet, 245px);
+        }
+
+        @include mix.laptop-up {
+            width: func.size-to-vw(var.$laptop, 370px);
+        }
+    }
+    &__warehouse-title {
+        @include mix.paragraph-small;
+        margin: 0;
+        margin-bottom: 8px;
+    }
+    &__warehouse-address-info {
+        @include mix.paragraph-medium;
+        font-style: normal;
+        margin-bottom: 1rem;
+        @include mix.tablet-up {
+            width: func.rem-size(130px);
+        }
+    }
+    &__name-info-container {
+        display: flex;
+        justify-content: space-between;
+        @include mix.tablet-up {
+            justify-content: flex-start;
+            padding-left: func.rem-size(40px);
+            border-left: 1px solid var.$dividers-borders;
+        }
+        @include mix.laptop-up {
+            justify-content: flex-start;
+        }
+    }
+    &__name-wrap {
+        display: flex;
+        flex-direction: column;
+        @include mix.tablet-up {
+            width: func.size-to-vw(var.$tablet, 165px);
+        }
+
+        @include mix.laptop-up {
+            width: func.size-to-vw(var.$laptop, 245px);
+        }
+    }
+
+    &__warehouse-contact-name-title {
+        @include mix.paragraph-small;
+        margin: 0;
+        margin-bottom: 8px;
+    }
+    &__contact-name {
+        @include mix.paragraph-medium;
+        margin: 0;
+    }
+    &__info-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+    &__warehouse-contact-info-title {
+        @include mix.paragraph-small;
+        margin: 0;
+        margin-bottom: 8px;
+    }
+    &__contact-info {
+        @include mix.paragraph-medium;
+        margin: 0;
+    }
+    &__label {
+        display: none;
+
+        @include mix.tablet-up {
+            display: flex;
+            background-color: var.$cta-background;
+            padding: 0 func.size-to-vw(var.$tablet, 32px);
+        }
+    }
+
+    &__column-heading {
+        display: flex;
+        width: func.size-to-vw(var.$tablet, 120px);
+        text-transform: uppercase;
+
+        &--main {
+            width: func.size-to-vw(var.$tablet, 150px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 220px);
+            }
+        }
+        &--category {
+            width: func.size-to-vw(var.$tablet, 120px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 170px);
+            }
+        }
+        &--status {
+            width: func.size-to-vw(var.$tablet, 170px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 260px);
+            }
+        }
+
+        &--action {
+            width: fit-content;
+            margin-left: auto;
+        }
+        @include mix.desktop-up {
+            margin-left: 0;
+        }
+    }
+
+    &__item {
+        @include mix.tablet-up {
+            @include mix.paragraph-small;
+        }
+        @include mix.laptop-up {
+            margin-top: 10px;
+        }
+    }
+
+    &__sort-icon {
+        width: func.rem-size(24px);
+    }
+
+    &__add {
+        @include mix.tablet-up {
+            margin-left: func.rem-size(16px);
+        }
+
+        &-button {
+            width: 100%;
+            margin-top: func.rem-size(16px);
+            background-color: var.$instock;
+            color: var.$secondary;
+            text-transform: capitalize;
+
+            @include mix.tablet-up {
+                margin-top: 0;
+                padding: 0 func.rem-size(16px);
+                width: func.rem-size(168px);
+            }
+        }
+    }
+
+    &__list {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 0;
+
+
+        @include mix.tablet-up {
+            margin-top: 0;
+            padding-top: 0;
+        }
+    }
+}
