@@ -86,7 +86,7 @@ class InventoryList extends React.Component {
         let modal = this.state.showModal ? (
             <Modal handleOnClick={this.handleToggleModal}>
                 <DeleteItem
-                    itemType="warehouse"
+                    itemType="inventory"
                     item={this.state.currentItem}
                     handleOnCancel={this.handleToggleModal}
                     handleOnDelete={this.handleOnDelete}
