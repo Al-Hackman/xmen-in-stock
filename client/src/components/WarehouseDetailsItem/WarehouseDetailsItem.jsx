@@ -16,7 +16,7 @@ const WarehouseDetailsItem = (props) => {
                 <div className="detail-item__left">
                     <h2 className="detail-item__label">{props.itemType}</h2>
                     <Link
-                        to={props.itemName}
+                        to={`/inventory/${props.id}`}
                         className="detail-item__link detail-item__link--main"
                     >
                         {props.itemName}
@@ -61,7 +61,7 @@ const WarehouseDetailsItem = (props) => {
                     />
                 </button>
 
-                <Link to={`/edit-warehouse/${props.id}`}>
+                <Link to={`/edit-inventory/${props.id}`}>
                     <button className="item__button">
                         <img
                             src={editItem}
