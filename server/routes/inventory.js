@@ -47,6 +47,17 @@ router.post("/", (req, res) => {
         warehouseName,
     } = req.body;
 
+    if (
+        inventoryData.find((item) => {
+            return (
+                item.itemName === itemName &&
+                item.warehouseName === warehouseName &&
+                item.category === category
+            );
+        })
+    ) {
+        res.status(500).send("Inventory already exists")
+    } else {
     inventoryData.push({
         id: uuid.v4(),
         name: itemName,
@@ -56,8 +67,14 @@ router.post("/", (req, res) => {
         quantity,
         warehouseName,
     });
-    fs.writeFileSync("data/inventories.json", JSON.stringify(inventoryData));
-    res.json(inventoryData);
+    try {
+        fs.writeFileSync("data/inventories.json", JSON.stringify(inventoryData));
+        res.json(inventoryData);
+    } catch (err) {
+        console.error("Error writing to inventories.json", err)
+    }
+
+    }
 });
 
 
