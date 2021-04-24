@@ -26,9 +26,6 @@
                 padding-right: 4.2vw;
             }
         }
-        @include mix.desktop-up {
-            width: 60%;
-        }
     }
     &__heading {
         @include mix.table-header;

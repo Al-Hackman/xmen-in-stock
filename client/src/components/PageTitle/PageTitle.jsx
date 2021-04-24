@@ -13,7 +13,7 @@ const handleOnCancel = (event, props) => {
 function PageTitle(props) {  
     
     let editButton = props.editBtn
-        ? <Link to={`/edit-inventory/${props.itemId}`} className="">
+        ? <Link to={`/edit-inventory/${props.itemId}`} className="page-title__link">
             <button className="button page-title__button" type="submit">
             <img className="page-title__button-icon" src={editIcon} alt="edit icon" />
                 <span className="button page-title__button--text">Edit</span>
