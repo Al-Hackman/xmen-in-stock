@@ -121,7 +121,7 @@ class InventoryList extends React.Component {
                     <div className="inventory-list__label">
                         <div className="inventory-list__column-heading inventory-list__column-heading--main">
                             <p className="inventory-list__item-item-name inventory-list__item">
-                                Warehouse
+                                Inventory Item
                             </p>
                             <img
                                 src={sortIcon}
@@ -129,9 +129,9 @@ class InventoryList extends React.Component {
                                 className="inventory-list__sort-icon"
                             />
                         </div>
-                        <div className="inventory-list__column-heading inventory-list__column-heading--address">
+                        <div className="inventory-list__column-heading inventory-list__column-heading--category">
                             <p className="inventory-list__item-address inventory-list__item">
-                                Address
+                                Category
                             </p>
                             <img
                                 src={sortIcon}
@@ -139,9 +139,9 @@ class InventoryList extends React.Component {
                                 className="inventory-list__sort-icon"
                             />
                         </div>
-                        <div className="inventory-list__column-heading">
+                        <div className="inventory-list__column-heading inventory-list__column-heading--status">
                             <p className="inventory-list__item-contact-name inventory-list__item">
-                                Contact Name
+                                Status
                             </p>
                             <img
                                 src={sortIcon}
@@ -149,9 +149,19 @@ class InventoryList extends React.Component {
                                 className="inventory-list__sort-icon"
                             />
                         </div>
-                        <div className="inventory-list__column-heading inventory-list__column-heading--contact ">
+                        <div className="inventory-list__column-heading inventory-list__column-heading--quantity ">
                             <p className="inventory-list__item-contact-info inventory-list__item">
-                                Contact information
+                                QTY
+                            </p>
+                            <img
+                                src={sortIcon}
+                                alt="sort"
+                                className="inventory-list__sort-icon"
+                            />
+                        </div>
+                        <div className="inventory-list__column-heading inventory-list__column-heading--warehouse ">
+                            <p className="inventory-list__item-contact-info inventory-list__item">
+                                Warehouse
                             </p>
                             <img
                                 src={sortIcon}
