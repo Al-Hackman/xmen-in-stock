@@ -1,0 +1,21 @@
+@use '../../styles/partials/variables' as var;
+@use '../../styles/partials/functions' as func;
+@use '../../styles/partials/mixins' as mix;
+
+
+.modal {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var.$secondary;
+    @include mix.tablet-up {
+        display: flex;
+        justify-content: center;
+        padding: func.rem-size(185px) func.size-to-vw(var.$tablet, 48px) 0;
+        background-color: rgba(var.$primary, $alpha: 0.7);
+    }
+}
+

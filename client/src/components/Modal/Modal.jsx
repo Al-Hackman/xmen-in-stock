@@ -3,7 +3,7 @@ import './modal.scss'
 
 function Modal(props) {
     return (
-        <section className="delete-invt-parent">
+        <section className="modal" onClick={(event)=>props.handleOnClick(event)}>
                {props.children}
         </section>
     )

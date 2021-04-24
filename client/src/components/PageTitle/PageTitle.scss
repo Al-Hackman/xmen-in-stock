@@ -5,8 +5,11 @@
 
 .page-title {
     display: flex;
-    align-items: center;
-    padding: 0 func.size-to-vw($mobile, 320/375 * 28px);
+    align-items: flex-start;
+    padding: 0 func.size-to-vw($mobile, 320/375 * 22px);
+    @include instock-mobile-up {
+        padding: 0 func.size-to-vw($tablet, 320/375 * 38px);
+    }
 
     @include tablet-up {
         padding: 0 func.size-to-vw($tablet, 320/375 * 22px);
@@ -25,6 +28,17 @@
         height: fit-content;
         padding-left: 0;
         padding-right: 0;
+        margin-top: func.rem-size(31px);
+        @include instock-mobile-up {
+            margin-top: func.rem-size(32px);
+        }
+        @include tablet-up {
+            margin-top: func.rem-size(33px);
+        }
+        &--icon {
+            height: func.rem-size(20px);
+            width: func.rem-size(20px);
+        }
     }
     &__title {
         padding-left: 0.25em;

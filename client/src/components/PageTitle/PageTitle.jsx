@@ -13,7 +13,7 @@ function PageTitle(props) {
         <div className="page-title">
             <button className="page-title__return">
                 <img
-                    className="page-title__return-icon"
+                    className="page-title__return--icon"
                     src={backArrowIcon}
                     alt="back arrow icon"
                     onClick={(event) => handleOnCancel(event, props)}
