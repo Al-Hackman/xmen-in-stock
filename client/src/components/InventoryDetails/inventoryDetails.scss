@@ -33,11 +33,16 @@
         margin: 0;
 
         @include mix.tablet-up {
-            width: func.size-to-vw(var.$tablet, 120px);
+            width: func.size-to-vw(var.$tablet, 100px);
+            text-align: left;
         }
 
         @include mix.laptop-up {
-            width: func.size-to-vw(var.$laptop, 174px);
+            width: func.size-to-vw(var.$laptop, 150px);
+        }
+
+        &--qty{
+            width: func.size-to-vw(var.$tablet, 100px);
         }
     }
 
@@ -80,7 +85,7 @@
         }
 
         @include mix.laptop-up {
-            width: func.size-to-vw(var.$laptop, 261px);
+            width: func.size-to-vw(var.$laptop, 170px);
         }
     }
 
@@ -105,11 +110,11 @@
             align-items: center;
 
             @include mix.tablet-up {
-                width: func.size-to-vw(var.$tablet, 150px);
+                width: func.size-to-vw(var.$tablet, 130px);
             }
 
             @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 221px);
+                width: func.size-to-vw(var.$laptop, 180px);
             }
         }
     }
