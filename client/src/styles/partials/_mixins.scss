@@ -2,6 +2,13 @@
 @use './typography' as *;
 @use './variables' as *;
 
+// mixins for mobile(375px) breakpoints.
+@mixin instock-mobile-up {
+    @media (min-width: $mobile-instock) {
+        @content;
+    }
+}
+
 // mixins for tablet(768px) breakpoints.
 @mixin tablet-up {
     @media (min-width: $tablet) {
@@ -25,10 +32,13 @@
 
 // Mixins for various font sizes.
 @mixin header {
-    font-size: func.rem-size(28px);
-    line-height: func.rem-size(36px);
     font-weight: 600;
-
+    font-size: func.rem-size(25px);
+    line-height: func.rem-size(34px);
+    @include instock-mobile-up {
+        font-size: func.rem-size(28px);
+        line-height: func.rem-size(36px);
+    }
     @include tablet-up {
         font-size: func.rem-size(32px);
         line-height: func.rem-size(40px);
