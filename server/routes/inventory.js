@@ -60,7 +60,7 @@ router.delete("/:id", (req, res) => {
 
 
 router.put("/:id", (req, res) => {
-    // find warehouse
+    // find inventory
     let inventoryItem = inventoryData.find(
         (result) => result.id === req.params.id
     );
@@ -73,16 +73,8 @@ router.put("/:id", (req, res) => {
         }
     });
 
-    // Regex to check phone number
-    // const phoneRegex = /^\+?(\d{1,2})?\s?\-?\.?\(?\d{3}[\-\)\.\s]?\s?\d{3}[\-\.\s]?\d{4}$/im;
-    // let isValidPhone = phoneRegex.test(req.body.phone);
-
-    // const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // let isValidEmail = emailRegex.test(req.body.email);
-
     // Create new inventory object to add if only data is valid
     if (!hasEmptyField) {
-        // let formattedPhoneNumber = formatter.formatPhone(req.body.phone);
         inventoryItem.warehouseID = req.body.warehouseID;
         inventoryItem.warehouseName = req.body.warehouseName;
         inventoryItem.itemName = req.body.itemName;
