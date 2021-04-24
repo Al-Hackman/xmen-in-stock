@@ -7,7 +7,6 @@ import Spinner from "../Spinner/Spinner";
 import "./inventoryList.scss";
 import searchIcon from "../../assets/icons/search-24px.svg";
 import sortIcon from "../../assets/icons/sort-24px.svg";
-import { Route } from "react-router-dom";
 import DeleteItem from "../DeleteItem/DeleteItem";
 import Modal from "../Modal/Modal";
 
@@ -28,7 +27,22 @@ class InventoryList extends React.Component {
         });
     };
 
-    componentDidMount = () => {
+    handleOnDelete = (event) => {
+        event.preventDefault();
+
+        axios
+            .delete(
+                `${api.apiUrl}${api.inventoryEndpoint}/${this.state.currentItem.id}`
+            )
+            .then(() => {
+                this.loadItems();
+            })
+            .catch((error) =>
+                console.error("Error occured when trying to delete", error)
+            );
+    };
+
+    loadItems = () => {
         // axios call to get list of warehouses from api
         axios
             .get(api.apiUrl + api.inventoryEndpoint)
@@ -46,6 +60,10 @@ class InventoryList extends React.Component {
                     error
                 )
             );
+    }
+
+    componentDidMount = () => {
+        this.loadItems();
     };
 
     render() {
@@ -68,8 +86,10 @@ class InventoryList extends React.Component {
         let modal = this.state.showModal ? (
             <Modal handleOnClick={this.handleToggleModal}>
                 <DeleteItem
+                    itemType="warehouse"
                     item={this.state.currentItem}
                     handleOnCancel={this.handleToggleModal}
+                    handleOnDelete={this.handleOnDelete}
                 />
             </Modal>
         ) : (

@@ -33,17 +33,16 @@ class WarehouseList extends React.Component {
         axios
             .delete(
                 `${api.apiUrl}${api.warehouseEndpoint}/${this.state.currentItem.id}`
-            ).then(()=>{
-                this.setState({
-                    currentItem:null,
-                });
+            )
+            .then(() => {
+                this.loadItems();
             })
             .catch((error) =>
                 console.error("Error occured when trying to delete", error)
             );
     };
 
-    componentDidMount = () => {
+    loadItems = () => {
         // axios call to get list of warehouses from api
         axios
             .get(api.apiUrl + api.warehouseEndpoint)
@@ -60,6 +59,10 @@ class WarehouseList extends React.Component {
                     error
                 )
             );
+    };
+
+    componentDidMount = () => {
+        this.loadItems();
     };
 
     render() {
@@ -83,6 +86,7 @@ class WarehouseList extends React.Component {
         let modal = this.state.showModal ? (
             <Modal handleOnClick={this.handleToggleModal}>
                 <DeleteItem
+                    itemType="warehouse"
                     item={this.state.currentItem}
                     handleOnCancel={this.handleToggleModal}
                     handleOnDelete={this.handleOnDelete}

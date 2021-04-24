@@ -34,11 +34,11 @@ function DeleteItem(props) {
                 onClick={(event) => {props.handleOnCancel(event)}}
             />
             <h1 className="delete-item__title">
-                Delete {props.item.name} Warehouse?
+                Delete {props.item.name} {props.itemType}?
             </h1>
             <p className="delete-item__paragraph">
                 Please confirm that you'd like to delete{" "}
-                {props.item.name} from the list of warehouses. You won't
+                {props.item.name} from the list of {props.itemType}s. You won't
                 be able to undo this action
             </p>
             <div className="delete-item__button-wrap">
