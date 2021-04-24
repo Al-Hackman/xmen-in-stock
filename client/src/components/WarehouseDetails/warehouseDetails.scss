@@ -47,11 +47,18 @@
         display: flex;
         flex-direction: column;
         border-top: 1px solid var.$dividers-borders;
+        @include mix.tablet-up {
+            padding: func.rem-size(32px) func.size-to-vw(var.$tablet, 32px) func.rem-size(22px);
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        @include mix.laptop-up {
+            justify-content: space-between;
+        }   
     }
-    &___address-wrap {
+    &__address-wrap {
         display: flex;
-        flex-direction: column;
-        
+        flex-direction: column;               
     }
     &__item-warehouse-address-title {
         @include mix.paragraph-small;
@@ -63,15 +70,31 @@
         @include mix.paragraph-medium;
         font-style: normal;
         margin-bottom: 1rem;
+        @include mix.tablet-up {
+            width: 187px;
+        }
     }
     &__name-info-container {
         display: flex;
         justify-content: space-between;
+        @include mix.tablet-up {
+            width: 332px;
+            padding-left: 40px;
+            border-left: 1px solid var.$dividers-borders;
+        }
+        @include mix.laptop-up {
+            width: 550px;
+            justify-content: flex-start;
+        }
     }
     &__name-wrap {
         display: flex;
         flex-direction: column;
+        @include mix.laptop-up {
+            margin-right: 5rem
+        }
     }
+
     &__warehouse-contact-name-title {
         @include mix.paragraph-small;
         margin: 0;
@@ -108,15 +131,22 @@
         display: flex;
         width: func.size-to-vw(var.$tablet, 140px);
         text-transform: uppercase;
-
+        @include mix.tablet-up {
+            width: 20.229167vw;
+        }
+        
         @include mix.laptop-up {
-            width: func.size-to-vw(var.$laptop, 174px);
+            width: 17.59375vw;
+            margin: 0;
+        }
+        @include mix.desktop-up {
+            width: 15vw;
         }
 
         &--main {
             width: func.size-to-vw(var.$tablet, 150px);
             @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 221px);
+                width: 17.265625vw;
             }
         }
 
@@ -124,13 +154,26 @@
             width: func.size-to-vw(var.$tablet, 150px);
             @include mix.laptop-up {
                 width: func.size-to-vw(var.$laptop, 261px);
+                margin: 0;
             }
         }
 
-        &--contact {
+        &--quantity {
             width: func.size-to-vw(var.$tablet, 160px);
+            @include mix.tablet-up {
+                width: 8.833333vw;
+            }
             @include mix.laptop-up {
                 width: func.size-to-vw(var.$laptop, 221px);
+                // width: 50px;
+            }
+        }
+        &--category {
+            @include mix.laptop-up {
+                width: 12.59375vw;
+            }
+            @include mix.desktop-up {
+                width: 17.59375vw;
             }
         }
 
@@ -138,12 +181,19 @@
             width: fit-content;
             margin-left: auto;
         }
+        @include mix.desktop-up {
+            margin-left: 0;
+        }
     }
 
     &__item {
         @include mix.tablet-up {
             @include mix.paragraph-small;
         }
+        @include mix.laptop-up {
+            margin-top: 10px;
+        }
+        
     }
 
     &__sort-icon {

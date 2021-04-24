@@ -25,8 +25,15 @@
             display: none;
         }
     }
+    &__instock-tag {
+        @include mix.in-stock;
+    }
+    &__out-of-stock-tag {
+        @include mix.out-of-stock;
+    }
 
     &__text {
+
         @include mix.paragraph-medium;
         margin: 0;
 
@@ -41,7 +48,14 @@
 
     &__top {
         display: flex;
+        @include mix.laptop-up {
+        width: 700px;
+        }
+        @include mix.desktop-up {
+            width: 900px;
+        }
     }
+    
 
     &__left {
         width: 50%;
@@ -51,12 +65,26 @@
         @include mix.tablet-up {
             flex-direction: row;
             width: initial;
+            align-items: center;
+        }
+        @include mix.laptop-up {
+            width: 375px;
+        }
+        @include mix.desktop-up {
+            width: 485px;
         }
     }
 
-    // &__right {
-    //     @extend .item__left;
-    // }
+    &__right {
+        @extend .detail-item__left;
+        @include mix.tablet-up {
+            width: 175px;
+            justify-content: space-between;
+        }
+        @include mix.laptop-up {
+            width: 255px;
+        }
+    }
 
     &__bottom {
         display: flex;
@@ -91,7 +119,9 @@
 
         &-container {
             display: flex;
-            flex-direction: column;           
+            flex-direction: column; 
+            @include mix.tablet-up {
+            }          
         }
 
         &--main {
@@ -106,7 +136,10 @@
             }
 
             @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 221px);
+                width: 33.265625vw;
+            }
+            @include mix.desktop-up {
+                width: 22.265625vw;
             }
         }
     }

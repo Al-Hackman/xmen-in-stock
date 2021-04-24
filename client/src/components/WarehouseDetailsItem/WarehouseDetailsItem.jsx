@@ -6,6 +6,7 @@ import "./warehouseDetailsItem.scss";
 import arrow from "../../assets/icons/chevron_right-24px.svg";
 
 const WarehouseDetailsItem = (props) => {
+    const status = props.status === "In Stock" ? "detail-item__instock-tag" : "detail-item__out-of-stock-tag";
     return (
         <li className="detail-item divider--top">
             <div className="detail-item__top">
@@ -23,7 +24,7 @@ const WarehouseDetailsItem = (props) => {
                 </div>
                 <div className="detail-item__right">
                     <h2 className="detail-item__label">Status</h2>
-                    <p className="detail-item__text">{props.status}</p>
+                    <p className={`"detail-item__text" ${status}`}>{props.status}</p>
                     <h2 className="detail-item__label">Qty</h2>
                     <div className="detail-item__link-container">
                         <Link

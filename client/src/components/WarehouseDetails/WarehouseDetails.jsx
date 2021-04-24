@@ -23,9 +23,6 @@ class WarehouseDetails extends React.Component {
     // set it to state
 
     componentDidMount = () => {
-        // Change axios call here to get specific warehouse
-
-        // axios call to get list of warehouses from api
         console.log('component mounted');
         axios
             .get(api.apiUrl + api.warehouseEndpoint + '/' + this.props.match.params.id)
@@ -158,7 +155,7 @@ class WarehouseDetails extends React.Component {
                         </div>
                         <div className="warehouse-details__column-heading warehouse-details__column-heading--quantity ">
                             <p className="warehouse-details__item-contact-info warehouse-details__item">
-                                QUANTITY
+                                QTY
                             </p>
                             <img
                                 src={sortIcon}
