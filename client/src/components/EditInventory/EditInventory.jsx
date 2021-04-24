@@ -34,7 +34,6 @@ class EditInventory extends React.Component {
     };
 
     componentDidUpdate = () => {
-        console.log(this.state);
 
         if (this.state.warehouseList.length < 1) {
             axios
@@ -52,7 +51,7 @@ class EditInventory extends React.Component {
                 })
                 .catch((error) =>
                     console.error(
-                        "Error with GET warehouse request in ComonentDidMount in Edit Invetory",
+                        "Error with GET warehouse request in ComonentDidMount in Edit Inventory",
                         error
                     )
                 );
@@ -75,7 +74,7 @@ class EditInventory extends React.Component {
             })
             .catch((error) =>
                 console.error(
-                    "Error with GET inventory request in ComonentDidMount in Edit Invetory",
+                    "Error with GET inventory request in ComonentDidMount in Edit Inventory",
                     error
                 )
             );
@@ -86,20 +85,23 @@ class EditInventory extends React.Component {
                     `${api.apiUrl}${api.inventoryEndpoint}/${this.props.match.params.id}`
                 )
                 .then((response) => {
+                    
                     this.setState({
                         itemId: response.data.id,
-                        warehouseId: response.data.warehouseID,
-                        itemName: response.data.itemName,
-                        description: response.data.description,
-                        category: response.data.category,
-                        inStock: response.data.status,
-                        warehouse: response.data.warehouseName,
-                        quantity: 0,
+                        inputs: {
+                            warehouseId: response.data.warehouseID,
+                            itemName: response.data.itemName,
+                            description: response.data.description,
+                            category: response.data.category,
+                            inStock: response.data.status,
+                            warehouse: response.data.warehouseName,
+                            quantity: response.data.quantity,
+                        }
                     });
                 })
                 .catch((error) =>
                     console.error(
-                        "Error with GET inventory request in ComonentDidMount in Edit Invetory",
+                        "Error with GET inventory request in ComonentDidMount in Edit Inventory",
                         error
                     )
                 );
@@ -187,6 +189,7 @@ class EditInventory extends React.Component {
             ) : (
                 <></>
             );
+            // console.log("inventory test", categoryOptions)
         let warehouseOptions =
             this.state.categoryList.length > 0 ? (
                 this.state.warehouseList.map((warehouse, index) => (
@@ -197,7 +200,7 @@ class EditInventory extends React.Component {
             ) : (
                 <></>
             );
-
+            // console.log("warehouse test", warehouseOptions)
         let titleText = this.props.isNew
             ? "Add New Inventory Item"
             : "Edit Inventory Item";
@@ -295,7 +298,7 @@ class EditInventory extends React.Component {
                             name="category"
                             className={`inventory-form__input inventory-form__select ${this.state.errors.categoryError}`}
                         >
-                            <option className="option" value="" disabled hidden>
+                            <option disabled hidden value="">
                                 Please select
                             </option>
                             {categoryOptions}

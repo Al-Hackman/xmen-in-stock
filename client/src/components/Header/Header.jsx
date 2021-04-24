@@ -27,7 +27,7 @@ function Header() {
                         <button className="navbar__btn button">Warehouses</button>
                     </NavLink>
                     <NavLink
-                        to="/inventories"
+                        to="/inventory"
                         activeClassName="navbar--active"
                         className="navbar__btn-link"
                     >
