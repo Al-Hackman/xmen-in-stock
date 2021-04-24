@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
-import editItem from "../../assets/icons/edit-24px.svg";
 import "./inventoryDetails.scss";
 import arrow from "../../assets/icons/chevron_right-24px.svg";
+import ItemAction from "../ItemAction/ItemAction";
 
 function InventoryDetails(props) {
     const status =
@@ -53,6 +52,7 @@ function InventoryDetails(props) {
                     </p>
                 </div>
             </div>
+<<<<<<< HEAD
             <div className="inventory-list-item__bottom">
                 <button
                     className="inventory-list-item__button"
@@ -77,6 +77,13 @@ function InventoryDetails(props) {
                     </button>
                 </Link>
             </div>
+=======
+            <ItemAction
+                handleToggleModal={props.handleToggleModal}
+                {...props}
+                itemType="inventory"
+            />
+>>>>>>> 46df79f6156dd97e743b507510ee3c1550685550
         </li>
     );
 }

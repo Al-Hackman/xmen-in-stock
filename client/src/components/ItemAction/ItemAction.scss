@@ -1,0 +1,24 @@
+@use '../../styles/partials/variables' as var;
+@use '../../styles/partials/mixins' as mix;
+@use '../../styles/partials/functions' as func;
+
+.item-action {
+    display: flex;
+    justify-content: space-between;
+    margin-top: func.rem-size(16px);
+
+    @include mix.tablet-up {
+        margin-left: auto;
+        margin-top: 0;
+        align-items: center;
+    }
+
+    &__button {
+        background-color: transparent;
+        border-width: 0;
+
+        @include mix.tablet-up {
+            margin-left: func.rem-size(6px);
+        }
+    }
+}

@@ -37,7 +37,7 @@ function DeleteItem(props) {
     } else if (props.itemType.toLowerCase() === "inventory") {
         itemName = props.item.itemName;
         itemType = "inventory item";
-        message = `${itemName} from the inventory list`;
+        message = ` ${itemName} from the inventory list`;
     }
 
     return (
