@@ -104,4 +104,49 @@ router.delete("/:id", (req, res) => {
     }
 });
 
+
+router.put("/:id", (req, res) => {
+    // find inventory
+    let inventoryItem = inventoryData.find(
+        (result) => result.id === req.params.id
+    );
+
+    // check for empty values inside object from request
+    let hasEmptyField = false;
+    Object.values(req.body).forEach((value) => {
+        if (value.length < 1) {
+            hasEmptyField = true;
+        }
+    });
+
+    // Create new inventory object to add if only data is valid
+    if (!hasEmptyField) {
+        inventoryItem.warehouseID = req.body.warehouseID;
+        inventoryItem.warehouseName = req.body.warehouseName;
+        inventoryItem.itemName = req.body.itemName;
+        inventoryItem.description = req.body.description;
+        inventoryItem.category = req.body.category;
+        inventoryItem.status = req.body.status;
+        inventoryItem.quantity = req.body.quantity;
+        
+
+        // write to file
+        try {
+            fs.writeFileSync(
+                "data/inventories.json",
+                JSON.stringify(inventoryData)
+            );
+        } catch (error) {
+            console.error("Error writing to inventories.json", error);
+        }
+
+        res.status(200).json(req.body);
+    } else {
+        res.status(500).send(
+            "New data is invalid."
+        );
+    }
+});
+
+
 module.exports = router;
