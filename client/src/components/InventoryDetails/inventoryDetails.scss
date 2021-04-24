@@ -4,7 +4,7 @@
 
 
 
-.inventory-item {
+.inventory-list-item {
     display: flex;
     flex-direction: column;
     padding-bottom: func.rem-size(27px);
@@ -62,7 +62,7 @@
     }
 
     &__right {
-        @extend .inventory-item__left;
+        @extend .inventory-list-item__left;
     }
 
     &__bottom {

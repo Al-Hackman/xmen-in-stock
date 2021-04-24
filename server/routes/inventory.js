@@ -28,7 +28,7 @@ router.get("/:id", (req, res) => {
     let inventoryItem = inventoryData.find(
         (result) => result.id === req.params.id
     );
-
+        console.log(inventoryItem)
     if (inventoryItem) {
         res.status(201).json(inventoryItem);
     } else {

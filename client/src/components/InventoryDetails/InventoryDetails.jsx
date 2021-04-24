@@ -10,53 +10,53 @@ import arrow from "../../assets/icons/chevron_right-24px.svg";
 
 function InventoryDetails(props) {
 
-    const status = props.status === "In Stock" ? "inventory-item__instock-tag" : "inventory-item__out-of-stock-tag"
+    const status = props.status === "In Stock" ? "inventory-list-item__instock-tag" : "inventory-list-item__out-of-stock-tag"
 
     return (
-        <li className="inventory-item divider--top">
-            <div className="inventory-item__top">
-                <div className="inventory-item__left">
-                    <h2 className="inventory-item__label">INVENTORY ITEM</h2>
+        <li className="inventory-list-item divider--top">
+            <div className="inventory-list-item__top">
+                <div className="inventory-list-item__left">
+                    <h2 className="inventory-list-item__label">INVENTORY ITEM</h2>
                     <Link
                         to={`/inventory/${props.itemName}`}
-                        className="inventory-item__link inventory-item__link--main"
+                        className="inventory-list-item__link inventory-list-item__link--main"
                     >
                         {props.itemName}
                         <img
                             src={arrow}
                             alt="right arrow"
-                            className="inventory-item__link-icon"
+                            className="inventory-list-item__link-icon"
                         />
                     </Link>
-                    <h2 className="inventory-item__label">CATEGORY</h2>
-                    <p className="inventory-item__text inventory-item__address">{props.category}</p>
+                    <h2 className="inventory-list-item__label">CATEGORY</h2>
+                    <p className="inventory-list-item__text inventory-list-item__address">{props.category}</p>
                 </div>
-                <div className="inventory-item__right">
-                    <h2 className="inventory-item__label">STATUS</h2>
-                    <div className ="inventory-item__text"><p className={`inventory-item__text-status ${status}`}>{props.status}</p></div>
-                    <h2 className="inventory-item__label">QTY</h2>
-                    <p className="inventory-item__text inventory-item__text--qty">{props.quantity}</p>
-                    <h2 className="inventory-item__label">WAREHOUSE</h2>
-                    <p className="inventory-item__text">{props.warehouseName}</p>
+                <div className="inventory-list-item__right">
+                    <h2 className="inventory-list-item__label">STATUS</h2>
+                    <div className ="inventory-list-item__text"><p className={`inventory-list-item__text-status ${status}`}>{props.status}</p></div>
+                    <h2 className="inventory-list-item__label">QTY</h2>
+                    <p className="inventory-list-item__text inventory-list-item__text--qty">{props.quantity}</p>
+                    <h2 className="inventory-list-item__label">WAREHOUSE</h2>
+                    <p className="inventory-list-item__text">{props.warehouseName}</p>
                 </div>
             </div>
-            <div className="inventory-item__bottom">
+            <div className="inventory-list-item__bottom">
                 <Link to={`/inventory/delete/${props.id}`}>
-                <button className="inventory-item__button">
+                <button className="inventory-list-item__button">
                     <img
                         src={deleteIcon}
                         alt="delete item"
-                        className="inventory-item__icon"
+                        className="inventory-list-item__icon"
                     />
                 </button>
                 </Link>
 
                 <Link to={`/edit-warehouse/${props.id}`}>
-                    <button className="inventory-item__button">
+                    <button className="inventory-list-item__button">
                         <img
                             src={editItem}
                             alt="edit item"
-                            className="inventory-item__icon"
+                            className="inventory-list-item__icon"
                         />
                     </button>
                 </Link>
