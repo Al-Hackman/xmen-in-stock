@@ -1,16 +1,9 @@
 import React from 'react'
 import './modal.scss'
 
-
-const handleClickModal = (props) => {
-    props.history.goBack();
-}
-
 function Modal(props) {
     return (
-        <section className="modal" onClick={()=>{
-            handleClickModal(props);
-        }}>
+        <section className="modal" onClick={(event)=>props.handleOnClick(event)}>
                {props.children}
         </section>
     )

@@ -1,20 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ListItem from "../WarehouseItem/WarehouseItem";
+import WarehouseItem from "../WarehouseItem/WarehouseItem";
 import axios from "axios";
 import api from "../../utils/api";
 import Spinner from "../Spinner/Spinner";
 import "./WarehouseList.scss";
 import searchIcon from "../../assets/icons/search-24px.svg";
 import sortIcon from "../../assets/icons/sort-24px.svg";
-import {Route} from 'react-router-dom';
-import Modal from '../Modal/Modal';
-import DeleteWarehouseModal from '../DeleteWarehouseModal/DeleteWarehouseModal'
+import Modal from "../Modal/Modal";
+import DeleteItem from "../DeleteItem/DeleteItem";
 
 class WarehouseList extends React.Component {
     // state to store current list of items
     state = {
         items: [],
+        showModal: false,
+        currentItem: {},
+    };
+
+    handleToggleModal = (event, item) => {
+        event.preventDefault();
+
+        this.setState({
+            showModal: !this.state.showModal,
+            currentItem: item,
+        });
+    };
+
+    handleOnDelete = (event) => {
+        event.preventDefault();
+
+        axios
+            .delete(
+                `${api.apiUrl}${api.warehouseEndpoint}/${this.state.currentItem.id}`
+            )
+            .catch((error) =>
+                console.error("Error occured when trying to delete", error)
+            );
     };
 
     componentDidMount = () => {
@@ -44,10 +66,27 @@ class WarehouseList extends React.Component {
         if (this.state.items) {
             items = this.state.items.map((item) => {
                 return (
-                    <ListItem key={item.id} {...item} itemType="Warehouse" />
+                    <WarehouseItem
+                        key={item.id}
+                        {...item}
+                        itemType="Warehouse"
+                        handleToggleModal={this.handleToggleModal}
+                    />
                 );
             });
         }
+
+        let modal = this.state.showModal ? (
+            <Modal handleOnClick={this.handleToggleModal}>
+                <DeleteItem
+                    item={this.state.currentItem}
+                    handleOnCancel={this.handleToggleModal}
+                    handleOnDelete={this.handleOnDelete}
+                />
+            </Modal>
+        ) : (
+            <></>
+        );
 
         return (
             <div className="warehouse-list">
@@ -119,14 +158,7 @@ class WarehouseList extends React.Component {
                     <ul className="warehouse-list__list">{items}</ul>
                 </div>
 
-                <Route
-                    path="/warehouse/delete/:name/:id"
-                    render={(routerProps) => (
-                        <Modal {...routerProps}>
-                            <DeleteWarehouseModal {...routerProps}/>
-                        </Modal>
-                    )}
-                />
+                {modal}
             </div>
         );
     }

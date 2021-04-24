@@ -49,9 +49,6 @@ class App extends React.Component {
                                 </Modal>
                             )}
                         />
-
-                        
-
                         <Route
                             path="/inventory"
                             render={(props) => <InventoryList {...props} />}

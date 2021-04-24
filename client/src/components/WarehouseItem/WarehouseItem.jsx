@@ -5,7 +5,7 @@ import editItem from "../../assets/icons/edit-24px.svg";
 import "./WarehouseItem.scss";
 import arrow from "../../assets/icons/chevron_right-24px.svg";
 
-const ListItem = (props) => {
+const WarehouseItem = (props) => {
     return (
         <li className="item divider--top">
             <div className="item__top">
@@ -46,15 +46,18 @@ const ListItem = (props) => {
                 </div>
             </div>
             <div className="item__bottom">
-                <Link to={`/warehouse/delete/${props.name}/${props.id}`}>
-                    <button className="item__button">
-                        <img
-                            src={deleteIcon}
-                            alt="delete item"
-                            className="item__icon"
-                        />
-                    </button>
-                </Link>
+                <button
+                    className="item__button"
+                    onClick={(event) => {
+                        props.handleToggleModal(event, props);
+                    }}
+                >
+                    <img
+                        src={deleteIcon}
+                        alt="delete item"
+                        className="item__icon"
+                    />
+                </button>
 
                 <Link to={`/edit-warehouse/${props.id}`}>
                     <button className="item__button">
@@ -70,4 +73,4 @@ const ListItem = (props) => {
     );
 };
 
-export default ListItem;
+export default WarehouseItem;
