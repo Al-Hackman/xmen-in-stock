@@ -16,6 +16,7 @@
             }
         }
     }
+
 }
 
 p {
@@ -47,6 +48,9 @@ main {
         margin-left: func.size-to-vw($laptop, 130px);
         margin-right: func.size-to-vw($laptop, 130px);
     }
+}
+a {
+    text-decoration: none;
 }
 
 h1,
