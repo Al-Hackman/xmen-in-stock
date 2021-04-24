@@ -55,7 +55,7 @@ class App extends React.Component {
                         />
 
                         <Route
-                            path="/inventory"
+                            path="/inventories"
                             render={(props) => <InventoryList {...props} />}
                         />                    
                                      
