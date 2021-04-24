@@ -1,7 +1,7 @@
 const e = require("express");
 const express = require("express");
 const fs = require("fs");
-// const uuid = require('uuid');
+const uuid = require('uuid');
 const router = express.Router();
 // const inventoryData = require('../data/inventories.json');
 
@@ -35,6 +35,52 @@ router.get("/:id", (req, res) => {
         res.status(500).send("Unable to find item in inventories.json");
     }
 });
+
+
+router.post("/", (req, res) => {
+    const {
+        itemName,
+        description,
+        category,
+        status,
+        quantity,
+        warehouseName,
+    } = req.body;
+
+    if (
+        inventoryData.find((item) => {
+            return (
+                item.itemName === itemName &&
+                item.warehouseName === warehouseName &&
+                item.category === category
+            );
+        })
+    ) {
+        res.status(500).send("Inventory already exists")
+    } else {
+    inventoryData.push({
+        id: uuid.v4(),
+        name: itemName,
+        description,
+        category,
+        status,
+        quantity,
+        warehouseName,
+    });
+    try {
+        fs.writeFileSync("data/inventories.json", JSON.stringify(inventoryData));
+        res.json(inventoryData);
+    } catch (err) {
+        console.error("Error writing to inventories.json", err)
+    }
+
+    }
+});
+
+
+
+
+
 
 router.get("/warehouse/:id", (req, res) => {
     let warehouseInventories = inventoryData.filter(
