@@ -7,21 +7,33 @@ import EditAction from "../EditAction/EditAction";
 
 class EditInventory extends React.Component {
     state = {
-        itemId: "",
-        itemName: "",
-        warehouseId: "",
-        description: "",
-        category: "",
-        inStock: "Out of Stock",
-        warehouse: "",
-        quantity: 0,
         warehouseList: [],
         categoryList: [],
+        itemId: "",
+        inputs: {
+            itemName: "",
+            warehouseId: "",
+            description: "",
+            category: "",
+            inStock: "Out of Stock",
+            warehouse: "",
+            quantity: 0,
+        },
+        errors: {
+            itemNameError: "",
+            descriptionError: "",
+            categoryError: "",
+            warehouseError: "",
+        }
+
     };
 
     handleOnChange = (event) => {
         this.setState({
-            [event.target.name]: event.target.value,
+            inputs: {
+                ...this.state.inputs,
+                [event.target.name]: event.target.value,
+            },
         });
     };
 
@@ -80,18 +92,20 @@ class EditInventory extends React.Component {
                 .then((response) => {
                     this.setState({
                         itemId: response.data.id,
-                        warehouseId: response.data.warehouseID,
-                        itemName: response.data.itemName,
-                        description: response.data.description,
-                        category: response.data.category,
-                        inStock: response.data.status,
-                        warehouse: response.data.warehouseName,
-                        quantity: 0,
+                        inputs: {
+                            warehouseId: response.data.warehouseID,
+                            itemName: response.data.itemName,
+                            description: response.data.description,
+                            category: response.data.category,
+                            inStock: response.data.status,
+                            warehouse: response.data.warehouseName,
+                            quantity: 0,
+                        },
                     });
                 })
                 .catch((error) =>
                     console.error(
-                        "Error with GET inventory request in ComonentDidMount in Edit Invetory",
+                        "Error with GET inventory request in ComponentDidMount in Edit Inventory",
                         error
                     )
                 );
@@ -107,42 +121,56 @@ class EditInventory extends React.Component {
     handleOnSubmit = (event) => {
         event.preventDefault();
 
-        console.log(event.target);
+        let warehouseNameError = this.state.inputs.warehouse ? "inventory-form__error" : "";
+        let descriptionError = this.state.inputs.description ? "inventory-form__error" : "";
+        let itemNameError = this.state.inputs.itemName ? "inventory-form__error" : "";
+        let categoryError = this.state.inputs.category ? "inventory-form__error" : "";
 
-        let newDetails = {
-            id: this.state.itemId,
-            warehouseID: this.state.warehouseId,
-            warehouseName: this.state.warehouse,
-            itemName: this.state.itemName,
-            description: this.state.description,
-            category: this.state.category,
-            status: this.state.inStock,
-            quantity: this.state.quantity,
-        };
-
-        if (this.props.isNew) {
-            axios
-                .post(api.apiUrl + api.inventoryEndpoint, newDetails)
-                .then(() => {
-                    this.props.history.push("/");
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-            event.target.reset();
+        if (this.state.inputs.warehouse || this.state.inputs.description || this.state.inputs.itemName || this.state.inputs.category) {
+            this.setState({
+                errors: {
+                    itemNameError: itemNameError,
+                    descriptionError: descriptionError,
+                    categoryError: categoryError,
+                    warehouseError: warehouseNameError,
+                }
+            })
         } else {
-            axios
-                .put(
-                    `${api.apiUrl}${api.warehouseEndpoint}/${this.state.warehouseId}`,
-                    newDetails
-                )
-                .then(() => {
-                    this.props.history.push("/");
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-            event.target.reset();
+            let newDetails = {
+                id: this.state.inputs.itemId,
+                warehouseID: this.state.inputs.warehouseId,
+                warehouseName: this.state.inputs.warehouse,
+                itemName: this.state.inputs.itemName,
+                description: this.state.inputs.description,
+                category: this.state.inputs.category,
+                status: this.state.inputs.inStock,
+                quantity: this.state.inputs.quantity,
+            };
+
+            if (this.props.isNew) {
+                axios
+                    .post(api.apiUrl + api.inventoryEndpoint, newDetails)
+                    .then(() => {
+                        this.props.history.push("/");
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    });
+                event.target.reset();
+            } else {
+                axios
+                    .put(
+                        `${api.apiUrl}${api.warehouseEndpoint}/${this.state.warehouseId}`,
+                        newDetails
+                    )
+                    .then(() => {
+                        this.props.history.push("/");
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    });
+                event.target.reset();
+            }
         }
     };
 
@@ -176,7 +204,7 @@ class EditInventory extends React.Component {
 
         let quantityInput = <></>;
 
-        if (this.state.inStock.toLowerCase() === "in stock") {
+        if (this.state.inputs.inStock.toLowerCase() === "in stock") {
             quantityInput = (
                 <>
                     <label
@@ -196,7 +224,7 @@ class EditInventory extends React.Component {
                 </>
             );
         }
-
+        let errorMessage = <p className="validation-error">This field is required</p>;
         return (
             <div className="inventory-form">
                 <PageTitle {...this.props} title={titleText} />
@@ -220,12 +248,17 @@ class EditInventory extends React.Component {
                             Item Name
                         </label>
                         <input
-                            defaultValue={this.state.itemName}
-                            className={"inventory-form__input"}
+                            defaultValue={this.state.inputs.itemName}
+                            className={`inventory-form__input ${this.state.errors.itemNameError}`}
                             name="itemName"
                             placeholder="Item Name"
                             type="text"
                         />
+                        {this.state.errors.itemNameError ? (
+                            errorMessage
+                        ) : (
+                            <></>
+                        )}
                         <label
                             className="inventory-form__label"
                             htmlFor="description"
@@ -233,15 +266,20 @@ class EditInventory extends React.Component {
                             Description
                         </label>
                         <textarea
-                            defaultValue={this.state.itemName}
+                            defaultValue={this.state.inputs.description}
                             className={
-                                "inventory-form__input inventory-form__description"
+                                `inventory-form__input inventory-form__description ${this.state.errors.descriptionError}`
                             }
                             name="description"
                             placeholder="Please enter a brief item description"
                             type="text"
-                        >     
+                        >
                         </textarea>
+                        {this.state.errors.descriptionError ? (
+                            errorMessage
+                        ) : (
+                            <></>
+                        )}
                         <label
                             className="inventory-form__label"
                             htmlFor="itemName"
@@ -249,15 +287,20 @@ class EditInventory extends React.Component {
                             Category
                         </label>
                         <select
-                            defaultValue=""
+                            defaultValue={this.state.inputs.category}
                             name="category"
-                            className="inventory-form__input inventory-form__select"
+                            className={`inventory-form__input inventory-form__select ${this.state.errors.descriptionError}`}
                         >
                             <option className="option" value="" disabled hidden>
                                 Please select
                             </option>
                             {categoryOptions}
                         </select>
+                        {this.state.errors.categoryError ? (
+                            errorMessage
+                        ) : (
+                            <></>
+                        )}
                     </div>
                     <div className="inventory-form__wrap">
                         <h2 className="inventory-form__heading">
@@ -290,15 +333,20 @@ class EditInventory extends React.Component {
                             Warehouse
                         </label>
                         <select
-                            defaultValue=""
+                            defaultValue={this.state.inputs.warehouse}
                             name="warehouse"
-                            className="inventory-form__input inventory-form__select"
+                            className={`inventory-form__input inventory-form__select ${this.state.errors.descriptionError}`}
                         >
                             <option disabled hidden value="">
                                 Please select
                             </option>
                             {warehouseOptions}
                         </select>
+                        {this.state.errors.warehouseNameError ? (
+                            errorMessage
+                        ) : (
+                            <></>
+                        )}
                     </div>
                     <EditAction {...this.props} buttonText={buttonText} />
                 </form>
