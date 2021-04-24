@@ -10,7 +10,12 @@
 .divider {
     &--top {
         border-top: func.rem-size(1px) solid $dividers-borders;
+        @include tablet-up{
+            &:first-child {
+                border-top: none;
+        }
     }
+}
 }
 
 p {

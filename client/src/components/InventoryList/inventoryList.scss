@@ -71,14 +71,14 @@
         }
 
         &--quantity {
-            width: func.size-to-vw(var.$tablet, 100px);
+            width: func.size-to-vw(var.$tablet, 120px);
             @include mix.laptop-up {
                 width: func.size-to-vw(var.$laptop, 200px);
             }
         }
 
         &--warehouse {
-            width: func.size-to-vw(var.$tablet, 200px);
+            width: func.size-to-vw(var.$tablet, 160px);
             @include mix.laptop-up {
                 width: func.size-to-vw(var.$laptop, 200px);
             }
