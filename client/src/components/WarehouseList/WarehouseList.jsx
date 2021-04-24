@@ -33,7 +33,11 @@ class WarehouseList extends React.Component {
         axios
             .delete(
                 `${api.apiUrl}${api.warehouseEndpoint}/${this.state.currentItem.id}`
-            )
+            ).then(()=>{
+                this.setState({
+                    currentItem:null,
+                });
+            })
             .catch((error) =>
                 console.error("Error occured when trying to delete", error)
             );
