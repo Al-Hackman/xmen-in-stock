@@ -38,11 +38,14 @@
         }
 
         @include mix.laptop-up {
-            width: func.size-to-vw(var.$laptop, 150px);
+            width: func.size-to-vw(var.$laptop, 175px);
         }
 
         &--qty{
             width: func.size-to-vw(var.$tablet, 60px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 90px);
+            }
         }
     }
 
@@ -66,25 +69,13 @@
         @extend .inventory-list-item__left;
     }
 
-    &__bottom {
-        display: flex;
-        justify-content: space-between;
-        margin-top: func.rem-size(16px);
-
-        @include mix.tablet-up {
-            margin-left: auto;
-            margin-top: 0;
-            align-items: center;
-        }
-    }
-
     &__category {
         @include mix.tablet-up {
             width: func.size-to-vw(var.$tablet, 120px);
         }
 
         @include mix.laptop-up {
-            width: func.size-to-vw(var.$laptop, 170px);
+            width: func.size-to-vw(var.$laptop, 175px);
         }
     }
 
@@ -113,17 +104,8 @@
             }
 
             @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 180px);
+                width: func.size-to-vw(var.$laptop, 220px);
             }
-        }
-    }
-
-    &__button {
-        background-color: transparent;
-        border-width: 0;
-
-        @include mix.tablet-up{
-            margin-left: func.rem-size(6px);
         }
     }
     
