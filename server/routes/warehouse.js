@@ -37,12 +37,13 @@ router.get("/", (_req, res) => {
         return singleWarehouse;
     });
 
-    if(warehouses) {
+    if (warehouses) {
         res.status(201).send(warehouses);
     } else {
-        res.status(500).send("Unable to get warehouses, was not able to map through warehouse.json");
+        res.status(500).send(
+            "Unable to get warehouses, was not able to map through warehouse.json"
+        );
     }
-
 });
 
 router.get("/:id", (req, res) => {
@@ -70,25 +71,42 @@ router.post("/", (req, res) => {
         email,
     } = req.body;
 
-    warehouseData.push({
-        id: uuid.v4(),
-        name: name,
-        address: address,
-        city: city,
-        country: country,
-        contact: {
-            name: contactName,
-            position: position,
-            phone: phone,
-            email: email,
-        },
-    });
-    try {
-        fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
-    } catch (error) {
-        console.error("Error writing to warehouses.json", error);
-        res.status(201).json(warehouseData);
+    if (
+        warehouseData.find((warehouse) => {
+            return (
+                warehouse.name === name &&
+                warehouse.address === address &&
+                warehouse.city === city &&
+                warehouse.country === country
+            );
+        })
+    ) {
+        res.status(500).send("Warehouse already exists")
+    } else {
+
+        let formattedPhoneNumber = formatter.formatPhone(phone);
+
+        warehouseData.push({
+            id: uuid.v4(),
+            name: name,
+            address: address,
+            city: city,
+            country: country,
+            contact: {
+                name: contactName,
+                position: position,
+                phone: formattedPhoneNumber,
+                email: email,
+            },
+        });
+        try {
+            fs.writeFileSync("data/warehouses.json", JSON.stringify(warehouseData));
+            res.status(201).json(warehouseData);
+        } catch (error) {
+            console.error("Error writing to warehouses.json", error);
+        }
     }
+
 });
 
 router.put("/:id", (req, res) => {
