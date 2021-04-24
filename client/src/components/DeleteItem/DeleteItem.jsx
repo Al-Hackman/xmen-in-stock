@@ -25,6 +25,21 @@ import api from "../../utils/api";
 // };
 
 function DeleteItem(props) {
+
+    let itemName = "";
+    let itemType = "";
+    let message = "";
+
+    if (props.itemType.toLowerCase() === "warehouse") {
+        itemName = props.item.name;
+        itemType = "warehouse";
+        message = `the ${itemName} from the list of warehouses`;
+    } else if (props.itemType.toLowerCase() === "inventory") {
+        itemName = props.item.itemName;
+        itemType = "inventory item";
+        message = `${itemName} from the inventory list`;
+    }
+
     return (
         <div className="delete-item">
             <img
@@ -34,11 +49,11 @@ function DeleteItem(props) {
                 onClick={(event) => {props.handleOnCancel(event)}}
             />
             <h1 className="delete-item__title">
-                Delete {props.item.name} {props.itemType}?
+                Delete {itemName} {itemType}?
             </h1>
             <p className="delete-item__paragraph">
-                Please confirm that you'd like to delete{" "}
-                {props.item.name} from the list of {props.itemType}s. You won't
+                Please confirm that you'd like to delete
+                {message}. You won't
                 be able to undo this action
             </p>
             <div className="delete-item__button-wrap">

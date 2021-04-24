@@ -50,14 +50,14 @@
         }
 
         &--main {
-            width: func.size-to-vw(var.$tablet, 160px);
+            width: func.size-to-vw(var.$tablet, 150px);
             @include mix.laptop-up {
                 width: func.size-to-vw(var.$laptop, 221px);
             }
         }
 
         &--category {
-            width: func.size-to-vw(var.$tablet, 140px);
+            width: func.size-to-vw(var.$tablet, 120px);
             @include mix.laptop-up {
                 width: func.size-to-vw(var.$laptop, 200px);
             }
@@ -71,14 +71,7 @@
         }
 
         &--quantity {
-            width: func.size-to-vw(var.$tablet, 120px);
-            @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 200px);
-            }
-        }
-
-        &--warehouse {
-            width: func.size-to-vw(var.$tablet, 160px);
+            width: func.size-to-vw(var.$tablet, 60px);
             @include mix.laptop-up {
                 width: func.size-to-vw(var.$laptop, 200px);
             }
@@ -87,12 +80,6 @@
         &--action {
             width: fit-content;
             margin-left: auto;
-            @include mix.tablet-up {
-            width: func.size-to-vw(var.$tablet, 70px);
-        }
-         @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 100px);
-            }
         }
     }
 

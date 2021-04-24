@@ -21,6 +21,7 @@
         margin-top: func.rem-size(16px);
         margin-bottom: func.rem-size(4px);
         text-transform: uppercase;
+        @include mix.table-header;
 
         @include mix.tablet-up {
             display: none;
@@ -32,7 +33,7 @@
         margin: 0;
 
         @include mix.tablet-up {
-            width: func.size-to-vw(var.$tablet, 100px);
+            width: func.size-to-vw(var.$tablet, 120px);
             text-align: left;
         }
 
@@ -41,7 +42,7 @@
         }
 
         &--qty{
-            width: func.size-to-vw(var.$tablet, 100px);
+            width: func.size-to-vw(var.$tablet, 60px);
         }
     }
 
@@ -77,9 +78,8 @@
         }
     }
 
-    &__address {
+    &__category {
         @include mix.tablet-up {
-            padding-right: func.size-to-vw(var.$tablet, 30px);
             width: func.size-to-vw(var.$tablet, 120px);
         }
 
@@ -109,7 +109,7 @@
             align-items: center;
 
             @include mix.tablet-up {
-                width: func.size-to-vw(var.$tablet, 130px);
+                width: func.size-to-vw(var.$tablet, 150px);
             }
 
             @include mix.laptop-up {
@@ -125,5 +125,15 @@
         @include mix.tablet-up{
             margin-left: func.rem-size(6px);
         }
+    }
+    
+    &__instock-tag {
+        @include mix.in-stock;
+        margin: 0;
+    }
+
+    &__out-of-stock-tag {
+        @include mix.out-of-stock;
+        margin: 0;
     }
 }
