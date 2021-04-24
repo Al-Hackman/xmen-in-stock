@@ -29,9 +29,9 @@
             width: 140px;
         }
         @include tablet-up {
-            max-width: func.size-to-vw($tablet, 320/375 * 106px);
-            padding-left: 0.5em;
-            padding-right: 0.5em;
+            width: initial;
+            padding-left: 16px;
+            padding-right: 16px;
         }
     }
 

@@ -175,7 +175,7 @@ class EditWarehouse extends React.Component {
     };
 
     render() {
-        let errorMessage = <p>This field is required</p>;
+        let errorMessage = <p className="validation-error">This field is required</p>;
 
         let buttonText = this.props.isNew ? "+ Add Warehouse" : "Save";
         let titleText = this.props.isNew

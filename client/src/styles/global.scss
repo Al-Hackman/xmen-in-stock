@@ -76,3 +76,12 @@ input, textarea, select, ::placeholder {
     color: $primary;
     font-family: "Titillium Web", sans-serif;
 }
+.validation-error {
+    font-size: 12px;
+    color: $out-of-stock;
+    background-image: url(../assets/icons/error-24px.svg);
+    background-repeat: no-repeat;
+    background-position: 0;
+    padding-left: 30px;
+    margin-top: -10px;
+}
