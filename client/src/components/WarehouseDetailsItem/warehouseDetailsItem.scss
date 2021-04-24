@@ -27,8 +27,10 @@
     }
     &__instock-tag {
         @include mix.in-stock;
+        margin: 0;
     }
     &__out-of-stock-tag {
+        @extend .detail-item__instock-tag;
         @include mix.out-of-stock;
     }
 
@@ -38,11 +40,11 @@
         margin: 0;
 
         @include mix.tablet-up {
-            width: func.size-to-vw(var.$tablet, 140px);
+            width: func.size-to-vw(var.$tablet, 170px);
         }
 
         @include mix.laptop-up {
-            width: func.size-to-vw(var.$laptop, 174px);
+            width: func.size-to-vw(var.$laptop, 260px);
         }
     }
 
@@ -67,23 +69,11 @@
             width: initial;
             align-items: center;
         }
-        @include mix.laptop-up {
-            width: 375px;
-        }
-        @include mix.desktop-up {
-            width: 485px;
-        }
     }
 
     &__right {
         @extend .detail-item__left;
-        @include mix.tablet-up {
-            width: 175px;
-            justify-content: space-between;
-        }
-        @include mix.laptop-up {
-            width: 255px;
-        }
+        
     }
 
     &__bottom {
@@ -98,14 +88,14 @@
         }
     }
 
-    &__address {
+    &__category {
         @include mix.tablet-up {
             padding-right: func.size-to-vw(var.$tablet, 30px);
-            width: func.size-to-vw(var.$tablet, 150px);
+            width: func.size-to-vw(var.$tablet, 120px);
         }
 
         @include mix.laptop-up {
-            width: func.size-to-vw(var.$laptop, 261px);
+            width: func.size-to-vw(var.$laptop, 170px);
         }
     }
 
@@ -136,10 +126,7 @@
             }
 
             @include mix.laptop-up {
-                width: 33.265625vw;
-            }
-            @include mix.desktop-up {
-                width: 22.265625vw;
+                width: func.size-to-vw(var.$laptop, 220px);
             }
         }
     }

@@ -14,7 +14,8 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding: func.rem-size(32px) func.size-to-vw(var.$tablet, 32px) func.rem-size(22px);
+            padding: func.rem-size(32px) func.size-to-vw(var.$tablet, 32px)
+                func.rem-size(22px);
         }
     }
     &__arrow-icon {
@@ -23,75 +24,78 @@
         margin-right: 7px;
     }
 
-
     &__title {
         margin-right: auto;
         margin-top: 0;
         margin-bottom: 0;
     }
-    &__edit-icon-button{
+    &__edit-icon-button {
         width: 36px;
         height: 36px;
         border: 0;
         border-radius: 50px;
         background-color: var.$instock;
-       
     }
     &__edit-icon {
         width: 20px;
         height: 20px;
     }
-    &__item-details-container {
-        padding: func.rem-size(24px) func.size-to-vw(var.$mobile, 21px);
-        height: 100%;
+    &__info-container {
+        padding: func.rem-size(16px) func.size-to-vw(var.$mobile, 24px);
         display: flex;
         flex-direction: column;
-        border-top: 1px solid var.$dividers-borders;
         @include mix.tablet-up {
-            padding: func.rem-size(32px) func.size-to-vw(var.$tablet, 32px) func.rem-size(22px);
+            padding: func.rem-size(24px) func.size-to-vw(var.$tablet, 32px);
             flex-direction: row;
-            justify-content: space-around;
         }
-        @include mix.laptop-up {
-            justify-content: space-between;
-        }   
     }
     &__address-wrap {
         display: flex;
-        flex-direction: column;               
+        flex-direction: column;
+        width: 50%;
+
+        @include mix.tablet-up {
+            width: func.size-to-vw(var.$tablet, 245px);
+        }
+
+        @include mix.laptop-up {
+            width: func.size-to-vw(var.$laptop, 370px);
+        }
     }
-    &__item-warehouse-address-title {
+    &__warehouse-title {
         @include mix.paragraph-small;
         margin: 0;
         margin-bottom: 8px;
-
     }
     &__warehouse-address-info {
         @include mix.paragraph-medium;
         font-style: normal;
         margin-bottom: 1rem;
         @include mix.tablet-up {
-            width: 187px;
+            width: func.rem-size(130px);
         }
     }
     &__name-info-container {
         display: flex;
         justify-content: space-between;
         @include mix.tablet-up {
-            width: 332px;
-            padding-left: 40px;
+            justify-content: flex-start;
+            padding-left: func.rem-size(40px);
             border-left: 1px solid var.$dividers-borders;
         }
         @include mix.laptop-up {
-            width: 550px;
             justify-content: flex-start;
         }
     }
     &__name-wrap {
         display: flex;
         flex-direction: column;
+        @include mix.tablet-up {
+            width: func.size-to-vw(var.$tablet, 165px);
+        }
+
         @include mix.laptop-up {
-            margin-right: 5rem
+            width: func.size-to-vw(var.$laptop, 245px);
         }
     }
 
@@ -129,51 +133,25 @@
 
     &__column-heading {
         display: flex;
-        width: func.size-to-vw(var.$tablet, 140px);
+        width: func.size-to-vw(var.$tablet, 120px);
         text-transform: uppercase;
-        @include mix.tablet-up {
-            width: 20.229167vw;
-        }
-        
-        @include mix.laptop-up {
-            width: 17.59375vw;
-            margin: 0;
-        }
-        @include mix.desktop-up {
-            width: 15vw;
-        }
 
         &--main {
             width: func.size-to-vw(var.$tablet, 150px);
             @include mix.laptop-up {
-                width: 17.265625vw;
-            }
-        }
-
-        &--address {
-            width: func.size-to-vw(var.$tablet, 150px);
-            @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 261px);
-                margin: 0;
-            }
-        }
-
-        &--quantity {
-            width: func.size-to-vw(var.$tablet, 160px);
-            @include mix.tablet-up {
-                width: 8.833333vw;
-            }
-            @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 221px);
-                // width: 50px;
+                width: func.size-to-vw(var.$laptop, 220px);
             }
         }
         &--category {
+            width: func.size-to-vw(var.$tablet, 120px);
             @include mix.laptop-up {
-                width: 12.59375vw;
+                width: func.size-to-vw(var.$laptop, 170px);
             }
-            @include mix.desktop-up {
-                width: 17.59375vw;
+        }
+        &--status {
+            width: func.size-to-vw(var.$tablet, 170px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 260px);
             }
         }
 
@@ -193,7 +171,6 @@
         @include mix.laptop-up {
             margin-top: 10px;
         }
-        
     }
 
     &__sort-icon {
@@ -211,59 +188,20 @@
             background-color: var.$instock;
             color: var.$secondary;
             text-transform: capitalize;
-    
+
             @include mix.tablet-up {
                 margin-top: 0;
-                padding:0 func.rem-size(16px);
-                width:func.rem-size(168px);
+                padding: 0 func.rem-size(16px);
+                width: func.rem-size(168px);
             }
-        }
-    }
-
-
-    &__search {
-        position: relative;
-
-        &-button {
-            position: absolute;
-            padding: func.rem-size(6px) func.rem-size(16px);
-            border-radius: 0 func.rem-size(20px) func.rem-size(20px) 0;
-            background-color: transparent;
-            outline: none;
-            border-width: 0;
-            right: 0;
-            display: inline-flex;
-            align-items: center;
-            transition: all ease 0.1s;
-
-            &:hover {
-                background-color: var.$cta-button;
-            }
-
-            
-        }
-    }
-
-    &__input {
-        width: 100%;
-        border: func.rem-size(1px) solid var.$dividers-borders;
-        padding-top: func.rem-size(8px);
-        padding-bottom: func.rem-size(8px);
-        padding-right: func.rem-size(24px);
-        padding-left: func.rem-size(16px);
-
-        @include mix.tablet-up {
-            width: func.rem-size(185px);
-        }
-
-        @include mix.laptop-up {
-            width: func.rem-size(274px);
         }
     }
 
     &__list {
         list-style-type: none;
-        padding: func.rem-size(8px) 0;
+        padding: 0;
+        margin-top: 0;
+
 
         @include mix.tablet-up {
             margin-top: 0;

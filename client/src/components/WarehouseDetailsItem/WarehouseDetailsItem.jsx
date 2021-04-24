@@ -6,7 +6,10 @@ import "./warehouseDetailsItem.scss";
 import arrow from "../../assets/icons/chevron_right-24px.svg";
 
 const WarehouseDetailsItem = (props) => {
-    const status = props.status === "In Stock" ? "detail-item__instock-tag" : "detail-item__out-of-stock-tag";
+    const status =
+        props.status === "In Stock"
+            ? "detail-item__instock-tag"
+            : "detail-item__out-of-stock-tag";
     return (
         <li className="detail-item divider--top">
             <div className="detail-item__top">
@@ -17,14 +20,22 @@ const WarehouseDetailsItem = (props) => {
                         className="detail-item__link detail-item__link--main"
                     >
                         {props.itemName}
-                        <img src={arrow} alt="right arrow" className="detail-item__link-icon"/>
+                        <img
+                            src={arrow}
+                            alt="right arrow"
+                            className="detail-item__link-icon"
+                        />
                     </Link>
                     <h2 className="detail-item__label">Category</h2>
-                    <p className="detail-item__text detail-item__address">{props.category}</p>
+                    <p className="detail-item__text detail-item__category">
+                        {props.category}
+                    </p>
                 </div>
                 <div className="detail-item__right">
                     <h2 className="detail-item__label">Status</h2>
-                    <p className={`"detail-item__text" ${status}`}>{props.status}</p>
+                    <div className="detail-item__text">
+                        <p className={status}>{props.status}</p>
+                    </div>
                     <h2 className="detail-item__label">Qty</h2>
                     <div className="detail-item__link-container">
                         <Link
@@ -37,26 +48,28 @@ const WarehouseDetailsItem = (props) => {
                 </div>
             </div>
             <div className="detail-item__bottom">
-                <button className="detail-item__button">
+            <button
+                    className="item__button"
+                    onClick={(event) => {
+                        props.handleToggleModal(event, props);
+                    }}
+                >
                     <img
                         src={deleteIcon}
                         alt="delete item"
-                        className="detail-item__icon"
-                        onClick={(event) => {
-                            props.handleOnDelete(event);
-                        }}
+                        className="item__icon"
                     />
                 </button>
-                <button className="detail-item__button">
-                    <img
-                        src={editItem}
-                        alt="edit item"
-                        className="detail-item__icon"
-                        onClick={(event) => {
-                            props.handleOnEdit(event);
-                        }}
-                    />
-                </button>
+
+                <Link to={`/edit-warehouse/${props.id}`}>
+                    <button className="item__button">
+                        <img
+                            src={editItem}
+                            alt="edit item"
+                            className="item__icon"
+                        />
+                    </button>
+                </Link>
             </div>
         </li>
     );
