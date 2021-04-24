@@ -4,7 +4,7 @@
 
 
 
-.item {
+.inventory-item {
     display: flex;
     flex-direction: column;
     padding-bottom: func.rem-size(27px);
@@ -21,7 +21,6 @@
         margin-top: func.rem-size(16px);
         margin-bottom: func.rem-size(4px);
         text-transform: uppercase;
-        @include mix.table-header;
 
         @include mix.tablet-up {
             display: none;
@@ -63,7 +62,7 @@
     }
 
     &__right {
-        @extend .item__left;
+        @extend .inventory-item__left;
     }
 
     &__bottom {
