@@ -46,17 +46,18 @@ const WarehouseItem = (props) => {
                 </div>
             </div>
             <div className="item__bottom">
-                <button className="item__button">
+                <button
+                    className="item__button"
+                    onClick={(event) => {
+                        props.handleToggleModal(event, props);
+                    }}
+                >
                     <img
                         src={deleteIcon}
                         alt="delete item"
                         className="item__icon"
-                        onClick={(event) => {
-                            props.handleOnDelete(event);
-                        }}
                     />
                 </button>
-                
 
                 <Link to={`/edit-warehouse/${props.id}`}>
                     <button className="item__button">

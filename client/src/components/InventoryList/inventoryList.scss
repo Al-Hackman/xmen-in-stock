@@ -9,7 +9,7 @@
     border-radius: func.rem-size(3px);
 
     &__top {
-        padding: func.rem-size(32px) func.size-to-vw(var.$mobile, 21px);
+        padding: func.rem-size(32px) func.size-to-vw(var.$mobile, 21px) 0px;
 
         @include mix.tablet-up {
             display: flex;
@@ -22,7 +22,11 @@
     &__title {
         margin-right: auto;
         margin-top: 0;
-        margin-bottom: 0;
+        // margin-bottom: 0;
+
+        @include mix.tablet-up {
+            margin-bottom: 0;
+        }
     }
 
     &__label {
@@ -30,6 +34,7 @@
 
         @include mix.tablet-up {
             display: flex;
+            // justify-content: space-between;
             background-color: var.$cta-background;
             padding: 0 func.size-to-vw(var.$tablet, 32px);
         }
@@ -45,29 +50,49 @@
         }
 
         &--main {
-            width: func.size-to-vw(var.$tablet, 150px);
-            @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 221px);
-            }
-        }
-
-        &--address {
-            width: func.size-to-vw(var.$tablet, 120px);
-            @include mix.laptop-up {
-                width: func.size-to-vw(var.$laptop, 261px);
-            }
-        }
-
-        &--contact {
             width: func.size-to-vw(var.$tablet, 160px);
             @include mix.laptop-up {
                 width: func.size-to-vw(var.$laptop, 221px);
             }
         }
 
+        &--category {
+            width: func.size-to-vw(var.$tablet, 140px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 200px);
+            }
+        }
+
+        &--status {
+            width: func.size-to-vw(var.$tablet, 120px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 180px);
+            }
+        }
+
+        &--quantity {
+            width: func.size-to-vw(var.$tablet, 120px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 200px);
+            }
+        }
+
+        &--warehouse {
+            width: func.size-to-vw(var.$tablet, 160px);
+            @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 200px);
+            }
+        }
+
         &--action {
             width: fit-content;
             margin-left: auto;
+            @include mix.tablet-up {
+            width: func.size-to-vw(var.$tablet, 70px);
+        }
+         @include mix.laptop-up {
+                width: func.size-to-vw(var.$laptop, 100px);
+            }
         }
     }
 

@@ -7,16 +7,42 @@ import Spinner from "../Spinner/Spinner";
 import "./WarehouseList.scss";
 import searchIcon from "../../assets/icons/search-24px.svg";
 import sortIcon from "../../assets/icons/sort-24px.svg";
-
-
+import Modal from "../Modal/Modal";
+import DeleteItem from "../DeleteItem/DeleteItem";
 
 class WarehouseList extends React.Component {
     // state to store current list of items
     state = {
         items: [],
+        showModal: false,
+        currentItem: {},
     };
 
-    componentDidMount = () => {
+    handleToggleModal = (event, item) => {
+        event.preventDefault();
+
+        this.setState({
+            showModal: !this.state.showModal,
+            currentItem: item,
+        });
+    };
+
+    handleOnDelete = (event) => {
+        event.preventDefault();
+
+        axios
+            .delete(
+                `${api.apiUrl}${api.warehouseEndpoint}/${this.state.currentItem.id}`
+            )
+            .then(() => {
+                this.loadItems();
+            })
+            .catch((error) =>
+                console.error("Error occured when trying to delete", error)
+            );
+    };
+
+    loadItems = () => {
         // axios call to get list of warehouses from api
         axios
             .get(api.apiUrl + api.warehouseEndpoint)
@@ -35,6 +61,10 @@ class WarehouseList extends React.Component {
             );
     };
 
+    componentDidMount = () => {
+        this.loadItems();
+    };
+
     render() {
         // Spinner component to display in case
         // axios call takes long
@@ -43,11 +73,28 @@ class WarehouseList extends React.Component {
         if (this.state.items) {
             items = this.state.items.map((item) => {
                 return (
-                    <WarehouseItem key={item.id} {...item} itemType="Warehouse" />
+                    <WarehouseItem
+                        key={item.id}
+                        {...item}
+                        itemType="Warehouse"
+                        handleToggleModal={this.handleToggleModal}
+                    />
                 );
             });
         }
-        
+
+        let modal = this.state.showModal ? (
+            <Modal handleOnClick={this.handleToggleModal}>
+                <DeleteItem
+                    itemType="warehouse"
+                    item={this.state.currentItem}
+                    handleOnCancel={this.handleToggleModal}
+                    handleOnDelete={this.handleOnDelete}
+                />
+            </Modal>
+        ) : (
+            <></>
+        );
 
         return (
             <div className="warehouse-list">
@@ -118,6 +165,8 @@ class WarehouseList extends React.Component {
                     </div>
                     <ul className="warehouse-list__list">{items}</ul>
                 </div>
+
+                {modal}
             </div>
         );
     }
