@@ -1,28 +1,7 @@
 import React from "react";
 import "./DeleteItem.scss";
 import closeXIcon from "../../assets/icons/close-24px.svg";
-import axios from "axios";
-import api from "../../utils/api";
 
-// const handleClickCancel = (event, props) => {
-//     event.preventDefault();
-//     props.history.goBack();
-// };
-
-// const handleDelete = (event, props) => {
-//     event.preventDefault();
-//     if (props.location.pathname.toLowerCase().includes("warehouse")) {
-//         axios.delete(
-//             api.apiUrl + api.warehouseEndpoint + "/" + props.match.params.id
-//         );
-//         props.history.push("/");
-//     } else if (props.location.pathname.toLowerCase().includes("inventory")) {
-//         axios.delete(
-//             api.apiUrl + api.inventoryEndpoint + "/" + props.match.params.id
-//         );
-//         props.history.push("/");
-//     }
-// };
 
 function DeleteItem(props) {
 
