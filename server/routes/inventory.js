@@ -1,4 +1,3 @@
-const e = require("express");
 const express = require("express");
 const fs = require("fs");
 const uuid = require("uuid");
@@ -6,13 +5,22 @@ const router = express.Router();
 // const inventoryData = require('../data/inventories.json');
 
 let inventoryData;
-
 try {
     const data = fs.readFileSync("data/inventories.json", "utf8");
     inventoryData = JSON.parse(data);
 } catch (error) {
     console.error("Error reading file", error);
 }
+
+// get warehouse data
+let warehouseData;
+try {
+    const data = fs.readFileSync("data/warehouses.json", "utf8");
+    warehouseData = JSON.parse(data);
+} catch (error) {
+    console.error("Error reading file", error);
+}
+
 
 // send all inventory data
 router.get("/", (_req, res) => {
@@ -42,28 +50,31 @@ router.post("/", (req, res) => {
         category,
         status,
         quantity,
-        warehouseName,
+        warehouseID,
     } = req.body;
+    console.log(req.body);
 
     if (
         inventoryData.find((item) => {
             return (
                 item.itemName === itemName &&
-                item.warehouseName === warehouseName &&
+                item.warehouseID === warehouseID &&
                 item.category === category
             );
         })
     ) {
         res.status(500).send("Inventory already exists");
     } else {
+        let warehouse = warehouseData.find(warehouse=>warehouse.id === warehouseID);
         inventoryData.push({
             id: uuid.v4(),
-            name: itemName,
-            description,
-            category,
-            status,
-            quantity,
-            warehouseName,
+            itemName: itemName,
+            description:description,
+            category:category,
+            status:status,
+            quantity:quantity,
+            warehouseID:warehouseID,
+            warehouseName: warehouse.name,
         });
         try {
             fs.writeFileSync(
