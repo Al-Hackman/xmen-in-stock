@@ -10,10 +10,21 @@ import EditInventory from "./components/EditInventory/EditInventory";
 import InventoryItem from "./components/InventoryItem/InventoryItem";
 import InventoryList from "./components/InventoryList/InventoryList";
 
+const stopAnimation = () => {
+    let body = document.querySelector("body");
+    let bodyClass = body.classList;
+    bodyClass.add("resize-transition-stopper");
 
+    setTimeout(() => {
+        bodyClass.remove("resize-transition-stopper");
+    }, 100);
+};
 
 class App extends React.Component {
     render() {
+
+        window.addEventListener("resize", stopAnimation);
+        
         return (
             <>
                 <Header />
