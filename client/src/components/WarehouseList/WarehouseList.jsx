@@ -111,7 +111,7 @@ class WarehouseList extends React.Component {
                             <img src={searchIcon} alt="search" />
                         </button>
                     </form>
-                    <Link to="/add-warehouse" className="warehouse-list__add">
+                    <Link to="/warehouse/add" className="warehouse-list__add">
                         <button className="button warehouse-list__add-button">
                             + Add new warehouse
                         </button>

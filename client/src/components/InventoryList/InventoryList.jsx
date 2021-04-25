@@ -111,7 +111,7 @@ class InventoryList extends React.Component {
                             <img src={searchIcon} alt="search" />
                         </button>
                     </form>
-                    <Link to="/add-inventory" className="inventory-list__add">
+                    <Link to="/inventory/add" className="inventory-list__add">
                         <button className="button inventory-list__add-button">
                             + Add new Item
                         </button>

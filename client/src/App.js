@@ -25,7 +25,7 @@ class App extends React.Component {
                             render={(props) => <WarehouseList {...props} />}
                         />
                         <Route
-                            path="/warehouse/:id"
+                            path="/warehouse/single/:id"
                             exact
                             render={(props) => <WarehouseDetails {...props} />}
                         />
@@ -59,7 +59,7 @@ class App extends React.Component {
                             render={(props) => <EditInventory {...props} isNew />}
                         />
                         <Route
-                            path="/inventory/:id"
+                            path="/inventory/single/:id"
                             render={(props) => <InventoryItem {...props} />}
                         />
                     </Switch>
