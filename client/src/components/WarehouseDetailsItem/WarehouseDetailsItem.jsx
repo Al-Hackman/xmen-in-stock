@@ -17,7 +17,7 @@ const WarehouseDetailsItem = (props) => {
                 <div className="detail-item__left">
                     <h2 className="detail-item__label">{props.itemType}</h2>
                     <Link
-                        to={`/inventory/${props.id}`}
+                        to={`/inventory/single/${props.id}`}
                         className="detail-item__link detail-item__link--main"
                     >
                         {props.itemName}
