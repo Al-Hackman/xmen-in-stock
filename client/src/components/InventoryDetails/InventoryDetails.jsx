@@ -18,7 +18,7 @@ function InventoryDetails(props) {
                         INVENTORY ITEM
                     </h2>
                     <Link
-                        to={`/inventory/${props.id}`}
+                        to={`/inventory/single/${props.id}`}
                         className="inventory-list-item__link inventory-list-item__link--main"
                     >
                         {props.itemName}
@@ -52,38 +52,11 @@ function InventoryDetails(props) {
                     </p>
                 </div>
             </div>
-<<<<<<< HEAD
-            <div className="inventory-list-item__bottom">
-                <button
-                    className="inventory-list-item__button"
-                    onClick={(event) => {
-                        props.handleToggleModal(event, props);
-                    }}
-                >
-                    <img
-                        src={deleteIcon}
-                        alt="delete item"
-                        className="item__icon"
-                    />
-                </button>
-
-                <Link to={`/edit-inventory/${props.id}`}>
-                    <button className="inventory-list-item__button">
-                        <img
-                            src={editItem}
-                            alt="edit item"
-                            className="inventory-list-item__icon"
-                        />
-                    </button>
-                </Link>
-            </div>
-=======
             <ItemAction
                 handleToggleModal={props.handleToggleModal}
                 {...props}
                 itemType="inventory"
             />
->>>>>>> 46df79f6156dd97e743b507510ee3c1550685550
         </li>
     );
 }

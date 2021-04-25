@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
-import editItem from "../../assets/icons/edit-24px.svg";
 import "./warehouseDetailsItem.scss";
 import arrow from "../../assets/icons/chevron_right-24px.svg";
 import ItemAction from "../ItemAction/ItemAction";
@@ -17,7 +15,7 @@ const WarehouseDetailsItem = (props) => {
                 <div className="detail-item__left">
                     <h2 className="detail-item__label">{props.itemType}</h2>
                     <Link
-                        to={`/inventory/${props.id}`}
+                        to={`/inventory/single/${props.id}`}
                         className="detail-item__link detail-item__link--main"
                     >
                         {props.itemName}

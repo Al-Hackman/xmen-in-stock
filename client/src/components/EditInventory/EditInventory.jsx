@@ -24,17 +24,26 @@ class EditInventory extends React.Component {
             descriptionError: "",
             categoryError: "",
             warehouseError: "",
-        }
+        },
     };
 
+    // Handle changes to form inputs
     handleOnChange = (event) => {
         this.setState({
-            [event.target.name]: event.target.value,
+            inputs: {
+                ...this.state.inputs,
+                [event.target.name]: event.target.value,
+            },
         });
     };
 
-    componentDidUpdate = () => {
+    // onChange function to get rid of error message
+    // actual onchange handled bu form onchange handler
+    handleRadioOnChange = (event) => {};
+    handleCategoryChange = (event) => {};
+    handleCategoryChange = (event) => {};
 
+    componentDidUpdate = () => {
         if (this.state.warehouseList.length < 1) {
             axios
                 .get(`${api.apiUrl}${api.warehouseEndpoint}`)
@@ -85,7 +94,6 @@ class EditInventory extends React.Component {
                     `${api.apiUrl}${api.inventoryEndpoint}/${this.props.match.params.id}`
                 )
                 .then((response) => {
-                    
                     this.setState({
                         itemId: response.data.id,
                         inputs: {
@@ -96,7 +104,7 @@ class EditInventory extends React.Component {
                             inStock: response.data.status,
                             warehouse: response.data.warehouseName,
                             quantity: response.data.quantity,
-                        }
+                        },
                     });
                 })
                 .catch((error) =>
@@ -116,22 +124,15 @@ class EditInventory extends React.Component {
 
     handleOnSubmit = (event) => {
         event.preventDefault();
-        let itemNameInputError = "";
-        if (this.state.inputs.itemName === "") {
-            itemNameInputError = "inventory-form__error";
-        }
-        let descriptionInputError = "";
-        if (this.state.inputs.description === "") {
-            descriptionInputError = "inventory-form__error";
-        }
-        let categoryInputError = "";
-        if (this.state.inputs.category === "") {
-            categoryInputError = "inventory-form__error";
-        }
-        let warehouseNameInputError = "";
-        if (this.state.inputs.warehouse === "") {
-            warehouseNameInputError = "inventory-form__error";
-        }
+        let itemNameInputError =
+            this.state.inputs.itemName === "" ? "inventory-form__error" : "";
+        let descriptionInputError =
+            this.state.inputs.description === "" ? "inventory-form__error" : "";
+        let categoryInputError =
+            this.state.inputs.category === "" ? "inventory-form__error" : "";
+        let warehouseNameInputError =
+            this.state.inputs.warehouse === "" ? "inventory-form__error" : "";
+
         this.setState({
             errors: {
                 itemNameError: itemNameInputError,
@@ -141,44 +142,48 @@ class EditInventory extends React.Component {
             },
         });
 
-        let newDetails = {
-            id: this.state.itemId,
-            warehouseID: this.state.inputs.warehouseId,
-            warehouseName: this.state.inputs.warehouse,
-            itemName: this.state.inputs.itemName,
-            description: this.state.inputs.description,
-            category: this.state.inputs.category,
-            status: this.state.inputs.inStock,
-            quantity: this.state.inputs.quantity,
-        };
+        if (!Object.values(this.state.inputs).includes("")) {
+            let newDetails = {
+                id: this.state.itemId,
+                warehouseID: this.state.inputs.warehouseId,
+                warehouseName: this.state.inputs.warehouse,
+                itemName: this.state.inputs.itemName,
+                description: this.state.inputs.description,
+                category: this.state.inputs.category,
+                status: this.state.inputs.inStock,
+                quantity: this.state.inputs.quantity,
+            };
 
-        if (this.props.isNew) {
-            axios
-                .post(api.apiUrl + api.inventoryEndpoint, newDetails)
-                .then(() => {
-                    this.props.history.push("/");
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-            event.target.reset();
-        } else {
-            axios
-                .put(
-                    `${api.apiUrl}${api.warehouseEndpoint}/${this.state.warehouseId}`,
-                    newDetails
-                )
-                .then(() => {
-                    this.props.history.push("/");
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-            event.target.reset();
+            if (this.props.isNew) {
+                axios
+                    .post(api.apiUrl + api.inventoryEndpoint, newDetails)
+                    .then(() => {
+                        this.props.history.push("/");
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    });
+                event.target.reset();
+            } else {
+                axios
+                    .put(
+                        `${api.apiUrl}${api.warehouseEndpoint}/${this.state.warehouseId}`,
+                        newDetails
+                    )
+                    .then(() => {
+                        this.props.history.push("/");
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    });
+                event.target.reset();
+            }
         }
     };
 
     render = () => {
+        // populate category options with array
+        // of categories from state
         let categoryOptions =
             this.state.categoryList.length > 0 ? (
                 this.state.categoryList.map((category, index) => (
@@ -189,7 +194,9 @@ class EditInventory extends React.Component {
             ) : (
                 <></>
             );
-            // console.log("inventory test", categoryOptions)
+
+        // populate category options with array
+        // of warehouses from state
         let warehouseOptions =
             this.state.categoryList.length > 0 ? (
                 this.state.warehouseList.map((warehouse, index) => (
@@ -200,11 +207,13 @@ class EditInventory extends React.Component {
             ) : (
                 <></>
             );
-            // console.log("warehouse test", warehouseOptions)
+
+        // Change title if it is adding a new item
         let titleText = this.props.isNew
             ? "Add New Inventory Item"
             : "Edit Inventory Item";
 
+        // Change button text if adding a new item
         let buttonText = this.props.isNew ? "+ Add Item" : "Save";
 
         let quantityInput = <></>;
@@ -219,7 +228,7 @@ class EditInventory extends React.Component {
                         Quantity
                     </label>
                     <input
-                        defaultValue={0}
+                        defaultValue={this.state.inputs.quantity}
                         className={
                             "inventory-form__input inventory-form__desciption"
                         }
@@ -229,7 +238,9 @@ class EditInventory extends React.Component {
                 </>
             );
         }
-        let errorMessage = <p className="validation-error">This field is required</p>;
+        let errorMessage = (
+            <p className="validation-error">This field is required</p>
+        );
         return (
             <div className="inventory-form">
                 <PageTitle {...this.props} title={titleText} />
@@ -254,18 +265,12 @@ class EditInventory extends React.Component {
                         </label>
                         <input
                             defaultValue={this.state.inputs.itemName}
-                            className={
-                                `inventory-form__input ${this.state.errors.itemNameError}`
-                            }
+                            className={`inventory-form__input ${this.state.errors.itemNameError}`}
                             name="itemName"
                             placeholder="Item Name"
                             type="text"
                         />
-                        {this.state.errors.itemNameError ? (
-                            errorMessage
-                        ) : (
-                            <></>
-                        )}
+                        {this.state.errors.itemNameError ? errorMessage : <></>}
                         <label
                             className="inventory-form__label"
                             htmlFor="description"
@@ -274,14 +279,11 @@ class EditInventory extends React.Component {
                         </label>
                         <textarea
                             defaultValue={this.state.inputs.description}
-                            className={
-                                `inventory-form__input inventory-form__description ${this.state.errors.itemNameError}`
-                            }
+                            className={`inventory-form__input inventory-form__description ${this.state.errors.itemNameError}`}
                             name="description"
                             placeholder="Please enter a brief item description"
                             type="text"
-                        >
-                        </textarea>
+                        ></textarea>
                         {this.state.errors.descriptionError ? (
                             errorMessage
                         ) : (
@@ -294,7 +296,10 @@ class EditInventory extends React.Component {
                             Category
                         </label>
                         <select
-                            defaultValue={this.state.inputs.category}
+                            onChange={(event) => {
+                                this.handleCategoryChange(event);
+                            }}
+                            value={this.state.inputs.category}
                             name="category"
                             className={`inventory-form__input inventory-form__select ${this.state.errors.categoryError}`}
                         >
@@ -303,11 +308,7 @@ class EditInventory extends React.Component {
                             </option>
                             {categoryOptions}
                         </select>
-                        {this.state.errors.categoryError ? (
-                            errorMessage
-                        ) : (
-                            <></>
-                        )}
+                        {this.state.errors.categoryError ? errorMessage : <></>}
                     </div>
                     <div className="inventory-form__wrap">
                         <h2 className="inventory-form__heading">
@@ -316,21 +317,44 @@ class EditInventory extends React.Component {
                         <label className="inventory-form__label">Status</label>
                         <div className="inventory-form__status">
                             <input
-                                value="In Stock"
-                                className={"inventory-form__radio"}
-                                name="inStock"
+                                onChange={(event) => {
+                                    this.handleRadioOnChange(event);
+                                }}
                                 id="InStock"
+                                value="In Stock"
+                                name="inStock"
                                 type="radio"
+                                checked={
+                                    this.state.inputs.inStock.toLowerCase() ===
+                                    "in stock"
+                                }
                             />
-                            <label className="inventory-form__radio-label" htmlFor="InStock">In stock</label>
+                            <label
+                                className="inventory-form__radio-label"
+                                htmlFor="InStock"
+                            >
+                                In stock
+                            </label>
                             <input
+                                onChange={(event) => {
+                                    this.handleRadioOnChange(event);
+                                }}
                                 value="Out of Stock"
                                 className={"inventory-form__radio"}
                                 name="inStock"
                                 id="OutOfStock"
                                 type="radio"
+                                checked={
+                                    this.state.inputs.inStock.toLowerCase() ===
+                                    "out of stock"
+                                }
                             />
-                            <label className="inventory-form__radio-label" htmlFor="OutOfStock">Out of stock</label>
+                            <label
+                                className="inventory-form__radio-label"
+                                htmlFor="OutOfStock"
+                            >
+                                Out of stock
+                            </label>
                         </div>
                         {quantityInput}
                         <label
