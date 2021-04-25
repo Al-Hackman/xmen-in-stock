@@ -48,14 +48,8 @@ class EditInventory extends React.Component {
             axios
                 .get(`${api.apiUrl}${api.warehouseEndpoint}`)
                 .then((response) => {
-                    let warehouses = [];
-                    response.data.forEach((warehouse) => {
-                        if (!warehouses.includes(warehouse.name)) {
-                            warehouses.push(warehouse.name);
-                        }
-                    });
                     this.setState({
-                        warehouseList: warehouses,
+                        warehouseList: response.data,
                     });
                 })
                 .catch((error) =>
@@ -142,11 +136,11 @@ class EditInventory extends React.Component {
             },
         });
 
-        if (!Object.values(this.state.inputs).includes("")) {
+        // Run axios only if there are no errors
+        if (!Object.values(this.state.errors).includes("error")) {
             let newDetails = {
                 id: this.state.itemId,
-                warehouseID: this.state.inputs.warehouseId,
-                warehouseName: this.state.inputs.warehouse,
+                warehouseID: this.state.inputs.warehouse,
                 itemName: this.state.inputs.itemName,
                 description: this.state.inputs.description,
                 category: this.state.inputs.category,
@@ -154,6 +148,9 @@ class EditInventory extends React.Component {
                 quantity: this.state.inputs.quantity,
             };
 
+
+            // Change axios method depending on whether
+            // it's a new item or not
             if (this.props.isNew) {
                 axios
                     .post(api.apiUrl + api.inventoryEndpoint, newDetails)
@@ -198,10 +195,10 @@ class EditInventory extends React.Component {
         // populate category options with array
         // of warehouses from state
         let warehouseOptions =
-            this.state.categoryList.length > 0 ? (
-                this.state.warehouseList.map((warehouse, index) => (
-                    <option key={warehouse + index} value={warehouse}>
-                        {warehouse}
+            this.state.warehouseList.length > 0 ? (
+                this.state.warehouseList.map((warehouse) => (
+                    <option key={warehouse.id} value={warehouse.id}>
+                        {warehouse.name}
                     </option>
                 ))
             ) : (
