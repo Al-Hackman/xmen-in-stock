@@ -89,3 +89,11 @@ input, textarea, select, ::placeholder {
     padding-left: 30px;
     margin-top: -10px;
 }
+
+.resize-transition-stopper {
+    * {
+        // using important to override transition
+        // of high specificity
+        transition: none !important;
+    }
+}
