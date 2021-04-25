@@ -36,14 +36,9 @@ const WarehouseDetailsItem = (props) => {
                         <p className={status}>{props.status}</p>
                     </div>
                     <h2 className="detail-item__label">Qty</h2>
-                    <div className="detail-item__link-container">
-                        <Link
-                            to={`tel:${props.quantity}`}
-                            className="detail-item__link"
-                        >
-                            {props.quantity}
-                        </Link>
-                    </div>
+                    <p className="detail-item__text  detail-item__quantity">
+                        {props.quantity}
+                    </p>
                 </div>
             </div>
             <ItemAction

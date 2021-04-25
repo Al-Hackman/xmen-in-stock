@@ -46,25 +46,24 @@ class WarehouseDetails extends React.Component {
     loadItems = () => {
         // axios call to get list of inventories from api
         axios
-        .get(
-            api.apiUrl +
+            .get(
+                api.apiUrl +
                 api.warehouseEndpoint +
                 "/" +
                 this.props.match.params.id
-        )
-        .then((response) => {
-            this.setState({
-                warehouse: response.data,
-            });
-        })
-        .catch((error) =>
-            console.error(
-                `Error on axios GET to ${
-                    api.apiUrl + api.warehouseEndpoint
-                }`,
-                error
             )
-        );
+            .then((response) => {
+                this.setState({
+                    warehouse: response.data,
+                });
+            })
+            .catch((error) =>
+                console.error(
+                    `Error on axios GET to ${api.apiUrl + api.warehouseEndpoint
+                    }`,
+                    error
+                )
+            );
     };
 
     componentDidMount = () => {
@@ -76,9 +75,9 @@ class WarehouseDetails extends React.Component {
             axios
                 .get(
                     api.apiUrl +
-                        api.inventoryEndpoint +
-                        "/warehouse/" +
-                        this.state.warehouse.id
+                    api.inventoryEndpoint +
+                    "/warehouse/" +
+                    this.state.warehouse.id
                 )
                 .then((response) => {
                     this.setState({
@@ -87,8 +86,7 @@ class WarehouseDetails extends React.Component {
                 })
                 .catch((error) =>
                     console.error(
-                        `Error on axios GET to ${
-                            api.apiUrl + api.inventoryEndpoint
+                        `Error on axios GET to ${api.apiUrl + api.inventoryEndpoint
                         }`,
                         error
                     )
@@ -143,10 +141,20 @@ class WarehouseDetails extends React.Component {
                                 CONTACT INFORMATION:
                             </h3>
                             <p className="warehouse-details__contact-info">
-                                {this.state.warehouse.contact.phone}
+                                <a
+                                    href={`tel:${this.state.warehouse.contact.phone}`}
+                                    className="warehouse-details__link"
+                                >
+                                    {this.state.warehouse.contact.phone}
+                                </a>
                             </p>
                             <p className="warehouse-details__contact-info">
-                                {this.state.warehouse.contact.email}
+                                <a
+                                    href={`mailto:${this.state.warehouse.contact.email}`}
+                                    className="warehouse-details__link"
+                                >
+                                    {this.state.warehouse.contact.email}
+                                </a>
                             </p>
                         </div>
                     </div>

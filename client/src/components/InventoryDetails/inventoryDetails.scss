@@ -83,10 +83,6 @@
         color: var.$primary;
         text-decoration: none;
 
-        &:hover{
-            text-decoration: underline;
-        }
-
         &-container {
             display: flex;
             flex-direction: column;           

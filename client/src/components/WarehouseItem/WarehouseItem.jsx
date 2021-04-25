@@ -29,18 +29,18 @@ const WarehouseItem = (props) => {
                     <p className="item__text">{props.contact.name}</p>
                     <h2 className="item__label">Contact Information</h2>
                     <div className="item__link-container">
-                        <Link
-                            to={`tel:${props.contact.phone}`}
+                        <a
+                            href={`tel:${props.contact.phone}`}
                             className="item__link"
                         >
                             {props.contact.phone}
-                        </Link>
-                        <Link
-                            to={`mailto:${props.contact.email}`}
+                        </a>
+                        <a
+                            href={`mailto:${props.contact.email}`}
                             className="item__link"
                         >
                             {props.contact.email}
-                        </Link>
+                        </a>
                     </div>
                 </div>
             </div>
