@@ -71,6 +71,10 @@
         @include mix.tablet-up {
             width: func.size-to-vw($tablet, 107px);
         }
+
+        @include mix.laptop-up {
+            width: func.size-to-vw($laptop, 107px);
+        }
     }
 
     &--active{

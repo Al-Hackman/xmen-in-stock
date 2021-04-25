@@ -76,7 +76,7 @@
         
     }
 
-    &__category {
+    &__category, &__quantity {
         @include mix.tablet-up {
             padding-right: func.size-to-vw(var.$tablet, 30px);
             width: func.size-to-vw(var.$tablet, 120px);
@@ -90,10 +90,6 @@
     &__link {
         color: var.$primary;
         text-decoration: none;
-
-        &:hover{
-            text-decoration: underline;
-        }
 
         &-container {
             display: flex;

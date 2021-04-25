@@ -73,13 +73,6 @@
     &__link {
         color: var.$primary;
         text-decoration: none;
-
-        &:hover{
-            text-decoration: underline;
-        }
-        &-icon {
-            transition: all ease 0.4s;
-        }
         
         &-container {
             display: flex;
@@ -92,11 +85,6 @@
             color: var.$instock;
             display: flex;
             align-items: center;
-            &:hover {
-                .item__link-icon {
-                    margin-left: 4px;
-                }
-            }
 
             @include mix.tablet-up {
                 width: func.size-to-vw(var.$tablet, 150px);

@@ -76,10 +76,15 @@ button {
         outline: none;
     }  
 }
-input, textarea, select, ::placeholder {
+
+input, 
+textarea, 
+select, 
+::placeholder {
     color: $primary;
     font-family: "Titillium Web", sans-serif;
 }
+
 .validation-error {
     font-size: 12px;
     color: $out-of-stock;
@@ -88,4 +93,38 @@ input, textarea, select, ::placeholder {
     background-position: 0;
     padding-left: 30px;
     margin-top: -10px;
+}
+
+.item, 
+.detail-item, 
+.inventory-list-item {
+
+    @include tablet-up {
+        &__link {
+            @include tablet-up {
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+        
+            &-icon {
+                transition: all ease 0.3s;
+            }        
+            &--main {
+                &:hover {
+                    .item__link-icon, 
+                    .detail-item__link-icon, 
+                    .inventory-list-item__link-icon {
+                        margin-left: 4px;
+                    }
+                }
+            }
+        }
+    }
+    
+    @include laptop-up {
+        &:hover {
+            background-color: rgba(46, 102, 229, 0.07);
+        }
+    }
 }

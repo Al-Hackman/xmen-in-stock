@@ -121,6 +121,11 @@
         @include mix.paragraph-medium;
         margin: 0;
     }
+    &__link {
+        color: var.$primary;
+        text-decoration: none;
+    }
+    
     &__label {
         display: none;
 
