@@ -167,7 +167,7 @@ class EditInventory extends React.Component {
             } else {
                 axios
                     .put(
-                        `${api.apiUrl}${api.warehouseEndpoint}/${this.state.warehouseId}`,
+                        `${api.apiUrl}${api.inventoryEndpoint}/${this.state.itemId}`,
                         newDetails
                     )
                     .then(() => {
@@ -223,7 +223,7 @@ class EditInventory extends React.Component {
                 <>
                     <label
                         className="inventory-form__label"
-                        htmlFor="description"
+                        htmlFor="quantity"
                     >
                         Quantity
                     </label>
@@ -232,7 +232,7 @@ class EditInventory extends React.Component {
                         className={
                             "inventory-form__input inventory-form__desciption"
                         }
-                        name="description"
+                        name="quantity"
                         type="number"
                     />
                 </>
