@@ -5,6 +5,8 @@ import logo from "../../assets/logo/InStock-Logo.svg";
 import "./header.scss";
 
 function Header() {
+
+
     return (
         <>
             <nav className="navbar">
@@ -19,7 +21,7 @@ function Header() {
                 </div>
                 <div className="navbar__button-wrap">
                     <NavLink
-                        to="/"
+                        to="/" isActive={(_,{ pathname }) => pathname.includes("warehouse") || pathname === "/"}
                         exact
                         activeClassName="navbar--active"
                         className="navbar__btn-link"
