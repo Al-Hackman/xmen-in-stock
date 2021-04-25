@@ -14,6 +14,7 @@ class InventoryList extends React.Component {
     // state to store current list of items
     state = {
         items: [],
+        itemsToShow: [],
         showModal: false,
         currentItem: {},
     };
@@ -42,6 +43,16 @@ class InventoryList extends React.Component {
             );
     };
 
+    handleOnSearch = (event) => {
+        event.preventDefault();
+        let searchTerm = event.target.search.value.toLowerCase();
+        console.log(this.state.items);
+        let matchedItems = this.state.items.filter((item) => item.itemName.toLowerCase().includes(searchTerm));
+        this.setState({
+            itemsToShow: matchedItems,
+        });
+    };
+
     loadItems = () => {
         // axios call to get list of warehouses from api
         axios
@@ -50,6 +61,7 @@ class InventoryList extends React.Component {
             .then((response) => {
                 this.setState({
                     items: response.data,
+                    itemsToShow: response.data,
                 });
             })
             .catch((error) =>
@@ -60,7 +72,7 @@ class InventoryList extends React.Component {
                     error
                 )
             );
-    }
+    };
 
     componentDidMount = () => {
         this.loadItems();
@@ -71,8 +83,8 @@ class InventoryList extends React.Component {
         // axios call takes long
         let items = <Spinner />;
 
-        if (this.state.items) {
-            items = this.state.items.map((item) => {
+        if (this.state.itemsToShow) {
+            items = this.state.itemsToShow.map((item) => {
                 return (
                     <InventoryDetails
                         key={item.id}
@@ -100,7 +112,12 @@ class InventoryList extends React.Component {
             <div className="inventory-list">
                 <div className="inventory-list__top">
                     <h1 className="inventory-list__title">Inventory</h1>
-                    <form className="inventory-list__search">
+                    <form
+                        className="inventory-list__search"
+                        onSubmit={(event) => {
+                            this.handleOnSearch(event);
+                        }}
+                    >
                         <input
                             className="inventory-list__input button"
                             name="search"

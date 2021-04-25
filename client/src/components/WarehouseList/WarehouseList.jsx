@@ -14,6 +14,7 @@ class WarehouseList extends React.Component {
     // state to store current list of items
     state = {
         items: [],
+        itemsToShow: [],
         showModal: false,
         currentItem: {},
     };
@@ -42,6 +43,15 @@ class WarehouseList extends React.Component {
             );
     };
 
+    handleOnSearch = (event) => {
+        event.preventDefault();
+        let searchTerm = event.target.search.value.toLowerCase();
+        let matchedItems = this.state.items.filter((item) => item.name.toLowerCase().includes(searchTerm));
+        this.setState({
+            itemsToShow: matchedItems,
+        });
+    };
+
     loadItems = () => {
         // axios call to get list of warehouses from api
         axios
@@ -49,6 +59,7 @@ class WarehouseList extends React.Component {
             .then((response) => {
                 this.setState({
                     items: response.data,
+                    itemsToShow: response.data,
                 });
             })
             .catch((error) =>
@@ -71,7 +82,7 @@ class WarehouseList extends React.Component {
         let items = <Spinner />;
 
         if (this.state.items) {
-            items = this.state.items.map((item) => {
+            items = this.state.itemsToShow.map((item) => {
                 return (
                     <WarehouseItem
                         key={item.id}
@@ -100,7 +111,12 @@ class WarehouseList extends React.Component {
             <div className="warehouse-list">
                 <div className="warehouse-list__top">
                     <h1 className="warehouse-list__title">Warehouses</h1>
-                    <form className="warehouse-list__search">
+                    <form
+                        className="warehouse-list__search"
+                        onSubmit={(event) => {
+                            this.handleOnSearch(event);
+                        }}
+                    >
                         <input
                             className="warehouse-list__input button"
                             name="search"
