@@ -60,6 +60,7 @@ class App extends React.Component {
                         />
                         <Route
                             path="/inventory/single/:id"
+                            exact
                             render={(props) => <InventoryItem {...props} />}
                         />
                     </Switch>

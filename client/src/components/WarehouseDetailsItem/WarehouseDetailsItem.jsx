@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
-import editItem from "../../assets/icons/edit-24px.svg";
 import "./warehouseDetailsItem.scss";
 import arrow from "../../assets/icons/chevron_right-24px.svg";
 import ItemAction from "../ItemAction/ItemAction";

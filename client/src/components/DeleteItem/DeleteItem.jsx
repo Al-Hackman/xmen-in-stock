@@ -2,7 +2,6 @@ import React from "react";
 import "./DeleteItem.scss";
 import closeXIcon from "../../assets/icons/close-24px.svg";
 
-
 function DeleteItem(props) {
 
     let itemName = "";
