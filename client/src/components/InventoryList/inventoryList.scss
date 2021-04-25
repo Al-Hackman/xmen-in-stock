@@ -117,6 +117,9 @@
             background-color: var.$instock;
             color: var.$secondary;
             text-transform: capitalize;
+            &:hover {
+                background-color: var.$cta-button;
+            }
     
             @include mix.tablet-up {
                 margin-top: 0;

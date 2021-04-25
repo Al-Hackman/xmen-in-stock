@@ -68,6 +68,10 @@
         background-color: var.$secondary;
         border: 1px solid var.$dividers-borders;
         border-radius: 20px;
+        &:hover {
+            border: 1px solid var.$instock;
+            color: var.$instock;
+        }
         @include mix.tablet-up {
             margin-left: func.rem-size(16px);
             width: func.rem-size(72px);
@@ -78,5 +82,9 @@
         @extend .delete-item__button-cancel;
         background-color: var.$out-of-stock;
         color: var.$secondary;
+        &:hover {
+            background-color: var.$cta-button;
+            color: var.$out-of-stock;
+        }
     }
 }

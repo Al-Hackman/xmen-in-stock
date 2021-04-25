@@ -45,7 +45,12 @@
         &--icon {
             height: func.rem-size(20px);
             width: func.rem-size(20px);
+            &:hover {
+                background-color: $body-background;
+            }
         }
+
+        
     }
     &__title {
         padding-left: 0.25em;

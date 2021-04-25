@@ -3,8 +3,6 @@ import "./styles/global.scss";
 import { Switch, Route } from "react-router-dom";
 import WarehouseList from "./components/WarehouseList/WarehouseList";
 import EditWarehouse from "./components/EditWarehouse/EditWarehouse";
-import Modal from "./components/Modal/Modal";
-import DeleteTeleInvt from "./components/DeleteCards/DeleteTeleInvt";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";

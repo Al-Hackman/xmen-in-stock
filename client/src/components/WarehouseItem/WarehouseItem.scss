@@ -89,6 +89,16 @@
         &:hover{
             text-decoration: underline;
         }
+        // &__link-icon:hover {
+        //     @include mix.tablet-up {
+        //         animation-name: slider 5s;
+        //         @keyframes slider {
+        //             from {left: 0px;}
+        //             to {left: 100px;}
+        //         }
+        //     }
+            
+        // }
 
         &-container {
             display: flex;
