@@ -41,7 +41,7 @@
 
     &__top {
         display: flex;
-    }
+    }    
 
     &__left {
         width: 50%;
@@ -89,17 +89,10 @@
         &:hover{
             text-decoration: underline;
         }
-        // &__link-icon:hover {
-        //     @include mix.tablet-up {
-        //         animation-name: slider 5s;
-        //         @keyframes slider {
-        //             from {left: 0px;}
-        //             to {left: 100px;}
-        //         }
-        //     }
-            
-        // }
-
+        &-icon {
+            transition: all ease 0.4s;
+        }
+        
         &-container {
             display: flex;
             flex-direction: column;           
@@ -111,6 +104,11 @@
             color: var.$instock;
             display: flex;
             align-items: center;
+            &:hover {
+                .item__link-icon {
+                    margin-left: 4px;
+                }
+            }
 
             @include mix.tablet-up {
                 width: func.size-to-vw(var.$tablet, 150px);
@@ -125,9 +123,28 @@
     &__button {
         background-color: transparent;
         border-width: 0;
+        padding-bottom: 4px;
+        &:hover {
+            .item__icon {
+                margin-top: -4px;
+                @include mix.tablet-up {
+                    // margin-bottom: 4px;
+                    // margin-top: 0;
+                    padding-bottom: 0px;
+                }
+            }
+            // @include mix.tablet-up {
+            //     height: 0px;
+            //     padding-bottom: 0px;
+            // }
+        }
 
         @include mix.tablet-up{
             margin-left: func.rem-size(6px);
         }
+
+    }
+    &__icon {
+        transition: all ease 0.2s;
     }
 }
