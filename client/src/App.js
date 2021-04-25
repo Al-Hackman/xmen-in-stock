@@ -25,35 +25,42 @@ class App extends React.Component {
                             render={(props) => <WarehouseList {...props} />}
                         />
                         <Route
-                            path="/warehouse/:id"
+                            path="/warehouse/single/:id"
+                            exact
                             render={(props) => <WarehouseDetails {...props} />}
                         />
                         <Route
-                            path="/edit-warehouse/:id"
+                            path="/warehouse/edit/:id"
+                            exact
                             render={(routerProps) => (
                                 <EditWarehouse {...routerProps} />
                             )}
                         />
                         <Route
-                            path="/add-warehouse"
+                            path="/warehouse/add"
+                            exact
                             render={(routerProps) => (
                                 <EditWarehouse {...routerProps} isNew />
                             )}
                         />
                         <Route
-                            path="/inventories"
+                            path="/inventory"
+                            exact
                             render={(props) => <InventoryList {...props} />}
                         />                    
                         <Route
-                            path="/edit-inventory/:id"
+                            path="/inventory/edit/:id"
+                            exact
                             render={(props) => <EditInventory {...props} />}
                         />
                         <Route
-                            path="/add-inventory"
+                            path="/inventory/add"
+                            exact
                             render={(props) => <EditInventory {...props} isNew />}
                         />
                         <Route
-                            path="/inventory/:id"
+                            path="/inventory/single/:id"
+                            exact
                             render={(props) => <InventoryItem {...props} />}
                         />
                     </Switch>

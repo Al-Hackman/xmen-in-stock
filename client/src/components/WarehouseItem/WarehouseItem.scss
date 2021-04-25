@@ -59,18 +59,6 @@
         @extend .item__left;
     }
 
-    &__bottom {
-        display: flex;
-        justify-content: space-between;
-        margin-top: func.rem-size(16px);
-
-        @include mix.tablet-up {
-            margin-left: auto;
-            margin-top: 0;
-            align-items: center;
-        }
-    }
-
     &__address {
         @include mix.tablet-up {
             padding-right: func.size-to-vw(var.$tablet, 30px);
@@ -120,31 +108,5 @@
         }
     }
 
-    &__button {
-        background-color: transparent;
-        border-width: 0;
-        padding-bottom: 4px;
-        &:hover {
-            .item__icon {
-                margin-top: -4px;
-                @include mix.tablet-up {
-                    // margin-bottom: 4px;
-                    // margin-top: 0;
-                    padding-bottom: 0px;
-                }
-            }
-            // @include mix.tablet-up {
-            //     height: 0px;
-            //     padding-bottom: 0px;
-            // }
-        }
-
-        @include mix.tablet-up{
-            margin-left: func.rem-size(6px);
-        }
-
-    }
-    &__icon {
-        transition: all ease 0.2s;
-    }
+    
 }

@@ -76,18 +76,6 @@
         
     }
 
-    &__bottom {
-        display: flex;
-        justify-content: space-between;
-        margin-top: func.rem-size(16px);
-
-        @include mix.tablet-up {
-            margin-left: auto;
-            margin-top: 0;
-            align-items: center;
-        }
-    }
-
     &__category {
         @include mix.tablet-up {
             padding-right: func.size-to-vw(var.$tablet, 30px);
@@ -128,15 +116,6 @@
             @include mix.laptop-up {
                 width: func.size-to-vw(var.$laptop, 220px);
             }
-        }
-    }
-
-    &__button {
-        background-color: transparent;
-        border-width: 0;
-
-        @include mix.tablet-up{
-            margin-left: func.rem-size(6px);
         }
     }
 }

@@ -173,6 +173,7 @@ class WarehouseDetails extends React.Component {
                     title={this.state.warehouse.name}
                     {...this.props}
                     editBtn
+                    itemType="warehouse"
                     itemId={this.state.warehouse.id}
                 />
                 {/* Show warehouse details here */}

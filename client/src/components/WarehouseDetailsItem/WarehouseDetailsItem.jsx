@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
-import editItem from "../../assets/icons/edit-24px.svg";
 import "./warehouseDetailsItem.scss";
 import arrow from "../../assets/icons/chevron_right-24px.svg";
+import ItemAction from "../ItemAction/ItemAction";
 
 const WarehouseDetailsItem = (props) => {
     const status =
@@ -16,7 +15,7 @@ const WarehouseDetailsItem = (props) => {
                 <div className="detail-item__left">
                     <h2 className="detail-item__label">{props.itemType}</h2>
                     <Link
-                        to={`/inventory/${props.id}`}
+                        to={`/inventory/single/${props.id}`}
                         className="detail-item__link detail-item__link--main"
                     >
                         {props.itemName}
@@ -47,30 +46,11 @@ const WarehouseDetailsItem = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="detail-item__bottom">
-            <button
-                    className="item__button"
-                    onClick={(event) => {
-                        props.handleToggleModal(event, props);
-                    }}
-                >
-                    <img
-                        src={deleteIcon}
-                        alt="delete item"
-                        className="item__icon"
-                    />
-                </button>
-
-                <Link to={`/edit-inventory/${props.id}`}>
-                    <button className="item__button">
-                        <img
-                            src={editItem}
-                            alt="edit item"
-                            className="item__icon"
-                        />
-                    </button>
-                </Link>
-            </div>
+            <ItemAction
+                handleToggleModal={props.handleToggleModal}
+                {...props}
+                itemType="inventory"
+            />
         </li>
     );
 };
