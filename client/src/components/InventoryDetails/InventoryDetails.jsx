@@ -47,9 +47,14 @@ function InventoryDetails(props) {
                         {props.quantity}
                     </p>
                     <h2 className="inventory-list-item__label">WAREHOUSE</h2>
-                    <p className="inventory-list-item__text">
-                        {props.warehouseName}
-                    </p>
+                    <div className="inventory-list-item__text">
+                        <Link
+                            to={`/warehouse/single/${props.warehouseID}`}
+                            className="inventory-list-item__link"
+                        >
+                            {props.warehouseName}
+                        </Link>
+                    </div>
                 </div>
             </div>
             <ItemAction
